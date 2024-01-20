@@ -1,0 +1,13 @@
+nodes:
+- conditions:
+  - type: Random
+    value: 80
+  action:
+    actionType: Attack
+    targetTypes:
+    - Near
+- conditions: []
+  action:
+    actionType: Move
+    targetTypes:
+    - Near

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ui="UnityEngine.UIElements"
+        xmlns:uie="UnityEditor.UIElements"
+        xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+>
+    <ui:Box name="overlay" />
+    <ui:Box name="gridInfoContainer">
+        <ui:Box name="gridInfoHeader">
+            <ui:Label text="ラベル" class="label" />
+            <ui:Button text="×" class="closeBtn" />
+        </ui:Box>
+        <ui:ScrollView>
+            <ui:Box name="gridInfoList">
+            </ui:Box>
+        </ui:ScrollView>
+        <ui:Box name="gridInfoFooter">
+            <ui:Button text="追加" name="addItemBtn" />
+            <ui:Button text="全削除" name="removeAllItemBtn" />
+        </ui:Box>
+    </ui:Box>
+</ui:UXML>

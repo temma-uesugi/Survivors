@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Client/Unity/Assets/Scenes/QuestStageEditor/UIElements/StageEditorInspectorWindow.cs.meta
+guid: 7594d96d01fe0431ea0d94f9c4284b93
+=======
+guid: 2e63c0782ae3bbe46832d54cb83690ae
+>>>>>>> master:Client/Unity/Assets/Scripts/Generated/MessagePack.Generated/MessagePack_Formatters_AM3_ServerShared_Objects_Ingame_DeckCardDataFormatter.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

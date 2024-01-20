@@ -1,0 +1,17 @@
+{
+    "name": "App.Battle.EnemyBotNodeObjects",
+    "rootNamespace": "",
+    "references": [
+        "App.Common",
+        "YamlDotNet"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

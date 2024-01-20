@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#itemSelector {
+}
+.selectorHeader {
+    display: flex;
+    flex-direction: row;
+    align-items:  stretch;
+    height: 18px;
+    justify-content: space-between;
+}
+.selectorHeader Label {
+    padding: 2px;
+    flex: 1;
+}
+.selectorHeader Button {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.list {
+    padding-top: 5px;
+}
+.listItem {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    padding: 2px 0 2px 0;
+}
+.listItem.selected {
+    background-color: rgba(0, 0, 100, 0.3);
+}
+.preset {
+    color: burlywood;
+    -unity-font-style: bold;
+}

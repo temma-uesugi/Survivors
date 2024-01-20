@@ -1,0 +1,26 @@
+#sqlExportDisplay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+#sqlExportDisplay.hidden {
+    display: none;
+}
+#sqlFieldContainer {
+    flex: 1;
+    height: 100%;
+}
+#sqlExportDisplay #sqlFooter {
+    height: 30px;
+}
+#sqlFooter {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+#sqlFooter > Button {
+    width: 30%;
+}

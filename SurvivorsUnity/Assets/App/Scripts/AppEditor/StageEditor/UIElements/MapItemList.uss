@@ -1,0 +1,11 @@
+#mapItemListScroller {
+    margin-top: 10; 
+    border-top-width: 1px;
+}
+.recordListBox .listItem {
+    padding-left: 10px;
+}
+.recordListBox .preset {
+    color: burlywood;
+    -unity-font-style: bold;
+}

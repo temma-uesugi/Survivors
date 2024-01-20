@@ -1,0 +1,18 @@
+{
+    "name": "App.Inputs",
+    "rootNamespace": "",
+    "references": [
+        "Unity.InputSystem",
+        "UniRx",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,8 @@
+nodes:
+- actionType: Move
+  conditions:
+  - type: Random50
+    value: 20
+  - type: Random80
+    value: 30
+  targetType: Random

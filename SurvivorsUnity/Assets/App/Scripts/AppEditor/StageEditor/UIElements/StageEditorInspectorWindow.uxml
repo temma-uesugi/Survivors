@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:uie="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+>
+    <ui:Label name="editStatus" />
+    <ui:TextField label="ラベル" name="itemLabel" />
+    <uie:ColorField label="塗りつぶし色" value="RGBA(256.000, 256.000, 256.000, 1.000)" />
+    <ui:Box name="objectSetting" class="settingContainer hidden">
+        <uie:IntegerField label="ObjectParam1" name="Object-ObjectParam1" />
+        <uie:IntegerField label="GetPoint" name="Object-GetPoint" />
+    </ui:Box>
+    <ui:Box name="enemySetting" class="settingContainer hidden">
+        <uie:IntegerField label="EnemyParam1" name="Enemy-EnemyParam1" />
+        <uie:IntegerField label="EnemyParam2" name="Enemy-EnemyParam2" />
+        <uie:IntegerField label="Level" name="Enemy-Level" />
+        <uie:IntegerField label="SpawnGameTime" name="Enemy-SpawnGameTime" />
+        <uie:IntegerField label="GetPoint" name="Enemy-GetPoint" />
+        <ui:Toggle label="IsBoss" name="Enemy-IsBoss" />
+        <ui:Toggle label="IsStealth" name="Enemy-IsStealth" />
+    </ui:Box>
+    <ui:TextField label="説明メモ" name="itemDesc" multiline="true" rows="3" />
+    <ui:Button name="editFinishBtn" text="編集完了" class="hidden" />
+    <ui:Button name="setPresetBtn" text="プリセットとして登録" class="hidden" />
+    <ui:Button name="editFinishPresetBtn" text="プリセット編集反映" class="hidden" />
+    <ui:Button name="deletePresetBtn" text="プリセット削除" class="hidden" />
+    <ui:Button name="unlinkPresetBtn" text="プリセットリンク解除" class="hidden" />
+
+    <!-- 直接入力用 -->
+    <ui:Box class="hidden" name="addToPosition">
+        <uie:IntegerField label="X座標" name="positionX" />
+        <uie:IntegerField label="Y座標" name="positionY" />
+        <ui:Button name="addItemBtn" text="追加" />
+    </ui:Box>
+    
+</ui:UXML>

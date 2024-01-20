@@ -1,0 +1,30 @@
+{
+    "name": "Battle",
+    "rootNamespace": "",
+    "references": [
+        "UniRx",
+        "UniTask",
+        "VContainer",
+        "UnityEngine.UI",
+        "UnityEditor.UI",
+        "DOTween.Modules",
+        "AppCommon",
+        "Inputs",
+        "YamlDotNet",
+        "Unity.TextMeshPro",
+        "Unity.VisualScripting.Core",
+        "UniTask.DOTween",
+        "UniTask.Linq"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITASK_DOTWEEN_SUPPORT"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
