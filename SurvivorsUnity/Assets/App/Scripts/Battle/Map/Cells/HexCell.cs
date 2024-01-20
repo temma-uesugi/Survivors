@@ -1,8 +1,8 @@
 using App.AppCommon;
-using App.Battle.ValueObjects;
+using App.Battle2.ValueObjects;
 using UnityEngine;
 
-namespace App.Battle.Map.Cells
+namespace App.Battle.Map
 {
     /// <summary>
     /// Hexセル
@@ -12,13 +12,7 @@ namespace App.Battle.Map.Cells
         [SerializeField] private SpriteRenderer spriteRenderer;
         protected SpriteRenderer SpriteRenderer => spriteRenderer;
 
-        public enum Type
-        {
-            Sea = 1,
-            Ford = 2,
-            Ground = 3,
-        }
-        public abstract Type CellType { get; }
+        public abstract MapCellType CellType { get; }
 
         public GridValue Grid { get; private set; }
         public int GridX => Grid.X;

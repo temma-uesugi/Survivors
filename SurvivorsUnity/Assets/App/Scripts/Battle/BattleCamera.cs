@@ -1,115 +1,55 @@
-using System.Threading;
+﻿using System.Threading;
 using App.AppCommon;
 using App.Battle.Core;
 using App.Battle.Map;
-using App.Battle.Map.Cells;
-using App.Battle.UI;
-using App.Battle.Units;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using VContainer;
+using DG.Tweening;
 
 namespace App.Battle
 {
     /// <summary>
-    /// バトルカメラカメラ
+    /// バトルカメラ
     /// </summary>
     [ContainerRegisterMonoBehaviour(typeof(BattleCamera))]
     public class BattleCamera : MonoBehaviour
     {
         [SerializeField] private new Camera camera;
-
-        public static BattleCamera Instance { get; private set; }
-
+        
         public Camera MainCamera => camera;
-        private RectTransform _uiRect;
-        private HexMapManager _mapManager;
 
         private readonly ReactiveProperty<Vector3> _cameraPosition = new();
         public IReactiveProperty<Vector3> Position => _cameraPosition;
-
+        
+        private MapManager _mapManager;
         private CancellationTokenSource _moveCtx;
-
-        private readonly ReactiveProperty<float> _cameraSizeRatio = new ReactiveProperty<float>(GameConst.DefaultBattleCameraSize);
-        public IReadOnlyReactiveProperty<float> CameraSizeRatio => _cameraSizeRatio;
-
-        private float _cameraSize = GameConst.DefaultBattleCameraSize;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
         public void Construct(
-            BattleUI ui,
-            HexMapManager mapManager
+            MapManager mapManager
         )
         {
-            Instance = this;
-            _cameraPosition.Value = camera.transform.position;
-            _uiRect = ui.RectTrans;
             _mapManager = mapManager;
-
-            SetCameraSize(GameConst.DefaultBattleCameraSize);
+            camera.orthographicSize = BattleConst.CameraSize; 
         }
-
-        /// <summary>
-        /// カメラサイズセット
-        /// </summary>
-        public void SetCameraSize(float size)
-        {
-            camera.orthographicSize = size; 
-            _cameraSizeRatio.Value = GameConst.DefaultBattleCameraSize / size;
-        }
-        
-        /// <summary>
-        /// カメラサイズ縮小
-        /// </summary>
-        public void CameraZoomDown()
-        {
-            _cameraSize = Mathf.Clamp(camera.orthographicSize - 0.5f, GameConst.DefaultBattleCameraSize, GameConst.BattleCameraSizeLimit);
-            SetCameraSize(_cameraSize);
-        }
-
-        /// <summary>
-        /// カメラサイズ拡大
-        /// </summary>
-        public void CameraZoomUp()
-        {
-            _cameraSize = Mathf.Clamp(camera.orthographicSize + 0.5f, GameConst.DefaultBattleCameraSize, GameConst.BattleCameraSizeLimit);
-            SetCameraSize(_cameraSize);
-        }
-
-        /// <summary>
-        /// 敵フェイズのカメラへ
-        /// </summary>
-        public void SetToEnemyPhaseCamera()
-        {
-            SetCameraSize(GameConst.BattleCameraSizeLimit);
-            SetPosition(_mapManager.Center);
-        }
-
-        /// <summary>
-        /// 敵フェイズのカメラから戻す
-        /// </summary>
-        public void ResetFromEnemyPhaseCamera()
-        {
-            SetCameraSize(_cameraSize); 
-        }
-        
+      
         /// <summary>
         /// 移動
         /// </summary>
-        public static async UniTask Move(Vector3 position, bool isAnim)
+        public async UniTask Move(Vector3 position, bool isAnim)
         {
             if (isAnim)
             {
-                await Instance.MoveToByAnimationAsync(position);
+                await MoveToByAnimationAsync(position);
             }
             else
             {
-                Instance.SetPosition(position);
+                SetPosition(position);
             }
         }
         
@@ -179,20 +119,12 @@ namespace App.Battle
             return WorldToScreenPoint(hexCell.Position);
         }
 
-        /// <summary>
-        /// unit移動
-        /// </summary>
-        private void OnShipMoved(IUnitModel unitModel)
-        {
-            SetPosition(unitModel.Position);
-        }
-
-        /// <summary>
-        /// OnDestroy
-        /// </summary>
-        private void OnDestroy()
-        {
-            _moveCtx?.Cancel();
-        }
+        // /// <summary>
+        // /// unit移動
+        // /// </summary>
+        // private void OnShipMoved(IUnitModel unitModel)
+        // {
+        //     SetPosition(unitModel.Position);
+        // }
     }
 }

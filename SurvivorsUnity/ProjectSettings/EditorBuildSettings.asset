@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/App/Scripts/Battle/_Test/Ship/ShipTest.unity
+    path: Assets/App/Scripts/Battle2/_Test/Ship/ShipTest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b22102869d79b4f12b82650ee78876c2, type: 2}

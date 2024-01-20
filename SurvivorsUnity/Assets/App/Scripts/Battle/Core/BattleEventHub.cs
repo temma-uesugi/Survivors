@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
-using VContainer;
 using UniRx;
+using VContainer;
 
 namespace App.Battle.Core
 {

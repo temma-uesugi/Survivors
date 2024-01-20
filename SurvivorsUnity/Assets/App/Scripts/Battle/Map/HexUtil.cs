@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using App.AppCommon;
 using App.AppCommon.Utils;
-using App.Battle.Map.Cells;
-using App.Battle.Turn;
-using App.Battle.ValueObjects;
+using App.Battle2.Turn;
+using App.Battle2.ValueObjects;
 using FastEnumUtility;
 using UnityEngine;
 
@@ -364,10 +363,10 @@ namespace App.Battle.Map
             return dir;
         }
 
-        /// <summary>
-        /// 範囲内か
-        /// </summary>
-        public static bool InRange(HexCell cellFrom, HexCell cellTo, int range)
-            => MapRoutSearch.HeuristicDistance(cellFrom, cellTo) <= range;
+        // /// <summary>
+        // /// 範囲内か
+        // /// </summary>
+        // public static bool InRange(HexCell cellFrom, HexCell cellTo, int range)
+        //     => MapRoutSearch.HeuristicDistance(cellFrom, cellTo) <= range;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Linq;
+using Object = UnityEngine.Object;
 
 namespace App.AppCommon
 {
@@ -8,23 +9,23 @@ namespace App.AppCommon
     /// EnumとImageの対応
     /// </summary>
     [Serializable]
-    public class ResourceMapItem<T> where T : Enum
+    public class ResourceMapItem<T, TO> where T : Enum where TO : Object
     {
         public T Type;
-        public Sprite Resource;
+        public TO Resource;
     }
     
     /// <summary>
     /// EnumとItemのマッピング
     /// </summary>
-    public class ResourceMapBase<T> : ScriptableObject where T : Enum
+    public class ResourceMapBase<T, TO> : ScriptableObject where T : Enum where TO : Object
     {
-        [SerializeField] private ResourceMapItem<T>[] items;
+        [SerializeField] private ResourceMapItem<T, TO>[] items;
 
         /// <summary>
-        /// Sprite取得
+        /// Object取得
         /// </summary>
-        public Sprite GetSprite(T type)
+        public TO GetObject(T type)
         {
             var data = items.FirstOrDefault(x => x.Type.Equals(type));
             if (data == null || data.Resource == null)
@@ -40,24 +41,24 @@ namespace App.AppCommon
     /// EnumとImageの対応
     /// </summary>
     [Serializable]
-    public class ResourceMapItem<T1, T2> where T1 : Enum
+    public class ResourceMapItem<T1, T2, TO> where T1 : Enum where TO : Object
     {
         public T1 Type;
         public T2 Value;
-        public Sprite Resource;
+        public TO Resource;
     }
 
     /// <summary>
     /// EnumとItemのマッピング
     /// </summary>
-    public class ResourceMapBase<T1, T2> : ScriptableObject where T1 : Enum
+    public class ResourceMapBase<T1, T2, TO> : ScriptableObject where T1 : Enum where TO : Object
     {
-        [SerializeField] private ResourceMapItem<T1, T2>[] items;
+        [SerializeField] private ResourceMapItem<T1, T2, TO>[] items;
 
         /// <summary>
-        /// Sprite取得
+        /// Object取得
         /// </summary>
-        public Sprite GetSprite(T1 type, T2 value)
+        public TO GetObject(T1 type, T2 value)
         {
             var data = items.FirstOrDefault(x => x.Type.Equals(type) && x.Value.Equals(value));
             if (data == null || data.Resource == null)

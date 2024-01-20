@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.CoreModule:UnityEngine:ScriptableObject
   <WindIcon>k__BackingField: {fileID: 11400000, guid: d30199c34b6c471b9482fd63e7df8108, type: 2}
   <WeatherIcon>k__BackingField: {fileID: 11400000, guid: f005636fa91542c7b9e5d30b93d56b2a, type: 2}
+  <CellPrefab>k__BackingField: {fileID: 11400000, guid: 35d3bcbc521a941149f3a8505a5cf453, type: 2}

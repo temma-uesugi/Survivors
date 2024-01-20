@@ -12,6 +12,28 @@ namespace App.AppCommon
         Unit = 2,
         Common = 9,
     }
+  
+    /// <summary>
+    /// Mapセルタイプ
+    /// </summary>
+    public enum MapCellType
+    {
+        Normal = 1,
+        //茂み
+        Bushes = 2,
+        //森
+        Forest = 3,
+        //岩場
+        RockyArea = 4,
+        //砂漠
+        Desert = 5,
+        //川
+        River = 6,
+        //沼
+        Swamp = 7,
+        //侵入不可
+        NoEnter = 9
+    }
     
     /// <summary>
     /// ターンタイプ

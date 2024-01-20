@@ -12,5 +12,6 @@ namespace App.AppCommon
 
         [field: SerializeField] public WindIconMap WindIcon { get; private set; }
         [field: SerializeField] public WeatherIconMap WeatherIcon { get; private set; }
+        [field: SerializeField] public CellPrefabMap CellPrefab { get; private set; }
     }
 }
