@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.AppCommon;
+using App.AppCommon.Core;
 using App.Battle.Core;
 using UnityEngine;
+using VContainer;
 
 namespace App.Battle.Map
 {
@@ -21,6 +23,8 @@ namespace App.Battle.Map
         private readonly HashSet<HexCell> _cells = new();
         private HexCell[,] _mapCells;
         public HexCell[] AllMapCells { get; private set; }
+       
+        public Rect MapRect { get; private set; }
         
         /// <summary>
         /// Setup
@@ -49,6 +53,12 @@ namespace App.Battle.Map
                 var cell = CreateNoEnterCell(x, y);
                 _cells.Add(cell);
             }
+
+            var maxPos = _mapCells[yAmount - 1, xAmount - 1].Position;
+            MapRect = new Rect(0, 0, maxPos.x, maxPos.y);
+            
+            var worldSize = BattleCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+            transform.position = (worldSize - Vector3.one) * -1;
         }
         
         /// <summary>

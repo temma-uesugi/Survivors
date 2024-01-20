@@ -1,0 +1,118 @@
+﻿using System;
+using System.Threading;
+using App.Game.Core;
+using App.Game.Map;
+using App.Game.UI;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using MessagePipe;
+using UniRx;
+using UnityEngine;
+using VContainer;
+
+namespace App.Game
+{
+    /// <summary>
+    /// バトルカメラカメラ
+    /// </summary>
+    public class BattleCamera : MonoBehaviour
+    {
+        [SerializeField] private new Camera camera;
+
+        private IDisposable _disposable;
+
+        public Camera MainCamera => camera;
+        private RectTransform _uiRect;
+        private MapMoveController _mapMoveController;
+
+        private readonly ReactiveProperty<Vector3> _cameraPosition = new();
+        public IReactiveProperty<Vector3> Position => _cameraPosition;
+
+        private CancellationTokenSource _moveCtx;
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        [Inject]
+        public void Construct(GameUI ui, ISubscriber<IGameEvent> gameEventSub, MapMoveController mapMoveController)
+        {
+            _cameraPosition.Value = camera.transform.position;
+            _uiRect = ui.RectTrans;
+            _mapMoveController = mapMoveController;
+
+            var bag = DisposableBag.CreateBuilder();
+            gameEventSub.Subscribe(msg =>
+            {
+                switch (msg)
+                {
+                    case EventMessages.CameraMoveEvent evt:
+                        if (evt.IsAnimation)
+                        {
+                            MoveToByAnimation(evt.Position);
+                        }
+                        else
+                        {
+                            SetPosition(evt.Position);
+                        }
+                        break;
+                }
+            }).AddTo(bag);
+            _disposable = bag.Build();
+        }
+
+        /// <summary>
+        /// ポジションのセット
+        /// </summary>
+        public void SetPosition(Vector3 pos)
+        {
+            var clumpPos = _mapMoveController.ClumpInCamera(pos);
+            clumpPos.z = -1;
+            camera.transform.position = clumpPos;
+            _cameraPosition.Value = clumpPos;
+        }
+
+        /// <summary>
+        /// アニメーションしながら移動
+        /// </summary>
+        public void MoveToByAnimation(Vector3 pos)
+        {
+            var clumpPos = _mapMoveController.ClumpInCamera(pos);
+            clumpPos.z = -1;
+            _moveCtx?.Cancel();
+            _moveCtx = new CancellationTokenSource();
+            transform.DOMove(clumpPos, 0.3f)
+                .OnUpdate(() =>
+                {
+                    _cameraPosition.Value = transform.position;
+                })
+                .SetEase(Ease.OutSine)
+                .ToUniTask(cancellationToken: _moveCtx.Token);
+            // _cameraPosition.Value = pos;
+        }
+
+        /// <summary>
+        /// スクリーン位置をMainCamera基準でワールド座標(z=0)に変換する
+        /// </summary>
+        public Vector3 ScreenToWorldPoint(Vector3 screenPos)
+        {
+            return camera.ScreenToWorldPoint(screenPos);
+        }
+
+        /// <summary>
+        /// ワールド座標ををMainCamera基準でScreen座標に変換する
+        /// </summary>
+        public Vector2 WorldToScreenPoint(Vector3 worldPos)
+        {
+            return RectTransformUtility.WorldToScreenPoint(camera, worldPos);
+        }
+
+        /// <summary>
+        /// OnDestroy
+        /// </summary>
+        private void OnDestroy()
+        {
+            _moveCtx?.Cancel();
+            _disposable.Dispose();
+        }
+    }
+}

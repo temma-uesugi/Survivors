@@ -1,0 +1,303 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using App.Game.ValueObjects;
+using UnityEngine;
+
+namespace App.Game.Map
+{
+    /// <summary>
+    /// Hexグリッド
+    /// </summary>
+    public class HexMapManager : MonoBehaviour
+    {
+        [SerializeField] private SeaHexCell seaCellPrefab;
+        [SerializeField] private FordHexCell fordHexCell;
+        [SerializeField] private GroundHexCell groundHexCell;
+        [SerializeField] private MapMoveController moveController;
+
+        public Rect SeaRect { get; private set; }
+
+        private int _xAmount;
+        private int _yAmount;
+
+        private readonly HashSet<HexCell> _cellList = new HashSet<HexCell>();
+        private static SeaHexCell[][] _seaHexCells;
+        private static readonly HashSet<FordHexCell> FordHexCells = new();
+        private readonly HashSet<GroundHexCell> _groundHexCells = new();
+
+        //中心
+        public Vector3 Center => _cellList.Any() ? (_cellList.First().Position + _cellList.Last().Position) / 2 : Vector3.zero;
+
+        //端チェック
+        private bool IsLeftEdge(HexCell cell) => cell.Grid.X == 0;
+        private bool IsRightEdge(HexCell cell) => cell.Grid.X == _xAmount - 1;
+        private bool IsBottomEdge(HexCell cell) => cell.GridY == 0;
+        private bool IsTopEdge(HexCell cell) => cell.GridY == _yAmount - 1;
+        //縦軸ずれ
+        private bool IsVerticalHalf(HexCell cell) => cell.GridX % 2 == 1;
+        //横軸ずれ
+        private bool IsHorizontalHalf(HexCell cell) => cell.GridY % 2 == 1;
+
+        /// <summary>
+        /// Setup
+        /// </summary>
+        public void Setup(int xAmount, int yAmount)
+        {
+            _xAmount = xAmount;
+            _yAmount = yAmount;
+
+            //海のセル作成
+            _seaHexCells = new SeaHexCell[_yAmount][];
+            for (int y = 0; y < _yAmount; y++)
+            {
+                _seaHexCells[y] = new SeaHexCell[_xAmount];
+                for (int x = 0; x < _xAmount; x++)
+                {
+                    var cell = CreateCell<SeaHexCell>(x, y);
+                    _cellList.Add(cell);
+                    _seaHexCells[y][x] = cell;
+                }
+            }
+
+            //周りに浅瀬セル
+            foreach (var (x, y) in CellGridCalculator.CalcFordCell(xAmount, yAmount))
+            {
+                var cell = CreateCell<FordHexCell>(x, y);
+                _cellList.Add(cell);
+                FordHexCells.Add(cell);
+            }
+
+            //周りに陸セル2つずつ
+            foreach (var (x, y) in CellGridCalculator.CalcGroundCell(xAmount, yAmount, 1, 2))
+            {
+                var cell = CreateCell<GroundHexCell>(x, y);
+                _cellList.Add(cell);
+            }
+
+            // MinHexCell = _seaHexCells[0][0];
+            // MaxHexCell = _seaHexCells[yAmount - 1][xAmount - 1];
+            var maxPos = _seaHexCells[yAmount - 1][xAmount - 1].Position;
+            SeaRect = new Rect(0, 0, maxPos.x, maxPos.y);
+
+            moveController.Setup(SeaRect);
+        }
+
+        /// <summary>
+        /// セルの作成
+        /// </summary>
+        private T CreateCell<T>(int x, int y) where T : HexCell
+        {
+            var pos = HexUtil.HexPosToLocalPos(x, y);
+            HexCell cell = typeof(T) switch
+            {
+                var t when t == typeof(SeaHexCell) => Instantiate<SeaHexCell>(seaCellPrefab, transform),
+                var t when t == typeof(FordHexCell) => Instantiate<FordHexCell>(fordHexCell, transform),
+                var t when t == typeof(GroundHexCell) => Instantiate<GroundHexCell>(groundHexCell, transform),
+                _ => throw new Exception("HexCell 相違")
+            };
+            cell.transform.localPosition = pos;
+            cell.Setup(x, y);
+            return cell as T;
+        }
+
+        /// <summary>
+        /// グリッドでセルを取得
+        /// </summary>
+        public HexCell GetCellByGrid(GridValue grid)
+        {
+            var x = grid.X;
+            var y = grid.Y;
+            if (x < 0 || x >= _xAmount || y < 0 || y >= _yAmount)
+            {
+                return null;
+            }
+            return _seaHexCells[y][x];
+        }
+
+        /// <summary>
+        /// 方向を指定して次のセル
+        /// </summary>
+        public HexCell GetNextCellByDir(HexCell curCell, DirectionType dir)
+        {
+            //縦方向の制限
+            //y軸最小
+            if (IsBottomEdge(curCell))
+            {
+                //縦の-方向は通さない
+                if (DirectionType.DiagonalBottom.HasFlag(dir))
+                {
+                    return curCell;
+                }
+            }
+            //y軸最大
+            else if (IsTopEdge(curCell))
+            {
+                //縦の+方向は通さない
+                if (DirectionType.DiagonalTop.HasFlag(dir))
+                {
+                    return curCell;
+                }
+            }
+
+            //横方向の制限
+            //x軸最小
+            if (IsLeftEdge(curCell))
+            {
+                //単純な左移動は通さない
+                if (dir == DirectionType.Left)
+                {
+                    return curCell;
+                }
+                //x軸ずれていない場合、左移動を含む縦移動は通さない
+                if (!IsHorizontalHalf(curCell))
+                {
+                    if (DirectionType.DiagonalLeft.HasFlag(dir))
+                    {
+                        return curCell;
+                    }
+                }
+            }
+            //x軸最大
+            else if (IsRightEdge(curCell))
+            {
+                //単純な右移動は通さない
+                if (dir == DirectionType.Right)
+                {
+                    return curCell;
+                }
+                //x軸ずれている場合、右移動を含む縦移動は通さない
+                if (IsHorizontalHalf(curCell))
+                {
+                    if (DirectionType.DiagonalRight.HasFlag(dir))
+                    {
+                        return curCell;
+                    }
+                }
+            }
+
+            var nextGrid = HexUtil.GetNextGridByDirection(curCell.Grid, dir);
+            var nextCell = GetCellByGrid(nextGrid);
+            return nextCell;
+        }
+
+        /// <summary>
+        /// 移動可能な方向を取得
+        /// </summary>
+        public DirectionType GetMovableDirection(HexCell curCell, DirectionType curDir)
+        {
+            var dir = DirectionType.None;
+
+            switch (curDir)
+            {
+                case DirectionType.Right:
+                {
+                    //現在右
+                    dir = DirectionType.AllRight;
+                    if (IsRightEdge(curCell))
+                    {
+                        //一番右端 -> 右を削除
+                        dir &= ~DirectionType.Right;
+                    }
+                    break;
+                }
+                case DirectionType.TopRight:
+                {
+                    //現在右上
+                    dir = DirectionType.Right | DirectionType.TopRight | DirectionType.TopLeft;
+                    if (IsTopEdge(curCell))
+                    {
+                        //一番上 -> 右上削除
+                        dir &= ~DirectionType.TopRight;
+                    }
+                    if (IsRightEdge(curCell) && IsHorizontalHalf(curCell))
+                    {
+                        //一番右端かつx軸ずれている -> 右上削除
+                        dir &= ~DirectionType.TopRight;
+                    }
+                    break;
+                }
+                case DirectionType.TopLeft:
+                {
+                    //現在左上
+                    dir = DirectionType.TopRight | DirectionType.TopLeft | DirectionType.Left;
+                    if (IsTopEdge(curCell))
+                    {
+                        //一番上 -> 左上削除
+                        dir &= ~DirectionType.TopLeft;
+                    }
+                    if (IsLeftEdge(curCell) && !IsHorizontalHalf(curCell))
+                    {
+                        //一番左端かつx軸ずれていない -> 左上削除
+                        dir &= ~DirectionType.TopLeft;
+                    }
+                    break;
+                }
+                case DirectionType.Left:
+                {
+                    //現在左
+                    dir = DirectionType.AllLeft;
+                    if (IsLeftEdge(curCell))
+                    {
+                        //一番左端 -> 左を削除
+                        dir &= ~DirectionType.Left;
+                    }
+                    break;
+                }
+                case DirectionType.BottomLeft:
+                {
+                    //現在左下
+                    dir = DirectionType.Left | DirectionType.BottomLeft | DirectionType.BottomRight;
+                    if (IsBottomEdge(curCell))
+                    {
+                        //一番下 -> 左下削除
+                        dir &= ~DirectionType.BottomLeft;
+                    }
+                    if (IsLeftEdge(curCell) && !IsHorizontalHalf(curCell))
+                    {
+                        //一番左端かつx軸ずれていない -> 左上削除
+                        dir &= ~DirectionType.BottomLeft;
+                    }
+                    break;
+                }
+                case DirectionType.BottomRight:
+                {
+                    //現在右下
+                    dir = DirectionType.BottomLeft | DirectionType.BottomRight | DirectionType.Right;
+                    if (IsBottomEdge(curCell))
+                    {
+                        //一番下 -> 右下削除
+                        dir &= ~DirectionType.BottomRight;
+                    }
+                    if (IsRightEdge(curCell) && IsHorizontalHalf(curCell))
+                    {
+                        //一番左端かつx軸ずれている -> 右上削除
+                        dir &= ~DirectionType.BottomRight;
+                    }
+                    break;
+                }
+            }
+            return dir;
+        }
+
+        /// <summary>
+        /// Positionを取得
+        /// </summary>
+        public static Vector3 GetPosition(GridValue grid)
+        {
+            var x = grid.X;
+            var y = grid.Y;
+            if (x < 0 || y < 0 || _seaHexCells.Length <= y || _seaHexCells[y].Length <= x)
+            {
+                //浅瀬から見つける
+                var fordCell = FordHexCells.FirstOrDefault(c => c.Grid.X == x && c.Grid.Y == y);
+                if (fordCell == null)
+                {
+                    return Vector3.zero;
+                }
+                return fordCell.Position;
+            }
+            return _seaHexCells[y][x].Position;
+        }
+    }
+}

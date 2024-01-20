@@ -32,6 +32,7 @@ namespace App.Battle
         /// </summary>
         public void Start()
         {
+            _battleCamera.Setup();
             _mapManager.Setup(BattleConst.MapWidth, BattleConst.MapHeight);
         }
         

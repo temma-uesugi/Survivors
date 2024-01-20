@@ -5,7 +5,7 @@
     /// </summary>
     public class BattleConst
     {
-        public const int MapWidth = 40;
+        public const int MapWidth = 60;
         public const int MapHeight = 15;
 
         public const float CameraSize = 7;
