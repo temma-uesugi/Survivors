@@ -3,6 +3,7 @@ using System.Linq;
 using App.AppCommon;
 using App.AppCommon.Core;
 using App.Battle.Core;
+using App.Battle2.ValueObjects;
 using UnityEngine;
 using VContainer;
 
@@ -58,7 +59,10 @@ namespace App.Battle.Map
             MapRect = new Rect(0, 0, maxPos.x, maxPos.y);
             
             var worldSize = BattleCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
-            transform.position = (worldSize - Vector3.one) * -1;
+            var pos = (worldSize - Vector3.one) * -1;
+            //TODO 計算する
+            pos.y = -2.5f;
+            transform.position = pos;
         }
         
         /// <summary>
@@ -113,6 +117,20 @@ namespace App.Battle.Map
                 list.Add((i, yAmount));
             }
             return list;
+        }
+        
+        /// <summary>
+        /// グリッドでセルを取得
+        /// </summary>
+        public HexCell GetCellByGrid(GridValue grid)
+        {
+            var x = grid.X;
+            var y = grid.Y;
+            if (x < 0 || x >= _xAmount || y < 0 || y >= _yAmount)
+            {
+                return null;
+            }
+            return _mapCells[y, x];
         }
     }
 }

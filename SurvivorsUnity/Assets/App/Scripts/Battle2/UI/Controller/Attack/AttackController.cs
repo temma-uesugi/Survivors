@@ -36,7 +36,7 @@ namespace App.Battle2.UI.Controller.Attack
         private readonly List<SlashButton> _attackBtnList = new();
 
         private HexMapAttackChecker _attackChecker;
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private BattleCamera2 battleCamera2;
 
         private readonly List<IAttackTargetModel> _slashTargetList = new();
@@ -44,7 +44,7 @@ namespace App.Battle2.UI.Controller.Attack
         private IAttackTargetModel _assaultTarget = null;
 
         private readonly CompositeDisposable _disposable = new();
-        private ShipUnitModel _shipUnitModel = null;
+        private ShipUnitModel2 shipUnitModel2 = null;
 
         private int _curSelectedTargetIndex = 0;
         private AttackTargetButton _curSelectedTargetButton;
@@ -60,14 +60,14 @@ namespace App.Battle2.UI.Controller.Attack
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             HexMapAttackChecker attackChecker,
             BattleCamera2 battleCamera2,
             BattleEventHub2 eventHub2
         )
         {
             _attackChecker = attackChecker;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             var trans = gameObject.transform;
             _bombBtnPool = new GameObjectPool<BombButton>(bombButtonPrefab, trans);
             _attackBtnPool = new GameObjectPool<SlashButton>(slashButtonPrefab, trans);
@@ -77,19 +77,19 @@ namespace App.Battle2.UI.Controller.Attack
             BattleOperation.Facade.Unit
                 .SwitchTargetL.Select(_ => -1)
                 .Merge(BattleOperation.Facade.Unit.SwitchTargetR.Select(_ => 1))
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(SwitchTarget)
                 .AddTo(this);
             BattleOperation.Facade.Unit.Decide
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => DecideAttackAsync().Forget())
                 .AddTo(this);
             BattleOperation.Facade.Unit.Skill
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => SubMenuAsync().Forget())
                 .AddTo(this);
             BattleOperation.Facade.Unit.Cancel
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => SwitchTarget(0))
                 .AddTo(this);
             
@@ -100,7 +100,7 @@ namespace App.Battle2.UI.Controller.Attack
         /// <summary>
         /// 船移動
         /// </summary>
-        private void OnShipMoved(ShipUnitModel shipUnitModel)
+        private void OnShipMoved(ShipUnitModel2 shipUnitModel2)
         {
             // UpdateTargets(); 
         }
@@ -108,35 +108,35 @@ namespace App.Battle2.UI.Controller.Attack
         /// <summary>
         /// 選択
         /// </summary>
-        private void SelectShipUnit(ShipUnitModel shipUnitModel)
+        private void SelectShipUnit(ShipUnitModel2 shipUnitModel2)
         {
             Clear();
             _disposable.Clear();
             _prevTarget = null;
 
-            if (shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 return;
             }
             
-            _shipUnitModel = shipUnitModel;
-            UpdateTargets(_shipUnitModel.Cell.Value, _shipUnitModel.Direction.Value, _shipUnitModel);
-            _shipUnitModel.Cell.CombineLatest(
-                _shipUnitModel.Direction,
+            this.shipUnitModel2 = shipUnitModel2;
+            UpdateTargets(this.shipUnitModel2.Cell.Value, this.shipUnitModel2.Direction.Value, this.shipUnitModel2);
+            this.shipUnitModel2.Cell.CombineLatest(
+                this.shipUnitModel2.Direction,
                 (cell, dir) => (cell, dir)
-            ).SubscribeWithState(_shipUnitModel, (x, ship) => UpdateTargets(x.cell, x.dir, ship))
+            ).SubscribeWithState(this.shipUnitModel2, (x, ship) => UpdateTargets(x.cell, x.dir, ship))
             .AddTo(_disposable);
         }
 
         /// <summary>
         /// ターゲット更新
         /// </summary>
-        private void UpdateTargets(HexCell cell, DirectionType dir, ShipUnitModel shipUnitModel)
+        private void UpdateTargets(HexCell cell, DirectionType dir, ShipUnitModel2 shipUnitModel2)
         {
             Clear();
             UpdateAssaultAttackTargets(cell, dir);
             UpdateSlashAttackTargets(cell, dir);
-            UpdateBombAttackTargets(cell, dir, shipUnitModel);
+            UpdateBombAttackTargets(cell, dir, shipUnitModel2);
             _sortedTargets = _slashTargetList
                 .Concat(_bombTargetList)
                 .Prepend(_assaultTarget)
@@ -198,7 +198,7 @@ namespace App.Battle2.UI.Controller.Attack
         /// <summary>
         /// 砲撃対象を更新
         /// </summary>
-        private void UpdateBombAttackTargets(HexCell cell, DirectionType dir, ShipUnitModel ship)
+        private void UpdateBombAttackTargets(HexCell cell, DirectionType dir, ShipUnitModel2 ship)
         {
             var rightBombTargets = _attackChecker.GetBombTargetUnits(BombSide.Right, ship.UnitId,
                 cell, dir, ship.RightBombStatus.Value);
@@ -227,7 +227,7 @@ namespace App.Battle2.UI.Controller.Attack
         /// </summary>
         private void CameraPositionUpdated()
         {
-            if (_shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 return;
             }
@@ -287,19 +287,19 @@ namespace App.Battle2.UI.Controller.Attack
             switch (_curSelectedTargetButton)
             {
                 case BombButton:
-                    BattleAttack.Facade.ShipAttack(_shipUnitModel, _curSelectedTargetButton.Target, AttackType.Bomb);
+                    BattleAttack.Facade.ShipAttack(shipUnitModel2, _curSelectedTargetButton.Target, AttackType.Bomb);
                     break;
                 case SlashButton:
-                    BattleAttack.Facade.ShipAttack(_shipUnitModel, _curSelectedTargetButton.Target, AttackType.Slash);
+                    BattleAttack.Facade.ShipAttack(shipUnitModel2, _curSelectedTargetButton.Target, AttackType.Slash);
                     break;
                 case AssaultButton:
-                    BattleAttack.Facade.ShipAttack(_shipUnitModel, _curSelectedTargetButton.Target, AttackType.Assault);
+                    BattleAttack.Facade.ShipAttack(shipUnitModel2, _curSelectedTargetButton.Target, AttackType.Assault);
                     break;
                 default:
                     return; 
             }
             _prevTarget = _curSelectedTargetButton.Target;
-            _shipUnitModel.DecideAction();
+            shipUnitModel2.DecideAction();
             await UniTask.Yield();
             Clear();
         }

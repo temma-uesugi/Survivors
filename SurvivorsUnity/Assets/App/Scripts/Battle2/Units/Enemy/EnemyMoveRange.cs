@@ -17,15 +17,15 @@ namespace App.Battle2.Units.Enemy
         public IReadOnlyReactiveProperty<IEnumerable<HexCell>> MoveRangeCell => _moveRangeCell;
 
         private readonly HexMapManager _mapManager;
-        private readonly EnemyUnitModel _unitModel;
+        private readonly EnemyUnitModel2 unitModel2;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EnemyMoveRange(HexMapManager mapManager, EnemyUnitModel unitModel)
+        public EnemyMoveRange(HexMapManager mapManager, EnemyUnitModel2 unitModel2)
         {
             _mapManager = mapManager;
-            _unitModel = unitModel;
+            this.unitModel2 = unitModel2;
         }
         
         /// <summary>
@@ -42,7 +42,7 @@ namespace App.Battle2.Units.Enemy
             //TODO 一旦単純な移動力移動力で行ける範囲
             _moveRangeCell.Value = _mapManager.AllSeaCells
                 .Where(x => x.Grid != cell.Grid)
-                .Where(x => HitUtil.IsCircleAndPoint(cell.Position, _unitModel.MovePower * 1.1f, x.Position));
+                .Where(x => HitUtil.IsCircleAndPoint(cell.Position, unitModel2.MovePower * 1.1f, x.Position));
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace App.Battle2.UI.HexButtons
     /// </summary>
     public class UnitHexButton : HexButton
     {
-        public ShipUnitModel Model { get; private set; }
+        public ShipUnitModel2 Model2 { get; private set; }
         private readonly CompositeDisposable _disposable = new();
         private HexCell _curCell;
         

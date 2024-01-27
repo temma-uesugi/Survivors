@@ -59,9 +59,9 @@ namespace App.Battle2.Facades
         /// <summary>
         /// アクション終了
         /// </summary>
-        public async UniTask EndActionAsync(IUnitModel actionUnit)
+        public async UniTask EndActionAsync(IUnitModel2 actionUnit)
         {
-            if (actionUnit is ShipUnitModel)
+            if (actionUnit is ShipUnitModel2)
             {
                 await EndPlayerPhaseAsync();
             }

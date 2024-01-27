@@ -26,12 +26,12 @@ namespace App.Battle2.UI.Turn
         public void Construct(
             WeatherManager weatherManager,
             WindManager windManager,
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
             lineWeather.Setup(GameConst.PredictedTurnAmount, weatherManager);
             lineWind.Setup(GameConst.PredictedTurnAmount, windManager);
-            shipTurnManagerView.SetupAsync(unitManger).Forget();
+            shipTurnManagerView.SetupAsync(unitManger2).Forget();
         }
     }
 }

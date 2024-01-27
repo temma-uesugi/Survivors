@@ -49,12 +49,12 @@ namespace App.Battle2.UI.Controller.Unit
         
         private HexMapMoveChecker _moveChecker;
         private HexMapManager _mapManager;
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private AttackController _attackController;
 
         private readonly CompositeDisposable _disposable = new();
         private DirectionType _movableDir = DirectionType.None;
-        private ShipUnitModel _shipUnitModel = null;
+        private ShipUnitModel2 shipUnitModel2 = null;
 
         private readonly Dictionary<DirectionType, MovableStatus> _movableMap = new()
         {
@@ -75,7 +75,7 @@ namespace App.Battle2.UI.Controller.Unit
         public void Construct(
             HexMapMoveChecker moveChecker,
             HexMapManager mapManager,
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleCamera2 battleCamera2,
             AttackController attackController,
             BattleEventHub2 eventHub2
@@ -83,21 +83,21 @@ namespace App.Battle2.UI.Controller.Unit
         {
             _moveChecker = moveChecker;
             _mapManager = mapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _attackController = attackController;
             BattleState.Facade.SelectedShipUnit.Subscribe(SelectShipUnit).AddTo(this);
            
             BattleOperation.Facade.Unit.Move
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(Move).AddTo(this);
             BattleOperation.Facade.Unit.Decide
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => Decide()).AddTo(this);
             BattleOperation.Facade.Unit.Cancel
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => Cancel()).AddTo(this);
             BattleOperation.Facade.Unit.Skill
-                .Where(_ => _shipUnitModel != null)
+                .Where(_ => shipUnitModel2 != null)
                 .Subscribe(_ => UnitSkillAsync().Forget()).AddTo(this);
             
             battleCamera2.Position.Subscribe(_ => CameraPositionUpdated()).AddTo(this);
@@ -126,10 +126,10 @@ namespace App.Battle2.UI.Controller.Unit
         /// </summary>
         private void Cancel()
         {
-            if (_shipUnitModel.IsUnselectable)
+            if (shipUnitModel2.IsUnselectable)
             {
                 // _shipUnitModel.Cancel();
-                _shipUnitModel = null;
+                shipUnitModel2 = null;
                 BattleState.Facade.UpdateSelectedShipUnit(null);
                 return;
             }
@@ -145,36 +145,36 @@ namespace App.Battle2.UI.Controller.Unit
         private void Move(Vector2 dir)
         {
             var inputDir = HexUtil2.InputVectorToMoveDir(dir);
-            var moveDir = HexUtil2.InputDirToMoveDir(inputDir, _shipUnitModel.Direction.Value);
+            var moveDir = HexUtil2.InputDirToMoveDir(inputDir, shipUnitModel2.Direction.Value);
             if (!IsMovable(moveDir))
             {
                 return; 
             }
-            BattleMove.Facade.InputMove(_shipUnitModel.UnitId, moveDir);
+            BattleMove.Facade.InputMove(shipUnitModel2.UnitId, moveDir);
         }
         
         /// <summary>
         /// 選択
         /// </summary>
-        private void SelectShipUnit(ShipUnitModel shipUnitModel)
+        private void SelectShipUnit(ShipUnitModel2 shipUnitModel2)
         {
             _disposable.Clear();
             _movableDir = DirectionType.None;
 
-            if (shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 Clear();
                 return;
             }
 
-            _shipUnitModel = shipUnitModel;
-            UpdateButtonPosition(_shipUnitModel.Cell.Value);
-            SelectedShipMovableDirUpdated(_shipUnitModel, _shipUnitModel.MovableDirection.Value);
-            _shipUnitModel.MovableDirection.SubscribeWithState(_shipUnitModel, (d, ship) =>
+            this.shipUnitModel2 = shipUnitModel2;
+            UpdateButtonPosition(this.shipUnitModel2.Cell.Value);
+            SelectedShipMovableDirUpdated(this.shipUnitModel2, this.shipUnitModel2.MovableDirection.Value);
+            this.shipUnitModel2.MovableDirection.SubscribeWithState(this.shipUnitModel2, (d, ship) =>
             {
                 SelectedShipMovableDirUpdated(ship, d);
             }).AddTo(_disposable);
-            _shipUnitModel.MovePower.Where(x => x == 0).Subscribe(_ =>
+            this.shipUnitModel2.MovePower.Where(x => x == 0).Subscribe(_ =>
             {
                 Clear();
             });
@@ -183,7 +183,7 @@ namespace App.Battle2.UI.Controller.Unit
         /// <summary>
         /// 移動可能方向が変更
         /// </summary>
-        private void SelectedShipMovableDirUpdated(ShipUnitModel ship, DirectionType movableDir)
+        private void SelectedShipMovableDirUpdated(ShipUnitModel2 ship, DirectionType movableDir)
         {
             if (!ship.IsMovable)
             {
@@ -236,11 +236,11 @@ namespace App.Battle2.UI.Controller.Unit
         /// </summary>
         private void CameraPositionUpdated()
         {
-            if (_shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 return;
             }
-            UpdateButtonPosition(_shipUnitModel.Cell.Value);
+            UpdateButtonPosition(shipUnitModel2.Cell.Value);
         }
         
         /// <summary>
@@ -303,9 +303,9 @@ namespace App.Battle2.UI.Controller.Unit
             var res = await BattleMenus.Facade.OpenMainMenuAsync(BattleMenuItemType.MainMenu.UnitItems);
             if (res == BattleMenuItemType.MainMenu.EndTurn)
             {
-                _shipUnitModel.EndAction();
+                shipUnitModel2.EndAction();
                 //終了  
-                BattleProgress.Facade.EndActionAsync(_shipUnitModel).Forget();
+                BattleProgress.Facade.EndActionAsync(shipUnitModel2).Forget();
             }
             else if (res == BattleMenuItemType.MainMenu.UnitSkill)
             {

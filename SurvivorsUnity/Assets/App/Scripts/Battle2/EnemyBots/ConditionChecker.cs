@@ -12,28 +12,28 @@ namespace App.Battle2.EnemyBots
     public class ConditionChecker
     {
         private readonly HexMapManager _mapManager;
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public ConditionChecker(
             HexMapManager mapManager,
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
             _mapManager = mapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
         }
 
         /// <summary>
         /// Check
         /// </summary>
-        public bool Check(BotNodeObject.BotCondition[] conditions, EnemyUnitModel enemyModel)
+        public bool Check(BotNodeObject.BotCondition[] conditions, EnemyUnitModel2 enemyModel2)
         {
             foreach (var condition in conditions)
             {
-                if (!CheckCondition(condition, enemyModel))
+                if (!CheckCondition(condition, enemyModel2))
                 {
                     return false;
                 }
@@ -44,7 +44,7 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// 条件のチェック
         /// </summary>
-        private bool CheckCondition(BotNodeObject.BotCondition condition, EnemyUnitModel enemyModel)
+        private bool CheckCondition(BotNodeObject.BotCondition condition, EnemyUnitModel2 enemyModel2)
         {
             return condition.Type switch
             {

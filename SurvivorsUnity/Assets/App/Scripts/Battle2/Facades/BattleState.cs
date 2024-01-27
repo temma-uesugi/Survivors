@@ -34,13 +34,13 @@ namespace App.Battle2.Facades
         private readonly ReactiveProperty<HexCell> _focusedHexCell = new();
         public IReadOnlyReactiveProperty<HexCell> FocusedHexCell => _focusedHexCell;
         //選択されている船Unit
-        private readonly ReactiveProperty<ShipUnitModel> _selectedShipUnit = new();
-        public IReadOnlyReactiveProperty<ShipUnitModel> SelectedShipUnit => _selectedShipUnit;
+        private readonly ReactiveProperty<ShipUnitModel2> _selectedShipUnit = new();
+        public IReadOnlyReactiveProperty<ShipUnitModel2> SelectedShipUnit => _selectedShipUnit;
         //フォーカスされているUnit
-        private readonly ReactiveProperty<IUnitModel> _focusedUnit = new();
-        public IReadOnlyReactiveProperty<IUnitModel> FocusedUnit => _focusedUnit;
+        private readonly ReactiveProperty<IUnitModel2> _focusedUnit = new();
+        public IReadOnlyReactiveProperty<IUnitModel2> FocusedUnit => _focusedUnit;
         //船移動
-        public IObservable<ShipUnitModel> OnShipMoved => _selectedShipUnit
+        public IObservable<ShipUnitModel2> OnShipMoved => _selectedShipUnit
             .Where(x => x != null)
             .SelectMany(x => x.Cell.Skip(1))
             .Select(_ => _selectedShipUnit.Value);
@@ -79,11 +79,11 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 選択Shipの更新
         /// </summary>
-        public void UpdateSelectedShipUnit(ShipUnitModel ship) => _selectedShipUnit.Value = ship;
+        public void UpdateSelectedShipUnit(ShipUnitModel2 ship) => _selectedShipUnit.Value = ship;
 
         /// <summary>
         /// FocusUnitの更新
         /// </summary>
-        public void UpdateFocusedUnit(IUnitModel unit) => _focusedUnit.Value = unit;
+        public void UpdateFocusedUnit(IUnitModel2 unit) => _focusedUnit.Value = unit;
     }
 }

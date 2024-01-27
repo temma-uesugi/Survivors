@@ -11,9 +11,9 @@ namespace App.Battle2.UI.MiniMap
 	[ContainerRegisterMonoBehaviourAttribute2(typeof(BattleMiniMapManager))]
     public class BattleMiniMapManager : MonoBehaviour
     {
-		private UnitManger _unit;
+		private UnitManger2 _unit;
         /// <summary>UnitManager</summary>
-        public UnitManger Unit{get{return _unit;}}
+        public UnitManger2 Unit{get{return _unit;}}
 
         private HexMapManager _hexMap;
         /// <summary>HexMapManager</summary>
@@ -54,7 +54,7 @@ namespace App.Battle2.UI.MiniMap
         /// コンストラクタ
         /// </summary>
         [Inject]
-        public void Construct(UnitManger unitManager, HexMapManager hexMapManager, MapIconManager mapIconManager, BattleEventHub2 eventHub2)
+        public void Construct(UnitManger2 unitManager, HexMapManager hexMapManager, MapIconManager mapIconManager, BattleEventHub2 eventHub2)
         {
             _unit = unitManager;
             _hexMap = hexMapManager;

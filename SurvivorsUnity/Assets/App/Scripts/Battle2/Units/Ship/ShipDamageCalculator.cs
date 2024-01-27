@@ -6,12 +6,12 @@ namespace App.Battle2.Units.Ship
     /// <summary>
     /// 船のダメージ計算
     /// </summary>
-    public class ShipDamageCalculator : DamageCalculator<ShipUnitModel>
+    public class ShipDamageCalculator : DamageCalculator<ShipUnitModel2>
     {
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ShipDamageCalculator(ShipUnitModel unitModel) : base(unitModel)
+        public ShipDamageCalculator(ShipUnitModel2 unitModel2) : base(unitModel2)
         {
         }
         
@@ -50,8 +50,8 @@ namespace App.Battle2.Units.Ship
         /// </summary>
         private float CalcDealDamageOfAssault()
         {
-            Log.Debug("CalcDealDamageOfAssault", UnitModel.Status.MovePower.Current);
-            return 2 * (float)UnitModel.Status.MovePower.Current;
+            Log.Debug("CalcDealDamageOfAssault", UnitModel2.Status.MovePower.Current);
+            return 2 * (float)UnitModel2.Status.MovePower.Current;
         }
         
         /// <summary>

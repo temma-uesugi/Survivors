@@ -16,7 +16,7 @@ namespace App.Battle2.UI.MovePower
     {
         private readonly CompositeDisposable _disposable = new();
         private IDisposable _movePowerDisposable;
-        private readonly UnitManger _unitManager;
+        private readonly UnitManger2 _unitManager;
 
         //船変更
         private readonly Subject<double> _onChangeShip = new();
@@ -36,7 +36,7 @@ namespace App.Battle2.UI.MovePower
         /// </summary>
         [Inject]
         public MovePowerViewModel(
-            UnitManger unitManager
+            UnitManger2 unitManager
         )
         {
             _unitManager = unitManager;
@@ -46,17 +46,17 @@ namespace App.Battle2.UI.MovePower
         /// <summary>
         /// 選択船更新
         /// </summary>
-        private void SelectShip(ShipUnitModel shipUnitModel)
+        private void SelectShip(ShipUnitModel2 shipUnitModel2)
         {
-            if (shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 _movePower.Value = 0;
                 _onShipReleased.OnNext(Unit.Default);
                 return;
             }
             
-            _onChangeShip.OnNext(shipUnitModel.Status.MovePower.Max);
-            _movePowerDisposable = shipUnitModel.MovePower.Subscribe(UpdateMovePower);
+            _onChangeShip.OnNext(shipUnitModel2.Status.MovePower.Max);
+            _movePowerDisposable = shipUnitModel2.MovePower.Subscribe(UpdateMovePower);
         }
 
         /// <summary>

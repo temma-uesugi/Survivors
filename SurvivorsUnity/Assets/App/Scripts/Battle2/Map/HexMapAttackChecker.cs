@@ -22,7 +22,7 @@ namespace App.Battle2.Map
     public class HexMapAttackChecker
     {
         private readonly HexMapManager _hexMapManager;
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly MapObjectManger _objectManager;
 
         /// <summary>
@@ -31,12 +31,12 @@ namespace App.Battle2.Map
         [Inject]
         public HexMapAttackChecker(
             HexMapManager hexMapManager,
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             MapObjectManger objectManager
         )
         {
             _hexMapManager = hexMapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _objectManager = objectManager;
         }
 
@@ -101,7 +101,7 @@ namespace App.Battle2.Map
             }
 
             var attackCell = checkDir.Select(x => _hexMapManager.GetNextCellByDir(curCell, x));
-            var list = _unitManger.AllAliveEnemies
+            var list = unitManger2.AllAliveEnemies
                 .Where(x => attackCell.Any(c => c  == x.Cell.Value));
             return list;
         }
@@ -113,14 +113,14 @@ namespace App.Battle2.Map
         public IAttackTargetModel GetAssaultTargetUnit(HexCell curCell, DirectionType curDir)
         {
             var assaultCell = _hexMapManager.GetNextCellByDir(curCell, curDir);
-            return _unitManger.AllAliveEnemies
+            return unitManger2.AllAliveEnemies
                 .FirstOrDefault(x => x.Cell.Value == assaultCell);
         }
 
         /// <summary>
         /// 砲撃対象の取得
         /// </summary>
-        public IEnumerable<IAttackTargetModel> GetBombardTargetUnits(ShipUnitModel attackerShip)
+        public IEnumerable<IAttackTargetModel> GetBombardTargetUnits(ShipUnitModel2 attackerShip)
         {
             var list = new List<IAttackTargetModel>();
             list.AddRange(GetBombTargetUnits(BombSide.Right, attackerShip.UnitId, attackerShip.Cell.Value, 
@@ -143,7 +143,7 @@ namespace App.Battle2.Map
             var bombDeg = HexUtil2.GetBombDegByShipDir(shipDir, side);
             var bombRad = bombDeg * Mathf.Deg2Rad;
             var bombDir = new Vector3(Mathf.Cos(bombRad), Mathf.Sin(bombRad), 0);
-            var rangeTargets = _unitManger.AllAliveEnemies.OfType<IAttackTargetModel>()
+            var rangeTargets = unitManger2.AllAliveEnemies.OfType<IAttackTargetModel>()
                 .Concat(_objectManager.AllAliveObstacles)
                 .Where(target => HitUtil.IsArcAndPoint(
                         shipCell.Position,
@@ -160,7 +160,7 @@ namespace App.Battle2.Map
             if (!isPenetration && !isHighParabola)
             {
                 //障害物の影響を受ける
-                var allBlocks = _unitManger.AllAliveUnitModels.OfType<IBlockBombModel>()
+                var allBlocks = unitManger2.AllAliveUnitModels.OfType<IBlockBombModel>()
                     .Concat(_objectManager.AllAliveObstacles)
                     .Where(x => x.Id != unitId).ToArray();
                 targets = rangeTargets

@@ -29,8 +29,8 @@ namespace App.Battle2.Units.Enemy
             public EnemyInactiveConditionType InactiveCondType { get; init; }
             public int InactiveCondValue { get; init; }
             public int CurrentCondValue { get; private set; } = 0;
-            public ShipUnitModel TargetShipModel { get; private set; }
-            public bool IsActive => TargetShipModel != null;
+            public ShipUnitModel2 TargetShipModel2 { get; private set; }
+            public bool IsActive => TargetShipModel2 != null;
 
             /// <summary>
             /// カウント追加
@@ -44,33 +44,33 @@ namespace App.Battle2.Units.Enemy
             /// <summary>
             /// ターゲットのセット
             /// </summary>
-            public void SetTarget(ShipUnitModel targetShipModel)
+            public void SetTarget(ShipUnitModel2 targetShipModel2)
             {
-                TargetShipModel = targetShipModel;
+                TargetShipModel2 = targetShipModel2;
             }
         }
         
         private readonly CompositeDisposable _disposable = new();
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
 
-        private readonly Dictionary<uint, (EnemyUnitModel model, ActiveCondition status)> _dic = new();
+        private readonly Dictionary<uint, (EnemyUnitModel2 model, ActiveCondition status)> _dic = new();
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
         public EnemyActiveManager(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleEventHub2 eventHub2
         )
         {
-            _unitManger = unitManger;
-            foreach (var enemy in unitManger.AllAliveEnemies)
+            this.unitManger2 = unitManger2;
+            foreach (var enemy in unitManger2.AllAliveEnemies)
             {
                 AddEnemy(enemy);
             }
-            unitManger.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(_disposable);
-            unitManger.EnemyModelMap.ObserveRemove().Subscribe(x => RemoveEnemy(x.Key)) .AddTo(_disposable);
+            unitManger2.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(_disposable);
+            unitManger2.EnemyModelMap.ObserveRemove().Subscribe(x => RemoveEnemy(x.Key)) .AddTo(_disposable);
             
             eventHub2.Subscribe<BattleEvents2.OnTurnStartAsync>(async _ => await OnTurnStartAsync()).AddTo(_disposable);
             eventHub2.Subscribe<BattleEvents2.OnTurnEndAsync>(async _ => await OnTurnEndAsync()).AddTo(_disposable);
@@ -81,9 +81,9 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 敵追加
         /// </summary>
-        private void AddEnemy(EnemyUnitModel enemyUnitModel)
+        private void AddEnemy(EnemyUnitModel2 enemyUnitModel2)
         {
-            var enemyMaster = MasterData.Facade.EnemyBaseTable.FindByEnemyId(enemyUnitModel.EnemyId);
+            var enemyMaster = MasterData.Facade.EnemyBaseTable.FindByEnemyId(enemyUnitModel2.EnemyId);
             var inactiveCondType = enemyMaster.InactiveConditionType;
             var inactiveCondValue = enemyMaster.InactiveConditionValue;
             if (inactiveCondType == EnemyInactiveConditionType.Invert)
@@ -107,7 +107,7 @@ namespace App.Battle2.Units.Enemy
                 InactiveCondValue = inactiveCondValue,
             };
            
-            _dic.Add(enemyUnitModel.UnitId, (enemyUnitModel, activeCondition));
+            _dic.Add(enemyUnitModel2.UnitId, (enemyUnitModel2, activeCondition));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace App.Battle2.Units.Enemy
             foreach (var value in _dic.Values)
             {
                 if (value.status.IsActive) continue;
-                (bool isActive, ShipUnitModel target) = value.status.ActiveCondType switch
+                (bool isActive, ShipUnitModel2 target) = value.status.ActiveCondType switch
                 {
                     EnemyActiveConditionType.None => (true, GetClosestShip(value.model)),
                     EnemyActiveConditionType.ProgressTurn => (value.status.CurrentCondValue >= value.status.ActiveCondValue, GetClosestShip(value.model)), 
@@ -164,7 +164,7 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 船の移動
         /// </summary>
-        private void OnShipMoved(ShipUnitModel shipUnitModel)
+        private void OnShipMoved(ShipUnitModel2 shipUnitModel2)
         {
             foreach (var value in _dic.Values)
             {
@@ -172,11 +172,11 @@ namespace App.Battle2.Units.Enemy
                 {
                     //アクティブ => 非アクティブチェック
                     //ターゲットでなければ何もしない
-                    if (shipUnitModel != value.status.TargetShipModel) continue;
+                    if (shipUnitModel2 != value.status.TargetShipModel2) continue;
                     var isInactive = value.status.ActiveCondType switch
                     {
-                        EnemyActiveConditionType.InRange => CheckOutRange(value.model, value.status.TargetShipModel, value.status.InactiveCondValue),
-                        EnemyActiveConditionType.InAttackRange => CheckOutAttackRange(value.model, value.status.TargetShipModel),
+                        EnemyActiveConditionType.InRange => CheckOutRange(value.model, value.status.TargetShipModel2, value.status.InactiveCondValue),
+                        EnemyActiveConditionType.InAttackRange => CheckOutAttackRange(value.model, value.status.TargetShipModel2),
                         _ => false,
                     };
                     if (isInactive)
@@ -190,14 +190,14 @@ namespace App.Battle2.Units.Enemy
                     //非アクティブ => アクティブチェック
                     bool isActive = value.status.ActiveCondType switch
                     {
-                        EnemyActiveConditionType.InRange => CheckInRange(value.model, shipUnitModel, value.status.ActiveCondValue),
-                        EnemyActiveConditionType.InAttackRange => CheckInAttackRange(value.model, shipUnitModel),
+                        EnemyActiveConditionType.InRange => CheckInRange(value.model, shipUnitModel2, value.status.ActiveCondValue),
+                        EnemyActiveConditionType.InAttackRange => CheckInAttackRange(value.model, shipUnitModel2),
                         _ => false,
                     };
                     if (isActive)
                     {
-                        value.status.SetTarget(shipUnitModel);
-                        value.model.SetTarget(shipUnitModel);
+                        value.status.SetTarget(shipUnitModel2);
+                        value.model.SetTarget(shipUnitModel2);
                     }
                 }
             }
@@ -237,54 +237,54 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 一番近い船を取得
         /// </summary>
-        private ShipUnitModel GetClosestShip(EnemyUnitModel enemyUnitModel)
+        private ShipUnitModel2 GetClosestShip(EnemyUnitModel2 enemyUnitModel2)
         {
-            return _unitManger.AllAliveShips
+            return unitManger2.AllAliveShips
                 .RandomSort()
-                .OrderBy(x => MapRoutSearch.HeuristicDistance(enemyUnitModel.Cell.Value, x.Cell.Value))
+                .OrderBy(x => MapRoutSearch.HeuristicDistance(enemyUnitModel2.Cell.Value, x.Cell.Value))
                 .First();
         }
 
         /// <summary>
         /// 範囲内に敵
         /// </summary>
-        private bool CheckInRange(EnemyUnitModel enemyUnitModel, ShipUnitModel ship, int range)
-            => HexUtil2.InRange(enemyUnitModel.Cell.Value, ship.Cell.Value, range);
+        private bool CheckInRange(EnemyUnitModel2 enemyUnitModel2, ShipUnitModel2 ship, int range)
+            => HexUtil2.InRange(enemyUnitModel2.Cell.Value, ship.Cell.Value, range);
 
         /// <summary>
         /// 攻撃範囲内に敵
         /// </summary>
-        private bool CheckInAttackRange(EnemyUnitModel enemyUnitModel, ShipUnitModel ship) =>
-            CheckInRange(enemyUnitModel, ship, enemyUnitModel.AttackRange);
+        private bool CheckInAttackRange(EnemyUnitModel2 enemyUnitModel2, ShipUnitModel2 ship) =>
+            CheckInRange(enemyUnitModel2, ship, enemyUnitModel2.AttackRange);
 
         
         /// <summary>
         /// 範囲内に敵
         /// </summary>
-        private (bool, ShipUnitModel) CheckInRange(EnemyUnitModel enemyUnitModel, int range)
+        private (bool, ShipUnitModel2) CheckInRange(EnemyUnitModel2 enemyUnitModel2, int range)
         {
-            var ship = GetClosestShip(enemyUnitModel);
-            var inRange = CheckInRange(enemyUnitModel, ship, range);
+            var ship = GetClosestShip(enemyUnitModel2);
+            var inRange = CheckInRange(enemyUnitModel2, ship, range);
             return (inRange, ship);
         }
 
         /// <summary>
         /// 攻撃範囲内に敵
         /// </summary>
-        private (bool, ShipUnitModel) CheckInAttackRange(EnemyUnitModel enemyUnitModel) =>
-            CheckInRange(enemyUnitModel, enemyUnitModel.AttackRange);
+        private (bool, ShipUnitModel2) CheckInAttackRange(EnemyUnitModel2 enemyUnitModel2) =>
+            CheckInRange(enemyUnitModel2, enemyUnitModel2.AttackRange);
 
         /// <summary>
         /// 範囲外かのチェック
         /// </summary>
-        private bool CheckOutRange(EnemyUnitModel enemyUnitModel, ShipUnitModel targetUnitModel, int range)
-            => !CheckInRange(enemyUnitModel, targetUnitModel, range);
+        private bool CheckOutRange(EnemyUnitModel2 enemyUnitModel2, ShipUnitModel2 targetUnitModel2, int range)
+            => !CheckInRange(enemyUnitModel2, targetUnitModel2, range);
 
         /// <summary>
         /// 攻撃範囲外かのチェック
         /// </summary>
-        private bool CheckOutAttackRange(EnemyUnitModel enemyUnitModel, ShipUnitModel targetUnitModel) =>
-            CheckOutRange(enemyUnitModel, targetUnitModel, enemyUnitModel.AttackRange);
+        private bool CheckOutAttackRange(EnemyUnitModel2 enemyUnitModel2, ShipUnitModel2 targetUnitModel2) =>
+            CheckOutRange(enemyUnitModel2, targetUnitModel2, enemyUnitModel2.AttackRange);
         
         /// <summary>
         /// 天気チェック

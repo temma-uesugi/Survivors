@@ -14,7 +14,7 @@ namespace App.Battle2.Map
     public class HexMapMoveChecker
     {
         private static HexMapManager _hexMapManager;
-        private static UnitManger _unitManger;
+        private static UnitManger2 _unitManger2;
 
         /// <summary>
         /// SetUp
@@ -22,11 +22,11 @@ namespace App.Battle2.Map
         [Inject]
         public HexMapMoveChecker(
             HexMapManager hexMapManager,
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
             _hexMapManager = hexMapManager;
-            _unitManger = unitManger;
+            _unitManger2 = unitManger2;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace App.Battle2.Map
             var movableDir = _hexMapManager.GetMovableDirection(curCell, curDir);
             var sideHexCells = HexUtil2.GetSideHexCell(curCell.Grid);
             //ユニットが存在するマップには侵入できない
-            foreach (var unit in _unitManger.AllAliveUnitModels)
+            foreach (var unit in _unitManger2.AllAliveUnitModels)
             {
                 if (sideHexCells.Any(x => x == unit.Grid))
                 {

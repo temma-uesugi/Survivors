@@ -15,7 +15,7 @@ namespace App.Battle2.UI.BattleLog
     {
         private readonly CompositeDisposable _disposable = new();
 
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private BattleLogPastView2 _pastView2;
 
         /// <summary>
@@ -23,12 +23,12 @@ namespace App.Battle2.UI.BattleLog
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleLogPastView2 pastView2,
             BattleEventHub2 eventHub2
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _pastView2 = pastView2;
             
             _pastView2.Setup();

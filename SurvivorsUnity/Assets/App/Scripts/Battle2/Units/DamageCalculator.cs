@@ -21,16 +21,16 @@ namespace App.Battle2.Units
     /// <summary>
     /// ダメージ計算
     /// </summary>
-    public abstract class DamageCalculator<T> : DamageCalculator where T : IUnitModel
+    public abstract class DamageCalculator<T> : DamageCalculator where T : IUnitModel2
     {
-        protected T UnitModel { get; private set; }
+        protected T UnitModel2 { get; private set; }
         
         /// <summary>
         /// Setup
         /// </summary>
-        public DamageCalculator(T unitModel)
+        public DamageCalculator(T unitModel2)
         {
-            UnitModel = unitModel;
+            UnitModel2 = unitModel2;
         }
     }
 }

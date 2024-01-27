@@ -72,7 +72,7 @@ namespace App.Battle2.Core
         public readonly struct AttackArgs
         {
             public AttackType Type { get; init; }
-            public IUnitModel AttackerUnit { get; init; }
+            public IUnitModel2 AttackerUnit { get; init; }
             public IAttackTargetModel TargetUnit { get; init; }
             public int Damage { get; init; }
         }
@@ -98,7 +98,7 @@ namespace App.Battle2.Core
         /// </summary>
         public readonly struct OnShipMovedEvent : IBattleEvent
         {
-            public ShipUnitModel Ship { get; init; }
+            public ShipUnitModel2 Ship { get; init; }
         }
        
         /// <summary>
@@ -106,7 +106,7 @@ namespace App.Battle2.Core
         /// </summary>
         public readonly struct OnEnemyMovedEvent : IBattleEvent
         {
-            public EnemyUnitModel Enemy { get; init; }
+            public EnemyUnitModel2 Enemy { get; init; }
         }
         
         /// <summary>

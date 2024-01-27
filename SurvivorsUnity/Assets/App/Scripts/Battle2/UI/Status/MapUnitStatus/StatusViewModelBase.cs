@@ -9,7 +9,7 @@ namespace App.Battle2.UI.Status.MapUnitStatus
     /// </summary>
     [RequireComponent(typeof(StatusViewBase))]
     public abstract class StatusViewModelBase<T1, T2> : MonoBehaviour
-        where T1 : IUnitModel
+        where T1 : IUnitModel2
         where T2 : StatusViewBase
     {
         protected T1 Model { get; private set; }

@@ -5,12 +5,12 @@ namespace App.Battle2.Units.Enemy
     /// <summary>
     /// 敵のダメージ計算
     /// </summary>
-    public class EnemyDamageCalculator : DamageCalculator<EnemyUnitModel>
+    public class EnemyDamageCalculator : DamageCalculator<EnemyUnitModel2>
     {
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EnemyDamageCalculator(EnemyUnitModel unitModel) : base(unitModel)
+        public EnemyDamageCalculator(EnemyUnitModel2 unitModel2) : base(unitModel2)
         {
         }
         

@@ -23,7 +23,7 @@ namespace App.Battle2.Debug
 
         private HexMapManager _mapManager;
 
-        private IUnitView _unitView;
+        private IUnitView2 unitView2;
 
         /// <summary>
         /// コンストラクタ
@@ -44,7 +44,7 @@ namespace App.Battle2.Debug
         /// </summary>
         private void Update()
         {
-            if (_unitView == null)
+            if (unitView2 == null)
             {
                 return;
             }
@@ -102,30 +102,30 @@ namespace App.Battle2.Debug
                 KeyDir.Down => new GridValue(0, -1),
                 _ => GridValue.GridZero,
             };
-            var moveCell = _mapManager.GetCellByGrid(_unitView.Cell.Grid + moveGrid);
+            var moveCell = _mapManager.GetCellByGrid(unitView2.Cell.Grid + moveGrid);
             if (moveCell == null)
             {
                 return;
             }
-            BattleMove.Facade.DebugInputMove(_unitView.UnitId, moveCell, _unitView.Direction);
+            BattleMove.Facade.DebugInputMove(unitView2.UnitId, moveCell, unitView2.Direction);
         }
 
-        /// <summary>
-        /// 向き変更
-        /// </summary>
-        private void ChangeDir(KeyDir keyDir)
-        {
-            if (_unitView is not ShipUnitView)
-            {
-                return; 
-            }
-            var dir = DebugMoveKeyCommand.GetNextDirByArrowKey(keyDir, _unitView.Direction);
-            if (dir == DirectionType.None)
-            {
-                return;
-            }
-            BattleMove.Facade.InputChangeDirection(_unitView.UnitId, dir);
-        }
+        // /// <summary>
+        // /// 向き変更
+        // /// </summary>
+        // private void ChangeDir(KeyDir keyDir)
+        // {
+        //     if (_unitView is not ShipUnitView)
+        //     {
+        //         return; 
+        //     }
+        //     var dir = DebugMoveKeyCommand.GetNextDirByArrowKey(keyDir, _unitView.Direction);
+        //     if (dir == DirectionType.None)
+        //     {
+        //         return;
+        //     }
+        //     BattleMove.Facade.InputChangeDirection(_unitView.UnitId, dir);
+        // }
 
         // /// <summary>
         // /// ユニット選択

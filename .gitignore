@@ -70,3 +70,6 @@
 # Temporary auto-generated Android Assets
 /SurvivorsUnity/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /SurvivorsUnity/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# dis/
+/SurvivorsUnity/dist

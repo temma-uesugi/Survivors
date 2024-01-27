@@ -26,17 +26,17 @@ namespace App.Battle2.Units.Enemy
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleEventHub2 eventHub2
         )
         {
             _targetLinePool = new GameObjectPool<TargetLine>(targetLinePrefab, layer);
-            foreach (var enemy in unitManger.AllAliveEnemies)
+            foreach (var enemy in unitManger2.AllAliveEnemies)
             {
                 AddEnemy(enemy);
             }
-            unitManger.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(this);
-            unitManger.EnemyModelMap.ObserveRemove().Subscribe(x => RemoveEnemy(x.Key)).AddTo(this);
+            unitManger2.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(this);
+            unitManger2.EnemyModelMap.ObserveRemove().Subscribe(x => RemoveEnemy(x.Key)).AddTo(this);
             
             eventHub2.Subscribe<BattleEvents2.OnPhaseStartAsync>(async x =>
             {
@@ -50,11 +50,11 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 敵追加
         /// </summary>
-        private void AddEnemy(EnemyUnitModel enemyUnitModel)
+        private void AddEnemy(EnemyUnitModel2 enemyUnitModel2)
         {
             var targetLine = _targetLinePool.Rent();
-            targetLine.Setup(enemyUnitModel);
-            _targetLineMap.Add(enemyUnitModel.UnitId, targetLine);
+            targetLine.Setup(enemyUnitModel2);
+            _targetLineMap.Add(enemyUnitModel2.UnitId, targetLine);
         }
 
         /// <summary>

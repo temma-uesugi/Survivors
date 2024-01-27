@@ -18,7 +18,7 @@ namespace App.Battle2.Facades
     {
         public static BattleAttack Facade { get; private set; }
         
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly BattleEventHub2 eventHub2;
         
         /// <summary>
@@ -26,11 +26,11 @@ namespace App.Battle2.Facades
         /// </summary>
         [Inject]
         public BattleAttack(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleEventHub2 eventHub2
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             this.eventHub2 = eventHub2;
 
             Facade = this;
@@ -39,7 +39,7 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 船攻撃
         /// </summary>
-        public void ShipAttack(ShipUnitModel ship, IAttackTargetModel target, AttackType attackType)
+        public void ShipAttack(ShipUnitModel2 ship, IAttackTargetModel target, AttackType attackType)
         {
             if (attackType == AttackType.Invalid)
             {
@@ -74,7 +74,7 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 砲撃攻撃
         /// </summary>
-        private int ShipBombAttack(ShipUnitModel ship, IAttackTargetModel target)
+        private int ShipBombAttack(ShipUnitModel2 ship, IAttackTargetModel target)
         {
             var originDamage = ship.DamageCalculator.CalcDealDamage(AttackType.Bomb);
             var damage = target.CalcDamaged(originDamage, AttackType.Bomb);
@@ -84,7 +84,7 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 近接攻撃
         /// </summary>
-        private int ShipSlashAttack(ShipUnitModel ship, IAttackTargetModel target)
+        private int ShipSlashAttack(ShipUnitModel2 ship, IAttackTargetModel target)
         {
             var originDamage = ship.DamageCalculator.CalcDealDamage(AttackType.Slash);
             var damage = target.CalcDamaged(originDamage, AttackType.Slash);
@@ -95,7 +95,7 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 突撃攻撃
         /// </summary>
-        private int ShipAssaultAttack(ShipUnitModel ship, IAttackTargetModel target)
+        private int ShipAssaultAttack(ShipUnitModel2 ship, IAttackTargetModel target)
         {
             var originDamage = ship.DamageCalculator.CalcDealDamage(AttackType.Assault);
             var damage = target.CalcDamaged(originDamage, AttackType.Assault);
@@ -106,7 +106,7 @@ namespace App.Battle2.Facades
         /// <summary>
         /// 敵の攻撃
         /// </summary>
-        public async UniTask EnemyAttackAsync(EnemyUnitModel enemy, IAttackTargetModel target)
+        public async UniTask EnemyAttackAsync(EnemyUnitModel2 enemy, IAttackTargetModel target)
         {
             var originDamage = enemy.DamageCalculator.CalcDealDamage(AttackType.EnemyAttack);
             var damage = target.CalcDamaged(originDamage, AttackType.EnemyAttack);

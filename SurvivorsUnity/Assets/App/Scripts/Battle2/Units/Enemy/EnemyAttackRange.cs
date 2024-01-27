@@ -17,15 +17,15 @@ namespace App.Battle2.Units.Enemy
         public IReadOnlyReactiveProperty<IEnumerable<HexCell>> AttackRangeCell => _attackRangeCell;
 
         private readonly HexMapManager _mapManager;
-        private readonly EnemyUnitModel _unitModel;
+        private readonly EnemyUnitModel2 unitModel2;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EnemyAttackRange(HexMapManager mapManager, EnemyUnitModel unitModel)
+        public EnemyAttackRange(HexMapManager mapManager, EnemyUnitModel2 unitModel2)
         {
             _mapManager = mapManager;
-            _unitModel = unitModel;
+            this.unitModel2 = unitModel2;
         }
 
         /// <summary>
@@ -34,12 +34,12 @@ namespace App.Battle2.Units.Enemy
         public void UpdateCell(HexCell cell)
         {
             var cellHashSet = new HashSet<HexCell>();
-            foreach (var moveHex in _unitModel.MoveRangeCell.Value)
+            foreach (var moveHex in unitModel2.MoveRangeCell.Value)
             {
                 var cells = _mapManager.AllSeaCells
                     .Where(x => x.Grid != moveHex.Grid)
                     //TODO: なんで1.1fしてるんだっけ？
-                    .Where(x => HitUtil.IsCircleAndPoint(moveHex.Position, _unitModel.AttackRange * 1.1f, x.Position));
+                    .Where(x => HitUtil.IsCircleAndPoint(moveHex.Position, unitModel2.AttackRange * 1.1f, x.Position));
                 cellHashSet.AddRange(cells);
             }
 

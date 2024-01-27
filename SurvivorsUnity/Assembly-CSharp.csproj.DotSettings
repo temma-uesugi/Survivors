@@ -8,6 +8,7 @@
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cbattle_005Cui_005Cstatus_005Cmapunitstatus_005Cenemy/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cbattle_005Cui_005Cstatus_005Cmapunitstatus_005Cship/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cbattle_005Cui_005Cstatus_005Cmapunitstatus/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cbattle_005Cunits_005Cenemys/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cexternals_005Cserializabledictionary/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cgame_005Cmap_005Ccells/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Capp_005Cscripts_005Cgame_005Cmap_005Cenemyattackrange/@EntryIndexedValue">True</s:Boolean>

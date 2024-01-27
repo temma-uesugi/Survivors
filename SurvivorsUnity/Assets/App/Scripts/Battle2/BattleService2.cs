@@ -28,7 +28,7 @@ namespace App.Battle2
         private readonly CompositeDisposable _disposable = new();
         private HexMapManager _hexMapManager;
         private BattleCamera2 battleCamera2;
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private MapObjectManger _objectManager;
         private WindManager _windManager;
         private WeatherManager _weatherManager;
@@ -43,7 +43,7 @@ namespace App.Battle2
         public void Construct(
             HexMapManager hexMapManager,
             BattleCamera2 battleCamera2,
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             MapObjectManger objectManager,
             WindManager windManager,
             WeatherManager weatherManager,
@@ -54,7 +54,7 @@ namespace App.Battle2
         {
             _hexMapManager = hexMapManager;
             this.battleCamera2 = battleCamera2;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _objectManager = objectManager;
             _windManager = windManager;
             _weatherManager = weatherManager;
@@ -76,14 +76,14 @@ namespace App.Battle2
             var shipParams = randomObjectCreator.GetRandomShipParam(5, true);
             foreach (var shipParam in shipParams)
             {
-                _unitManger.CreateShip(shipParam.grid, DirectionType.Right, shipParam.status);
+                unitManger2.CreateShip(shipParam.grid, DirectionType.Right, shipParam.status);
             }
 
             //敵をランダム作成
             foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)
             {
                 var grid = randomObjectCreator.GetRandomGrid();
-                _unitManger.CreateEnemy(grid, enemy.EnemyId, enemy.Level);
+                unitManger2.CreateEnemy(grid, enemy.EnemyId, enemy.Level);
             }
             
             //障害物をランダムに

@@ -8,7 +8,7 @@ namespace App.Battle2._Test.Ship
     /// </summary>
     public class ShipTester : MonoBehaviour
     {
-        [SerializeField] private ShipUnitView ship;
+        [SerializeField] private ShipUnitView2 ship;
 
         /// <summary>
         /// Awake

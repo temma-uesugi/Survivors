@@ -32,7 +32,8 @@ namespace App.AppCommon
         public const float DefaultBattleCameraSize = 5;
 
         //HexImageのデフォルトスケール
-        public const float DefaultHexImageScale = 0.22f;
+        // public const float DefaultHexImageScale = 0.22f;
+        public const float DefaultHexImageScale = 0.2f;
 
         public const int MapWidth = 40;
         public const int MapHeight = 25;

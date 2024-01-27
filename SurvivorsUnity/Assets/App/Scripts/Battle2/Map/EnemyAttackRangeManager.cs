@@ -22,22 +22,22 @@ namespace App.Battle2.Map
         [SerializeField] private EnemyAttackCell enemyAttackCell;
         [SerializeField] private Transform displayLayer;
 
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private GameObjectPool<EnemyAttackCell> _cellPool;
         private readonly HashSet<EnemyAttackCell> _hexCellSets = new();
 
         private bool _isAllShown = false;
-        private EnemyUnitModel _focusedEnemy = null;
+        private EnemyUnitModel2 _focusedEnemy = null;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _cellPool = new GameObjectPool<EnemyAttackCell>(enemyAttackCell, displayLayer);
 
             BattleState.Facade.FocusedUnit.Subscribe(OnFocusedUnit).AddTo(this);
@@ -47,9 +47,9 @@ namespace App.Battle2.Map
         /// <summary>
         /// ユニットフォーカス
         /// </summary>
-        private void OnFocusedUnit(IUnitModel unitModel)
+        private void OnFocusedUnit(IUnitModel2 unitModel2)
         {
-            if (unitModel is not EnemyUnitModel enemyModel)
+            if (unitModel2 is not EnemyUnitModel2 enemyModel)
             {
                 //敵ユニットでない場合は
                 //全表示中でなければ非表示にして処理を抜ける
@@ -111,13 +111,13 @@ namespace App.Battle2.Map
             if (unitId == GameConst.InvalidUnitId)
             {
                 //ID指定なしは全敵
-                hexCells = _unitManger.AllAliveEnemies
+                hexCells = unitManger2.AllAliveEnemies
                     .SelectMany(x => x.AttackRangeCell.Value)
                     .Distinct();
             }
             else
             {
-                if (!_unitManger.TryGetEnemyModelById(unitId, out var enemy))
+                if (!unitManger2.TryGetEnemyModelById(unitId, out var enemy))
                 {
                     return; 
                 }

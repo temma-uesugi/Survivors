@@ -23,7 +23,7 @@ namespace App.Battle2.EnemyBots
         private readonly CompositeDisposable _disposable = new();
         
         private readonly HexMapManager _mapManager;
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly BattleEventHub2 eventHub2;
        
         private readonly ConditionChecker _conditionChecker;
@@ -37,17 +37,17 @@ namespace App.Battle2.EnemyBots
         [Inject]
         public BotLogicManager(
             HexMapManager mapManager,
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleEventHub2 eventHub2
         )
         {
             _mapManager = mapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             this.eventHub2 = eventHub2;
-            _conditionChecker = new ConditionChecker(mapManager, unitManger);
-            _actionExecutor = new ActionExecutor(mapManager, unitManger);
+            _conditionChecker = new ConditionChecker(mapManager, unitManger2);
+            _actionExecutor = new ActionExecutor(mapManager, unitManger2);
 
-            foreach (var enemy in _unitManger.AllAliveEnemies)
+            foreach (var enemy in this.unitManger2.AllAliveEnemies)
             {
                 AddEnemy(enemy);
             }
@@ -60,15 +60,15 @@ namespace App.Battle2.EnemyBots
         /// </summary>
         private void SetSubscribe()
         {
-            _unitManger.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(_disposable);
+            unitManger2.EnemyModelMap.ObserveAdd().Subscribe(x => AddEnemy(x.Value)).AddTo(_disposable);
         }
         
         /// <summary>
         /// 敵追加
         /// </summary>
-        private void AddEnemy(EnemyUnitModel enemyModel)
+        private void AddEnemy(EnemyUnitModel2 enemyModel2)
         {
-            if (_botNodeMap.ContainsKey(enemyModel.UnitId))
+            if (_botNodeMap.ContainsKey(enemyModel2.UnitId))
             {
                 return;
             }
@@ -76,7 +76,7 @@ namespace App.Battle2.EnemyBots
             {
                 return;     
             }
-            _botNodeMap.Add(enemyModel.UnitId, root); 
+            _botNodeMap.Add(enemyModel2.UnitId, root); 
         }
         
         /// <summary>
@@ -84,7 +84,7 @@ namespace App.Battle2.EnemyBots
         /// </summary>
         public async UniTask BotsActionAsync()
         {
-            await foreach (var enemy in _unitManger.AllAliveEnemies.Where(x => x.IsActionable).ToUniTaskAsyncEnumerable())
+            await foreach (var enemy in unitManger2.AllAliveEnemies.Where(x => x.IsActionable).ToUniTaskAsyncEnumerable())
             {
                 if (enemy == null)
                 {
@@ -98,11 +98,11 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// Botの行動
         /// </summary>
-        private async UniTask BotActionAsync(EnemyUnitModel enemy)
+        private async UniTask BotActionAsync(EnemyUnitModel2 enemy)
         {
             var enemyId = enemy.UnitId;
             var actionId = GameConst.InvalidUnitId;
-            if (_unitManger.TryGetEnemyModelById(enemyId, out var enemyModel) &&
+            if (unitManger2.TryGetEnemyModelById(enemyId, out var enemyModel) &&
                 _botNodeMap.TryGetValue(enemyId, out var root))
             {
                 actionId = enemyId;
@@ -119,18 +119,18 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// BotNodeの振るまい開始
         /// </summary>
-        private async UniTask StartNodeBehaveAsync(BotNodeObject.BotNodeRoot root, EnemyUnitModel enemyModel)
+        private async UniTask StartNodeBehaveAsync(BotNodeObject.BotNodeRoot root, EnemyUnitModel2 enemyModel2)
         {
             //カメラフォーカス
             // await BattleCamera.Instance.MoveToByAnimationAsync(enemyModel.Position);
 
             foreach (var node in root.Nodes)
             {
-                if (!_conditionChecker.Check(node.Conditions, enemyModel))
+                if (!_conditionChecker.Check(node.Conditions, enemyModel2))
                 {
                     continue; 
                 }
-                if (await _actionExecutor.ActionAsync(node.Action, enemyModel))
+                if (await _actionExecutor.ActionAsync(node.Action, enemyModel2))
                 {
                     //アクション実行
                     break;

@@ -25,16 +25,16 @@ namespace App.Battle2.UI.Status.MapUnitStatus.Enemy
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleCamera2 battleCamera2
         )
         {
             this.battleCamera2 = battleCamera2;
-            unitManger.EnemyModelMap
+            unitManger2.EnemyModelMap
                 .ObserveAdd()
                 .Subscribe(x => AddEnemy(x.Value))
                 .AddTo(this);
-            unitManger.EnemyModelMap
+            unitManger2.EnemyModelMap
                 .ObserveRemove()
                 .Subscribe(x => RemoveEnemy(x.Key))
                 .AddTo(this);
@@ -43,11 +43,11 @@ namespace App.Battle2.UI.Status.MapUnitStatus.Enemy
         /// <summary>
         /// 敵追加
         /// </summary>
-        private void AddEnemy(EnemyUnitModel enemyModel)
+        private void AddEnemy(EnemyUnitModel2 enemyModel2)
         {
             var status = Instantiate(enemyStatusPrefab, transform);
-            status.Setup(enemyModel, battleCamera2);
-            _enemyStatusMap.Add(enemyModel.UnitId, status);
+            status.Setup(enemyModel2, battleCamera2);
+            _enemyStatusMap.Add(enemyModel2.UnitId, status);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace App.Battle2.Facades
     {
         public static BattleMove Facade { get; private set; }
         
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly HexMapManager _mapManager;
         private readonly HexMapMoveChecker _moveChecker;
         private readonly BattleEventHub2 eventHub2;
@@ -30,13 +30,13 @@ namespace App.Battle2.Facades
         /// </summary>
         [Inject]
         public BattleMove(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             HexMapManager mapManager,
             HexMapMoveChecker moveChecker,
             BattleEventHub2 eventHub2
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _mapManager = mapManager;
             _moveChecker = moveChecker;
             this.eventHub2 = eventHub2;
@@ -54,7 +54,7 @@ namespace App.Battle2.Facades
         /// </summary>
         public async UniTask EnemyMoveAsync(MoveArgs args)
         {
-            var enemy = _unitManger.GetEnemyModelById(args.EnemyId);
+            var enemy = unitManger2.GetEnemyModelById(args.EnemyId);
             var path = MapRoutSearch.FindPath(enemy.Cell.Value, args.Target.Cell.Value);
             var moveCnt = (args.MovePower, args.StepAhead) switch
             {
@@ -70,7 +70,7 @@ namespace App.Battle2.Facades
         /// </summary>
         public void InputMove(uint shipUnitId, DirectionType dir)
         {
-            if (!_unitManger.TryGetShipModelById(shipUnitId, out var ship) || ship.IsActionEnd.Value)
+            if (!unitManger2.TryGetShipModelById(shipUnitId, out var ship) || ship.IsActionEnd.Value)
             {
                 return;
             }
@@ -94,7 +94,7 @@ namespace App.Battle2.Facades
         /// </summary>
         public void InputChangeDirection(uint shipUnitId, DirectionType dir)
         {
-            if (!_unitManger.TryGetShipModelById(shipUnitId, out var ship) || ship.IsActionEnd.Value)
+            if (!unitManger2.TryGetShipModelById(shipUnitId, out var ship) || ship.IsActionEnd.Value)
             {
                 return;
             }
@@ -117,12 +117,12 @@ namespace App.Battle2.Facades
         public void DebugInputMove(uint unitId, HexCell moveCell, DirectionType dir)
         {
     #if UNITY_EDITOR
-            if (!_unitManger.TryGetUnit(unitId, out var unit))
+            if (!unitManger2.TryGetUnit(unitId, out var unit))
             {
                 return; 
             }
 
-            if (unit is ShipUnitModel ship)
+            if (unit is ShipUnitModel2 ship)
             {
                 ship.Move(moveCell, dir, 0);
                 // _eventHub.Publish(new BattleEvents.OnShipMovedEvent
@@ -130,7 +130,7 @@ namespace App.Battle2.Facades
                 //     Ship = ship,
                 // });
             }
-            else if (unit is EnemyUnitModel enemy)
+            else if (unit is EnemyUnitModel2 enemy)
             {
                 enemy.Move(moveCell);
                 eventHub2.Publish(new BattleEvents2.OnEnemyMovedEvent

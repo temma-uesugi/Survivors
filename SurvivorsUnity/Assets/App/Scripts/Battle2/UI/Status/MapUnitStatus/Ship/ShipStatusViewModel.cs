@@ -8,21 +8,21 @@ namespace App.Battle2.UI.Status.MapUnitStatus.Ship
     /// 船ステータスViewModel
     /// </summary>
     [RequireComponent(typeof(ShipStatusView))]
-    public class ShipStatusViewModel :  StatusViewModelBase<ShipUnitModel, ShipStatusView>
+    public class ShipStatusViewModel :  StatusViewModelBase<ShipUnitModel2, ShipStatusView>
     {
        
         /// <summary>
         /// Setup
         /// </summary>
-        public override void Setup(ShipUnitModel shipModel, BattleCamera2 battleCamera2)
+        public override void Setup(ShipUnitModel2 shipModel2, BattleCamera2 battleCamera2)
         {
-            base.Setup(shipModel, battleCamera2);
-            View.Setup(shipModel.Label, shipModel.Status.ArmorPoint, shipModel.Status.CrewPoint);
+            base.Setup(shipModel2, battleCamera2);
+            View.Setup(shipModel2.Label, shipModel2.Status.ArmorPoint, shipModel2.Status.CrewPoint);
             
-            shipModel.ArmorPoint.Subscribe(View.UpdateArmor).AddTo(this);
-            shipModel.CrewPoint.Subscribe(View.UpdateCrew).AddTo(this);
-            shipModel.OnDefeated.Subscribe(_ => View.OnDefeated()).AddTo(this);
-            shipModel.NextActionTurns.Subscribe(x => View.UpdateNextActionTurns(x)).AddTo(this);
+            shipModel2.ArmorPoint.Subscribe(View.UpdateArmor).AddTo(this);
+            shipModel2.CrewPoint.Subscribe(View.UpdateCrew).AddTo(this);
+            shipModel2.OnDefeated.Subscribe(_ => View.OnDefeated()).AddTo(this);
+            shipModel2.NextActionTurns.Subscribe(x => View.UpdateNextActionTurns(x)).AddTo(this);
         }
     }
 }

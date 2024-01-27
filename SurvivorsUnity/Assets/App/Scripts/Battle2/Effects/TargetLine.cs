@@ -13,8 +13,8 @@ namespace App.Battle2.Effects
     {
         [SerializeField] private TargetLineEffect effect;
        
-        private EnemyUnitModel _enemyUnitModel;
-        private ShipUnitModel _shipUnitModel;
+        private EnemyUnitModel2 enemyUnitModel2;
+        private ShipUnitModel2 shipUnitModel2;
 
         private readonly CompositeDisposable _disposable = new();
         private readonly CompositeDisposable _targetDisposable = new();
@@ -22,11 +22,11 @@ namespace App.Battle2.Effects
         /// <summary>
         /// Setup
         /// </summary>
-        public void Setup(EnemyUnitModel enemyUnitModel)
+        public void Setup(EnemyUnitModel2 enemyUnitModel2)
         {
-            _enemyUnitModel = enemyUnitModel;
-            enemyUnitModel.TargetUnit.Subscribe(SetTarget).AddTo(_disposable);
-            enemyUnitModel.Cell.DistinctUntilChanged().Subscribe(UpdatePosition).AddTo(_disposable);
+            this.enemyUnitModel2 = enemyUnitModel2;
+            enemyUnitModel2.TargetUnit.Subscribe(SetTarget).AddTo(_disposable);
+            enemyUnitModel2.Cell.DistinctUntilChanged().Subscribe(UpdatePosition).AddTo(_disposable);
         }
 
         /// <summary>
@@ -40,18 +40,18 @@ namespace App.Battle2.Effects
         /// <summary>
         /// ターゲット設定
         /// </summary>
-        private void SetTarget(ShipUnitModel shipUnitModel)
+        private void SetTarget(ShipUnitModel2 shipUnitModel2)
         {
             _targetDisposable.Clear();
-            if (shipUnitModel == null)
+            if (shipUnitModel2 == null)
             {
                 effect.gameObject.SetActive(false);
                 return;
             }
             
             effect.gameObject.SetActive(true);
-            effect.SetPosition(shipUnitModel.Cell.Value.Position);
-            shipUnitModel.Cell.Subscribe(x =>
+            effect.SetPosition(shipUnitModel2.Cell.Value.Position);
+            shipUnitModel2.Cell.Subscribe(x =>
             {
                 effect.Clear();
                 effect.SetPosition(x.Position);

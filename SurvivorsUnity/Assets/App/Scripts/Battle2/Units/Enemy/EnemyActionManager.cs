@@ -15,20 +15,20 @@ namespace App.Battle2.Units.Enemy
     [ContainerRegisterAttribute2(typeof(EnemyActionManager))]
     public class EnemyActionManager
     {
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly HexMapManager _mapManager;
-        private List<EnemyUnitModel> _turnEnemyList;
+        private List<EnemyUnitModel2> _turnEnemyList;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
         public EnemyActionManager(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             HexMapManager mapManager
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _mapManager = mapManager;
         }
 
@@ -37,7 +37,7 @@ namespace App.Battle2.Units.Enemy
         /// </summary>
         public async UniTask StartEnemyActionAsync()
         {
-            _turnEnemyList = _unitManger.AllAliveEnemies.Where(x => x.IsActionable).Reverse().ToList();
+            _turnEnemyList = unitManger2.AllAliveEnemies.Where(x => x.IsActionable).Reverse().ToList();
             foreach (var enemy in _turnEnemyList)
             {
                 enemy.ResetActionCount(); 
@@ -96,7 +96,7 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 攻撃
         /// </summary>
-        private async UniTask AttackAsync(EnemyUnitModel enemy)
+        private async UniTask AttackAsync(EnemyUnitModel2 enemy)
         {
             await BattleAttack.Facade.EnemyAttackAsync(enemy, enemy.TargetUnit.Value);
             enemy.Attacked();
@@ -105,7 +105,7 @@ namespace App.Battle2.Units.Enemy
         /// <summary>
         /// 移動
         /// </summary>
-        private async UniTask MoveAsync(EnemyUnitModel enemy)
+        private async UniTask MoveAsync(EnemyUnitModel2 enemy)
         {
             //TODO
             //ユニットが重ならないように

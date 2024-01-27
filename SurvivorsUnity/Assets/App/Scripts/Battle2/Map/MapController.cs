@@ -23,26 +23,26 @@ namespace App.Battle2.Map
     public class MapController : MonoBehaviour
     {
         private BattleState _battleState;
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private HexMapManager _mapManager;
 
         private IDisposable _moveUpdateDisposable;
         private InputDirectionType _currentDir = InputDirectionType.None;
         private HexCell _focusedHexCell;
-        private IUnitModel _focusedUnit = default;
+        private IUnitModel2 _focusedUnit = default;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             HexMapManager hexMapManager,
             BattleEventHub2 eventHub2
         )
         {
             _battleState = BattleState.Facade;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _mapManager = hexMapManager;
 
             BattleOperation.Facade.Map.Move.Subscribe(OnMoveStart).AddTo(this);
@@ -63,12 +63,12 @@ namespace App.Battle2.Map
         /// </summary>
         private async UniTask OnTurnStartAsync()
         {
-            var uniId = _focusedUnit is ShipUnitModel ? _focusedUnit.UnitId : GameConst.InvalidUnitId;
-            _focusedUnit = _unitManger.GetNextIdUnit(uniId, isAdd: true, isEnemy: false);
+            var uniId = _focusedUnit is ShipUnitModel2 ? _focusedUnit.UnitId : GameConst.InvalidUnitId;
+            _focusedUnit = unitManger2.GetNextIdUnit(uniId, isAdd: true, isEnemy: false);
             _focusedHexCell = _mapManager.GetCellByGrid(_focusedUnit.Grid);
             _battleState.UpdateFocusedHexCell(_focusedHexCell);
         }
-        
+
         /// <summary>
         /// マップ初期化
         /// </summary>
@@ -77,33 +77,31 @@ namespace App.Battle2.Map
             // _focusedHexCell = _mapManager.GetCellByGrid(new GridValue(0, 0));
             // _battleState.UpdateFocusedHexCell(_focusedHexCell);
         }
-       
+
         /// <summary>
         /// MoveStart
         /// </summary>
         private void OnMoveStart(Vector2 vec2)
         {
             var inputDir = HexUtil2.InputVectorToMoveDir(vec2);
-            
+
             _currentDir = inputDir;
             Move(inputDir);
             _moveUpdateDisposable?.Dispose();
             _moveUpdateDisposable = Observable.Interval(TimeSpan.FromSeconds(0.2f))
-                .TakeUntil(BattleOperation.Facade.Map.StopMove.Merge(BattleOperation.Facade.ModeUpdated.AsUnitObservable()))
-                .SubscribeWithState2(inputDir, this, (_, d, self) =>
-                {
-                    self.Move(d);
-                })
+                .TakeUntil(BattleOperation.Facade.Map.StopMove.Merge(
+                    BattleOperation.Facade.ModeUpdated.AsUnitObservable()))
+                .SubscribeWithState2(inputDir, this, (_, d, self) => { self.Move(d); })
                 .AddTo(this);
         }
-        
-        
+
+
         /// <summary>
         /// Hex移動
         /// </summary>
         private void Move(InputDirectionType inputDir)
         {
-            var dir = (inputDir, _focusedHexCell.GridY % 2 ==0 ) switch
+            var dir = (inputDir, _focusedHexCell.GridY % 2 == 0) switch
             {
                 (InputDirectionType.Right, _) => DirectionType.Right,
                 (InputDirectionType.TopRight, _) => DirectionType.TopRight,
@@ -115,11 +113,11 @@ namespace App.Battle2.Map
                 (InputDirectionType.Top, false) => DirectionType.TopLeft,
                 (InputDirectionType.Bottom, true) => DirectionType.BottomRight,
                 (InputDirectionType.Bottom, false) => DirectionType.BottomLeft,
-                _ => DirectionType.None,
+                _ => DirectionType.None
             };
             _focusedHexCell = _mapManager.GetNextCellByDir(_focusedHexCell, dir);
             _battleState.UpdateFocusedHexCell(_focusedHexCell);
-            _focusedUnit = _unitManger.GetUnitByHex(_focusedHexCell);
+            _focusedUnit = unitManger2.GetUnitByHex(_focusedHexCell);
             _battleState.UpdateFocusedUnit(_focusedUnit);
         }
 
@@ -128,24 +126,25 @@ namespace App.Battle2.Map
         /// </summary>
         private void Select()
         {
-            if (_focusedUnit is not ShipUnitModel shipModel)
+            if (_focusedUnit is not ShipUnitModel2 shipModel)
             {
-                OpenMapMenuAsync().Forget(); 
+                OpenMapMenuAsync().Forget();
                 return;
             }
+
             if (!shipModel.IsActionEnd.Value)
             {
                 _battleState.UpdateSelectedShipUnit(shipModel);
             }
         }
-        
+
         /// <summary>
         /// Unit切り替え
         /// </summary>
         private void SwitchUnit(int indexDir)
         {
-            bool isEnemy = _focusedUnit is EnemyUnitModel;
-            _focusedUnit = _unitManger.GetNextIdUnit(_focusedUnit?.UnitId ?? 0, isAdd: indexDir > 0, isEnemy);
+            bool isEnemy = _focusedUnit is EnemyUnitModel2;
+            _focusedUnit = unitManger2.GetNextIdUnit(_focusedUnit?.UnitId ?? 0, isAdd: indexDir > 0, isEnemy);
             _focusedHexCell = _mapManager.GetCellByGrid(_focusedUnit.Grid);
             _battleState.UpdateFocusedHexCell(_focusedHexCell);
             _battleState.UpdateFocusedUnit(_focusedUnit);
@@ -173,9 +172,9 @@ namespace App.Battle2.Map
         /// </summary>
         private async UniTask AdmiralSkillAsync()
         {
-            Log.Debug("AdmiralSkillAsync"); 
+            Log.Debug("AdmiralSkillAsync");
         }
-        
+
         /// <summary>
         /// OnDestroy
         /// </summary>

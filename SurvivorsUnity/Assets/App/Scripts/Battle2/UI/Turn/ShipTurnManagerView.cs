@@ -31,15 +31,15 @@ namespace App.Battle2.UI.Turn
         /// <summary>
         /// Setup
         /// </summary>
-        public async UniTask SetupAsync(UnitManger unitManger)
+        public async UniTask SetupAsync(UnitManger2 unitManger2)
         {
             await anchor.SetupAsync();
             anchor.gameObject.SetActive(false);
-            foreach (var ship in unitManger.AllAliveShips)
+            foreach (var ship in unitManger2.AllAliveShips)
             {
                 AddShip(ship);
             }
-            unitManger.ShipModelMap
+            unitManger2.ShipModelMap
                 .ObserveAdd()
                 .Subscribe(x => AddShip(x.Value)).AddTo(this);
         }
@@ -47,20 +47,20 @@ namespace App.Battle2.UI.Turn
         /// <summary>
         /// 船追加
         /// </summary>
-        private void AddShip(ShipUnitModel shipUnitModel)
+        private void AddShip(ShipUnitModel2 shipUnitModel2)
         {
             var icon = Instantiate(iconPrefab, lineLayer);
-            icon.Setup(shipUnitModel.UnitId, shipUnitModel.Label, shipUnitModel.NextActionTurns.Value);
+            icon.Setup(shipUnitModel2.UnitId, shipUnitModel2.Label, shipUnitModel2.NextActionTurns.Value);
             SetPosition(icon);
             
             //購読処理
-            shipUnitModel.NextActionTurns.SubscribeWithState(icon, (t, i) =>
+            shipUnitModel2.NextActionTurns.SubscribeWithState(icon, (t, i) =>
             {
                 i.SetTurn(t);
                 RemovePervPosition(i);
                 SetPosition(i);
-            }).AddTo(shipUnitModel.ModelDisposable);
-            shipUnitModel.NextTurnSchedule.SubscribeWithState(icon, (x, i) =>
+            }).AddTo(shipUnitModel2.ModelDisposable);
+            shipUnitModel2.NextTurnSchedule.SubscribeWithState(icon, (x, i) =>
             {
                 if (x.isOn)
                 {
@@ -70,7 +70,7 @@ namespace App.Battle2.UI.Turn
                 {
                     i.ClearSchedule(); 
                 }
-            }).AddTo(shipUnitModel.ModelDisposable);
+            }).AddTo(shipUnitModel2.ModelDisposable);
         }
 
         /// <summary>

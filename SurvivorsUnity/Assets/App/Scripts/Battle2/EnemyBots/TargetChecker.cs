@@ -15,36 +15,36 @@ namespace App.Battle2.EnemyBots
     public class TargetChecker
     {
         private readonly HexMapManager _mapManager;
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public TargetChecker(
             HexMapManager mapManager,
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
             _mapManager = mapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
         }
 
         //TODO 障害物も対象に取れるように
         /// <summary>
         /// ターゲット取得
         /// </summary>
-        public ShipUnitModel GetTarget(ActionTargetType[] targetTypes, EnemyUnitModel unitModel, ShipUnitModel[] ships = null)
+        public ShipUnitModel2 GetTarget(ActionTargetType[] targetTypes, EnemyUnitModel2 unitModel2, ShipUnitModel2[] ships = null)
         {
-            var candidates = ships ?? _unitManger.AllAliveShips.ToArray();
+            var candidates = ships ?? unitManger2.AllAliveShips.ToArray();
             if (!candidates.Any())
             {
                 return null;
             }
             
-            ShipUnitModel target = null;
+            ShipUnitModel2 target = null;
             foreach (var targetType in targetTypes)
             {
-                target =  GetTarget(targetType, unitModel, candidates);
+                target =  GetTarget(targetType, unitModel2, candidates);
                 if (target != null)
                 {
                     break;
@@ -56,14 +56,14 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// 対象
         /// </summary>
-        private ShipUnitModel GetTarget(ActionTargetType targetType, EnemyUnitModel unitModel, ShipUnitModel[] candidates)
+        private ShipUnitModel2 GetTarget(ActionTargetType targetType, EnemyUnitModel2 unitModel2, ShipUnitModel2[] candidates)
         {
             return targetType switch
             {
-                ActionTargetType.Near => PickNear(unitModel, candidates),
-                ActionTargetType.Weak => PickWeak(unitModel, candidates),
-                ActionTargetType.Defeat => PickCanDefeat(unitModel, candidates),
-                ActionTargetType.Kill => PickCanDefeat(unitModel, candidates),
+                ActionTargetType.Near => PickNear(unitModel2, candidates),
+                ActionTargetType.Weak => PickWeak(unitModel2, candidates),
+                ActionTargetType.Defeat => PickCanDefeat(unitModel2, candidates),
+                ActionTargetType.Kill => PickCanDefeat(unitModel2, candidates),
                 _ => null
             };
         }
@@ -71,18 +71,18 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// 一番近く
         /// </summary>
-        private ShipUnitModel PickNear(EnemyUnitModel unitModel, IEnumerable<ShipUnitModel> candidates)
+        private ShipUnitModel2 PickNear(EnemyUnitModel2 unitModel2, IEnumerable<ShipUnitModel2> candidates)
         {
             return candidates
                 .RandomSort()
-                .OrderBy(x => (unitModel.Position - x.Position).sqrMagnitude)
+                .OrderBy(x => (unitModel2.Position - x.Position).sqrMagnitude)
                 .First();
         }
 
         /// <summary>
         /// 一番弱っている
         /// </summary>
-        private ShipUnitModel PickWeak(EnemyUnitModel unitModel, IEnumerable<ShipUnitModel> candidates)
+        private ShipUnitModel2 PickWeak(EnemyUnitModel2 unitModel2, IEnumerable<ShipUnitModel2> candidates)
         {
             return candidates
                 .RandomSort()
@@ -93,7 +93,7 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// 倒せる
         /// </summary>
-        private ShipUnitModel PickCanDefeat(EnemyUnitModel unitModel, IEnumerable<ShipUnitModel> candidates)
+        private ShipUnitModel2 PickCanDefeat(EnemyUnitModel2 unitModel2, IEnumerable<ShipUnitModel2> candidates)
         {
             //TODO
             return candidates

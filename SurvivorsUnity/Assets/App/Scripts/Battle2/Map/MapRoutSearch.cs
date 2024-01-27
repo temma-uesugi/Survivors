@@ -40,16 +40,16 @@ namespace App.Battle2.Map
         };
         
         private HexMapManager _mapManager;
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         [Inject]
-        public void Construct(HexMapManager mapManager, UnitManger unitManger)
+        public void Construct(HexMapManager mapManager, UnitManger2 unitManger2)
         {
             _mapManager = mapManager;
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             _instance = this;
         }
 

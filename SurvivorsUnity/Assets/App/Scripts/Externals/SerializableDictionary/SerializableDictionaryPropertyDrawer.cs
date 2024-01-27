@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
@@ -7,6 +6,7 @@ using UnityEngine;
 
 namespace App.Externals
 {
+#if UNITY_EDITOR
 	[CustomPropertyDrawer(typeof(SerializableDictionary<,>))]
 	public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 	{

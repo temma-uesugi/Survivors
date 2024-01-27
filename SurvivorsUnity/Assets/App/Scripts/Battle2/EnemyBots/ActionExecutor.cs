@@ -15,7 +15,7 @@ namespace App.Battle2.EnemyBots
     public class ActionExecutor
     {
         private readonly HexMapManager _mapManager;
-        private readonly UnitManger _unitManger;
+        private readonly UnitManger2 unitManger2;
         private readonly TargetChecker _targetChecker;
         
         /// <summary>
@@ -23,20 +23,20 @@ namespace App.Battle2.EnemyBots
         /// </summary>
         public ActionExecutor(
             HexMapManager mapManager,
-            UnitManger unitManger
+            UnitManger2 unitManger2
         )
         {
             _mapManager = mapManager;
-            _unitManger = unitManger;
-            _targetChecker = new TargetChecker(mapManager, unitManger);
+            this.unitManger2 = unitManger2;
+            _targetChecker = new TargetChecker(mapManager, unitManger2);
         }
 
         /// <summary>
         /// 行動
         /// </summary>
-        public async UniTask<bool> ActionAsync(BotNodeObject.BotAction action, EnemyUnitModel enemyModel)
+        public async UniTask<bool> ActionAsync(BotNodeObject.BotAction action, EnemyUnitModel2 enemyModel2)
         {
-            var target = enemyModel.TargetUnit.Value;
+            var target = enemyModel2.TargetUnit.Value;
             if (target == null)
             {
                 return true;
@@ -44,10 +44,10 @@ namespace App.Battle2.EnemyBots
             //TODO 一旦攻撃 or 移動
             return action.ActionType switch
             {
-                ActionType.None => await MoveAsync(enemyModel, target),
-                ActionType.Move => await MoveAsync(enemyModel, target),
-                ActionType.Attack => await AttackAsync(enemyModel, target),
-                ActionType.SkillAttack => await AttackAsync(enemyModel, target),
+                ActionType.None => await MoveAsync(enemyModel2, target),
+                ActionType.Move => await MoveAsync(enemyModel2, target),
+                ActionType.Attack => await AttackAsync(enemyModel2, target),
+                ActionType.SkillAttack => await AttackAsync(enemyModel2, target),
                 _ => true,
             };
         }
@@ -55,26 +55,26 @@ namespace App.Battle2.EnemyBots
         /// <summary>
         /// 移動
         /// </summary>
-        private async UniTask<bool> MoveAsync(EnemyUnitModel enemyModel, ShipUnitModel target)
+        private async UniTask<bool> MoveAsync(EnemyUnitModel2 enemyModel2, ShipUnitModel2 target)
         {
-            await BattleMove.Facade.EnemyMoveAsync(new BattleMove.MoveArgs(enemyModel.UnitId, target,
-                enemyModel.MovePower));
+            await BattleMove.Facade.EnemyMoveAsync(new BattleMove.MoveArgs(enemyModel2.UnitId, target,
+                enemyModel2.MovePower));
             return true;
         }
         
         /// <summary>
         /// 攻撃
         /// </summary>
-        private async UniTask<bool> AttackAsync(EnemyUnitModel enemyModel, ShipUnitModel target)
+        private async UniTask<bool> AttackAsync(EnemyUnitModel2 enemyModel2, ShipUnitModel2 target)
         {
-            await BattleAttack.Facade.EnemyAttackAsync(enemyModel, target);
+            await BattleAttack.Facade.EnemyAttackAsync(enemyModel2, target);
             return true;
         }
         
         /// <summary>
         /// スキル攻撃
         /// </summary>
-        private async UniTask<bool> SkillAttackAsync(EnemyUnitModel enemyModel, ShipUnitModel target)
+        private async UniTask<bool> SkillAttackAsync(EnemyUnitModel2 enemyModel2, ShipUnitModel2 target)
         {
             Log.Debug("SkillAttack");
             return true;

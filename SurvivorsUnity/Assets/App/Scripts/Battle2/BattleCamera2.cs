@@ -182,9 +182,9 @@ namespace App.Battle2
         /// <summary>
         /// unit移動
         /// </summary>
-        private void OnShipMoved(IUnitModel unitModel)
+        private void OnShipMoved(IUnitModel2 unitModel2)
         {
-            SetPosition(unitModel.Position);
+            SetPosition(unitModel2.Position);
         }
 
         /// <summary>

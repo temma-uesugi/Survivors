@@ -14,7 +14,6 @@ namespace App.Battle2.Debug
     {
 #if UNITY_EDITOR
 
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -243,6 +242,6 @@ namespace App.Battle2.Debug
             }
             return dir;
         }
-    }
 #endif
+    }
 }

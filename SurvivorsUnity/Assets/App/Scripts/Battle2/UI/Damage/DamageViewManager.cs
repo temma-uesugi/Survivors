@@ -18,7 +18,7 @@ namespace App.Battle2.UI.Damage
         [SerializeField] private Transform viewLayer;
 
         private readonly CompositeDisposable _disposable = new();
-        private UnitManger _unitManger;
+        private UnitManger2 unitManger2;
         private BattleCamera2 battleCamera2;
         private GameObjectPool<DamageView> _viewPool;
 
@@ -27,11 +27,11 @@ namespace App.Battle2.UI.Damage
         /// </summary>
         [Inject]
         public void Construct(
-            UnitManger unitManger,
+            UnitManger2 unitManger2,
             BattleCamera2 battleCamera2
         )
         {
-            _unitManger = unitManger;
+            this.unitManger2 = unitManger2;
             this.battleCamera2 = battleCamera2;
             _viewPool = new GameObjectPool<DamageView>(damageViewPrefab, viewLayer);
 

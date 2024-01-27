@@ -13,7 +13,8 @@ namespace App.Battle.Map
     /// </summary>
     public static class HexUtil
     {
-        private const float CellSize = 1;
+        // private const float CellSize = 1;
+        private const float CellSize = 0.9f;
         private const float DegPerSide = 60;
 
         /// <summary>
