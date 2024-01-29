@@ -8,18 +8,18 @@ using UnityEngine;
 namespace App.Battle.Units
 {
     /// <summary>
-    /// 敵UnitModel
+    /// 味方UnitModel
     /// </summary>
-    public class EnemyUnitModel : IUnitModel
+    public class HeroUnitModel : IUnitModel
     {
-        //基本Data
-        public EnemyBase EnemyBase { get; }
-        public uint EnemyId => EnemyBase.EnemyId;
+        /// <summary>
+        /// 基本情報
+        /// </summary>
         public uint UnitId { get; } 
         public uint Id => UnitId;
         public string Label { get; }
         private readonly MapManager _mapManager;
-        public string ImageId => EnemyBase.ImageId;
+        public string ImageId => "Hero1";
         
         //位置
         private readonly ReactiveProperty<HexCell> _cell;
@@ -32,19 +32,15 @@ namespace App.Battle.Units
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public EnemyUnitModel(
-            EnemyCreateParam createParam,
+        public HeroUnitModel(
+            HeroCreateParam createParam,
             MapManager mapManager
         )
         {
-            UnitId = createParam.EnemyUnitId;
+            UnitId = createParam.HeroUnitId;
             Label = createParam.Label;
             _cell = new (createParam.InitCell);
             _mapManager = mapManager;
-            
-            var enemyBase = MasterData.Facade.EnemyBaseTable.FindByEnemyId(createParam.EnemyId);
-            var enemyStatus = MasterData.Facade.EnemyLevelStatusTable.FindByEnemyIdAndLevel((createParam.EnemyId, createParam.Level));
-            EnemyBase = enemyBase;
             
             //
             // ActionInterval = enemyBase.ActionInterval;

@@ -1,6 +1,9 @@
 ﻿using System;
 using App.AppCommon.Core;
 using App.Battle.Map;
+using App.Battle.Units;
+using App.Battle2.Debug;
+using App.Master;
 using VContainer;
 using VContainer.Unity;
 
@@ -12,6 +15,7 @@ namespace App.Battle
     public class BattleService : IStartable, IDisposable
     {
         private MapManager _mapManager;
+        private UnitManager _unitManager;
         private BattleCamera _battleCamera;
 
         /// <summary>
@@ -20,10 +24,12 @@ namespace App.Battle
         [Inject]
         public void Construct(
             MapManager mapManager,
+            UnitManager unitManager,
             BattleCamera battleCamera
         )
         {
             _mapManager = mapManager;
+            _unitManager = unitManager;
             _battleCamera = battleCamera;
         }
         
@@ -34,6 +40,22 @@ namespace App.Battle
         {
             _battleCamera.Setup();
             _mapManager.Setup(BattleConst.MapWidth, BattleConst.MapHeight);
+         
+            var randomObjectCreator = new RandomObjectCreator(BattleConst.MapWidth, BattleConst.MapHeight);
+           
+            //船を作成
+            var shipParams = randomObjectCreator.GetRandomShipParam(5, true);
+            foreach (var shipParam in shipParams)
+            {
+                _unitManager.CreateHero(shipParam.grid);
+            }
+            
+            //敵をランダム作成
+            foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)
+            {
+                var grid = randomObjectCreator.GetRandomGrid();
+                _unitManager.CreateEnemy(grid, enemy.EnemyId, enemy.Level);
+            }
         }
         
         /// <summary>

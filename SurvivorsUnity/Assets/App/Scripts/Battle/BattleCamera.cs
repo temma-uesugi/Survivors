@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using App.AppCommon;
 using App.AppCommon.Core;
 using App.Battle.Core;
 using App.Battle.Map;

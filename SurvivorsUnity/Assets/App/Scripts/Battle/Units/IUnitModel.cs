@@ -32,15 +32,20 @@ namespace App.Battle.Units
         // /// </summary>
         // IReadOnlyReactiveProperty<DirectionType> Direction { get; }
 
-        // /// <summary>
-        // /// 生存しているか
-        // /// </summary>
-        // bool IsAlive { get; }
-        //
+        /// <summary>
+        /// 生存しているか
+        /// </summary>
+        bool IsAlive { get; }
+        
         /// <summary>
         /// UnitId
         /// </summary>
         uint UnitId { get; }
+        
+        /// <summary>
+        /// ImageId
+        /// </summary>
+        string ImageId { get; }
         
         // /// <summary>
         // /// Label

@@ -9,12 +9,9 @@ namespace App.Editor
     /// </summary>
     public static class SceneShortcut
     {
-        [MenuItem("Trafalgar/Scene/Battle", false, 101)]
+        [MenuItem("Survivors/Scene/Battle", false, 101)]
         private static bool OpenBattle() => OpenScene("Battle");
        
-        [MenuItem("Trafalgar/Scene/BotNodeEditor", false, 901)]
-        private static bool OpenBotNodeEditor() => OpenScene("BotNodeEditor");
-
         /// <summary>
         /// シーンを開く
         /// </summary>

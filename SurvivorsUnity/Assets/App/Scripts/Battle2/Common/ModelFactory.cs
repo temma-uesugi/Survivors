@@ -44,14 +44,5 @@ namespace App.Battle2.Common
             var mapManager = _resolver.Resolve<HexMapManager>();
             return new EnemyUnitModel2(param2, mapManager);
         }
-        
-        /// <summary>
-        /// 敵作成
-        /// </summary>
-        public EnemyUnitModel CreateEnemy(EnemyCreateParam param)
-        {
-            var mapManager = _resolver.Resolve<MapManager>();
-            return new EnemyUnitModel(param, mapManager);
-        }
     }
 }
