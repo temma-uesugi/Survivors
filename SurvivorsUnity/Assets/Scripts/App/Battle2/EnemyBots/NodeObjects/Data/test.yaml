@@ -1,0 +1,7 @@
+nodes:
+  - cond: [none]
+    action: attack
+    target: [near]
+  - cond: [none]
+    action: move
+    target: [weak]
