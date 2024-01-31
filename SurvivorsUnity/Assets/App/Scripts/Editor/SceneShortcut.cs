@@ -1,10 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using Google.Apis.Services;
-// using Google.Apis.Auth.OAuth2;
-// using Google.Apis.Sheets.v4;
-using Google.Apis.Util.Store;
 
 namespace App.Editor
 {
@@ -13,7 +9,7 @@ namespace App.Editor
     /// </summary>
     public static class SceneShortcut
     {
-        [MenuItem("Survivors/Scene/Battle", false, 101)]
+        [MenuItem("Survivors/Scene/Battle", priority = 101)]
         private static bool OpenBattle() => OpenScene("Battle");
        
         /// <summary>

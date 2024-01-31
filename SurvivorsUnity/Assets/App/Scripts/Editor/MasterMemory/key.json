@@ -1,0 +1,13 @@
+﻿{
+  "type": "service_account",
+  "project_id": "lively-vim-404818",
+  "private_key_id": "006ad04a879eb53c3aa44d8670cc4d0bec5f107d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJa0ujtd/6ODS1\nIJkyCDx0Xt0qwf0ZSJkRprgk1E2R7YxPriPp/Vx8vl9w0P3ORTLQLJbh4Z4k2OJv\n5oasrfVv1x5Ye4DoTzOQVjK6zAGKD8NTHyhlQWCqQfe34nb1ecI8ZjhVhKNhrX2P\njT/4EDZBLVmGJV8Lh2HSKXCBV3xivSd9EpsUHhN6EDtAC3x0OunBUhVajDuBR2Tl\nneEUNmt3GS7wbfQNZTc328XvHq9VPm1UVIuIWznPecK41CxHZZEZiIHNW3lXDgOo\nSAx1SJ3ytATJ2DOpSnKdFvZY5bL5wQI3XRpGDJ0tKU7BkxoTmbtsTwPq1eU+rmJM\n4rFjxnIZAgMBAAECggEAIh5B64sDE9pB+V16fbpd7TNlgNjn08jTnuUQA7MPqbSk\npBmiHUBs0neX6J8KIw7fLtqiu0Pxuxme76gLr4PvE4ELs57GBPPnjt8/DBvC9f06\nD6IzQEWdB3IRsU0T6/xyPbNt/vRvDXxrDK43RACRBCTXqYy6hxQpaoVY+JvWZs4J\nS++ft7XHTQjhKxyRoUjDLGRqfDEiP882aP0ogRQmX27PJ4gha4yWai/Xl+fS8IGa\nhqraG6ti9zv+gRUw5+1j2bAI917scyCmUWzAld6AYuouDaZFIpqwOWDsnJPnLdi0\nrs3O7qpMvpL7d+ZN0muPtyORuAboD/dmOh3A4yoLlQKBgQDlD67JTQIDW+I7JeQI\nM45dAdUkF5hFmQEJa/yqiv4WbItTjbbyCvkSV0T29tBT2DlThh6B9jviZ5PG5Dwi\nciagC7z+QL1Z11WVdtWhzlym7fl23vfA0zNEUQsP4TnXzrCZtBZPh8xWcvLk9Za0\nL7wX1phXrBMU3YvH8Ecun1tnlQKBgQDhG2T98rqEVd3WaLc1HdCZnLdxovxMXMEO\nl7df0gBHcfbvjMVFmHWcd+N+z9NJiLABxqleMkn9F673rAmeAtRfb9Dt9U2eCUkM\ntYYt35XGu1ZXD4GxPCv5S/rKJLYAqKX14QX2qw82Ie1y7+/KVJ9j0WkZx7hQSwJw\n0WXMERzvdQKBgBWptAgJpmUW7YBWhwhXh+E36SZurNH4NGbltZGTb5BDV7HhNyoQ\n65lWc4k/slgbnOBPUNdNqEAzN4CZ2S4QyaJdOdR53u5+NPPbtzyEPbLz0qHxWFD+\nKF0PpRItZMEKJR2EMI/48dRDLsGEkGoeEZXXj7TK60sP4MZZ7QF1xLk5AoGBAIrs\nmzFWoeGWFKiES70OP3TuERCio86E1+innVYXhnCRVvKUEBNZegwsuUvD+wPAxc7y\nyggGRT9bZHIZzH2mBWc43Nper54+4MRlKwAYopjZePmV6lZ1ajYavBYQ/fn+Gx5Z\n15JaE7M20RJEHdriytORo6lzZr627DSwJoEAdrkZAoGAMN+sq3V9ctPQEEH331tl\njxJqWLPso+FIHaYLGi7DnwhhHJEKXgAKeaO7mhuKWKC7nk3lyYsgOH3aA/DnGcj7\nRkNJVQMgP5xHzq9dlRV0qTHTBVb49mVTOKkPpQd4rbf03gNoMd7ixB5RiCFujAnJ\nL0CjTt0JMcH5P9ntBS1VUqs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "trafalgarmaster@lively-vim-404818.iam.gserviceaccount.com",
+  "client_id": "110321269183553653440",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x511_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/trafalgarmaster%40lively-vim-404818.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

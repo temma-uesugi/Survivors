@@ -7,7 +7,7 @@ namespace App.Master.Tables
     /// <summary>
     /// 敵スキル効果
     /// </summary>
-    [MemoryTable("EnemySkillEffect"), MessagePackObject(true)]
+    [MemoryTable("EnemySkillEffect"), MessagePackObject(true), MasterData("Enemy")]
     public class EnemySkillEffect
     {
         /// <summary> EffectID </summary>

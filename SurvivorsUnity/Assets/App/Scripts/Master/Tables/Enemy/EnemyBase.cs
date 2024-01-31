@@ -6,7 +6,7 @@ namespace App.Master.Tables
     /// <summary>
     /// 敵基本
     /// </summary>
-    [MemoryTable("EnemyBase"), MessagePackObject(true)]
+    [MemoryTable("EnemyBase"), MessagePackObject(true), MasterData("Enemy")]
     public class EnemyBase
     {
         /// <summary> 敵ID </summary>

@@ -6,7 +6,7 @@ namespace App.Master.Tables
     /// <summary>
     /// 敵スキルSet
     /// </summary>
-    [MemoryTable("EnemySkillSet"), MessagePackObject(true)]
+    [MemoryTable("EnemySkillSet"), MessagePackObject(true), MasterData("Enemy")]
     public class EnemySkillSet
     {
         /// <summary> SetID </summary>

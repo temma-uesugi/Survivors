@@ -6,7 +6,7 @@ namespace App.Master.Tables
     /// <summary>
     /// 味方陣形枠
     /// </summary>
-    [MemoryTable("HeroFormationFrame"), MessagePackObject(true)]
+    [MemoryTable("HeroFormationFrame"), MessagePackObject(true), MasterData("Hero")]
     public class HeroFormationFrame
     {
         /// <summary> 陣形枠ID </summary>
