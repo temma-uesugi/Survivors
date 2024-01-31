@@ -45,13 +45,15 @@ namespace App.MD
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(7)
             {
                 {typeof(EnemyBase[]), 0 },
                 {typeof(EnemyLevelStatus[]), 1 },
                 {typeof(EnemySkill[]), 2 },
                 {typeof(EnemySkillEffect[]), 3 },
                 {typeof(EnemySkillSet[]), 4 },
+                {typeof(HeroFormation[]), 5 },
+                {typeof(HeroFormationFrame[]), 6 },
             };
         }
 
@@ -67,6 +69,8 @@ namespace App.MD
                 case 2: return new MessagePack.Formatters.ArrayFormatter<EnemySkill>();
                 case 3: return new MessagePack.Formatters.ArrayFormatter<EnemySkillEffect>();
                 case 4: return new MessagePack.Formatters.ArrayFormatter<EnemySkillSet>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<HeroFormation>();
+                case 6: return new MessagePack.Formatters.ArrayFormatter<HeroFormationFrame>();
                 default: return null;
             }
         }

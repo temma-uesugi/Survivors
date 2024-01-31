@@ -1,0 +1,4 @@
+スキルID,最小範囲,最大範囲,遮蔽物を無視,効果1,効果2,効果3,効果4,効果5,イメージID,,
+SkillId,MinRange,MaxRange,IsIgnoreObstacles,Effect1,Effect2,Effect3,Effect4,Effect5,ImageId,,
+1,1,1,FALSE,1,0,0,0,0,Skill1,,直接攻撃
+2,2,3,FALSE,1,0,0,0,0,Skill2,,遠隔攻撃

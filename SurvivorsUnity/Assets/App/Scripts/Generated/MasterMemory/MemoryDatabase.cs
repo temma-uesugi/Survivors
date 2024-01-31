@@ -17,13 +17,17 @@ namespace App.MD
         public EnemySkillTable EnemySkillTable { get; private set; }
         public EnemySkillEffectTable EnemySkillEffectTable { get; private set; }
         public EnemySkillSetTable EnemySkillSetTable { get; private set; }
+        public HeroFormationTable HeroFormationTable { get; private set; }
+        public HeroFormationFrameTable HeroFormationFrameTable { get; private set; }
 
         public MemoryDatabase(
             EnemyBaseTable EnemyBaseTable,
             EnemyLevelStatusTable EnemyLevelStatusTable,
             EnemySkillTable EnemySkillTable,
             EnemySkillEffectTable EnemySkillEffectTable,
-            EnemySkillSetTable EnemySkillSetTable
+            EnemySkillSetTable EnemySkillSetTable,
+            HeroFormationTable HeroFormationTable,
+            HeroFormationFrameTable HeroFormationFrameTable
         )
         {
             this.EnemyBaseTable = EnemyBaseTable;
@@ -31,6 +35,8 @@ namespace App.MD
             this.EnemySkillTable = EnemySkillTable;
             this.EnemySkillEffectTable = EnemySkillEffectTable;
             this.EnemySkillSetTable = EnemySkillSetTable;
+            this.HeroFormationTable = HeroFormationTable;
+            this.HeroFormationFrameTable = HeroFormationFrameTable;
         }
 
         public MemoryDatabase(byte[] databaseBinary, bool internString = true, MessagePack.IFormatterResolver formatterResolver = null, int maxDegreeOfParallelism = 1)
@@ -57,6 +63,8 @@ namespace App.MD
             this.EnemySkillTable = ExtractTableData<EnemySkill, EnemySkillTable>(header, databaseBinary, options, xs => new EnemySkillTable(xs));
             this.EnemySkillEffectTable = ExtractTableData<EnemySkillEffect, EnemySkillEffectTable>(header, databaseBinary, options, xs => new EnemySkillEffectTable(xs));
             this.EnemySkillSetTable = ExtractTableData<EnemySkillSet, EnemySkillSetTable>(header, databaseBinary, options, xs => new EnemySkillSetTable(xs));
+            this.HeroFormationTable = ExtractTableData<HeroFormation, HeroFormationTable>(header, databaseBinary, options, xs => new HeroFormationTable(xs));
+            this.HeroFormationFrameTable = ExtractTableData<HeroFormationFrame, HeroFormationFrameTable>(header, databaseBinary, options, xs => new HeroFormationFrameTable(xs));
         }
 
         void InitParallel(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
@@ -68,6 +76,8 @@ namespace App.MD
                 () => this.EnemySkillTable = ExtractTableData<EnemySkill, EnemySkillTable>(header, databaseBinary, options, xs => new EnemySkillTable(xs)),
                 () => this.EnemySkillEffectTable = ExtractTableData<EnemySkillEffect, EnemySkillEffectTable>(header, databaseBinary, options, xs => new EnemySkillEffectTable(xs)),
                 () => this.EnemySkillSetTable = ExtractTableData<EnemySkillSet, EnemySkillSetTable>(header, databaseBinary, options, xs => new EnemySkillSetTable(xs)),
+                () => this.HeroFormationTable = ExtractTableData<HeroFormation, HeroFormationTable>(header, databaseBinary, options, xs => new HeroFormationTable(xs)),
+                () => this.HeroFormationFrameTable = ExtractTableData<HeroFormationFrame, HeroFormationFrameTable>(header, databaseBinary, options, xs => new HeroFormationFrameTable(xs)),
             };
             
             System.Threading.Tasks.Parallel.Invoke(new System.Threading.Tasks.ParallelOptions
@@ -89,6 +99,8 @@ namespace App.MD
             builder.Append(this.EnemySkillTable.GetRawDataUnsafe());
             builder.Append(this.EnemySkillEffectTable.GetRawDataUnsafe());
             builder.Append(this.EnemySkillSetTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationFrameTable.GetRawDataUnsafe());
             return builder;
         }
 
@@ -100,6 +112,8 @@ namespace App.MD
             builder.Append(this.EnemySkillTable.GetRawDataUnsafe());
             builder.Append(this.EnemySkillEffectTable.GetRawDataUnsafe());
             builder.Append(this.EnemySkillSetTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationFrameTable.GetRawDataUnsafe());
             return builder;
         }
 
@@ -115,6 +129,8 @@ namespace App.MD
                 EnemySkillTable,
                 EnemySkillEffectTable,
                 EnemySkillSetTable,
+                HeroFormationTable,
+                HeroFormationFrameTable,
             });
 
             ((ITableUniqueValidate)EnemyBaseTable).ValidateUnique(result);
@@ -127,6 +143,10 @@ namespace App.MD
             ValidateTable(EnemySkillEffectTable.All, database, "EffectId", EnemySkillEffectTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)EnemySkillSetTable).ValidateUnique(result);
             ValidateTable(EnemySkillSetTable.All, database, "(SkillSetId, SkillId)", EnemySkillSetTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)HeroFormationTable).ValidateUnique(result);
+            ValidateTable(HeroFormationTable.All, database, "FormationId", HeroFormationTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)HeroFormationFrameTable).ValidateUnique(result);
+            ValidateTable(HeroFormationFrameTable.All, database, "FormationFrameId", HeroFormationFrameTable.PrimaryKeySelector, result);
 
             return result;
         }
@@ -149,6 +169,10 @@ namespace App.MD
                     return db.EnemySkillEffectTable;
                 case "EnemySkillSet":
                     return db.EnemySkillSetTable;
+                case "HeroFormation":
+                    return db.HeroFormationTable;
+                case "HeroFormationFrame":
+                    return db.HeroFormationFrameTable;
                 
                 default:
                     return null;
@@ -167,6 +191,8 @@ namespace App.MD
             dict.Add("EnemySkill", App.MD.Tables.EnemySkillTable.CreateMetaTable());
             dict.Add("EnemySkillEffect", App.MD.Tables.EnemySkillEffectTable.CreateMetaTable());
             dict.Add("EnemySkillSet", App.MD.Tables.EnemySkillSetTable.CreateMetaTable());
+            dict.Add("HeroFormation", App.MD.Tables.HeroFormationTable.CreateMetaTable());
+            dict.Add("HeroFormationFrame", App.MD.Tables.HeroFormationFrameTable.CreateMetaTable());
 
             metaTable = new MasterMemory.Meta.MetaDatabase(dict);
             return metaTable;

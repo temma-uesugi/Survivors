@@ -1,0 +1,4 @@
+効果ID,タイプ,値,範囲タイプ,範囲Value,イメージID
+EffectId,Type,Value,RangeType,RangeValue,ImageId
+1,DirectAttack,2,Target,0,Effect1
+2,DirectAttack,1,Target,0,Effect2

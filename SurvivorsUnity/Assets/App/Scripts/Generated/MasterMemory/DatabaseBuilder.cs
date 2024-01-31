@@ -45,5 +45,17 @@ namespace App.MD
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormation> dataSource)
+        {
+            AppendCore(dataSource, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            return this;
+        }
+
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormationFrame> dataSource)
+        {
+            AppendCore(dataSource, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            return this;
+        }
+
     }
 }

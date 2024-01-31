@@ -47,13 +47,15 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(5)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
             {
                 { typeof(global::App.Master.Tables.EnemyBase), 0 },
                 { typeof(global::App.Master.Tables.EnemyLevelStatus), 1 },
                 { typeof(global::App.Master.Tables.EnemySkill), 2 },
                 { typeof(global::App.Master.Tables.EnemySkillEffect), 3 },
                 { typeof(global::App.Master.Tables.EnemySkillSet), 4 },
+                { typeof(global::App.Master.Tables.HeroFormation), 5 },
+                { typeof(global::App.Master.Tables.HeroFormationFrame), 6 },
             };
         }
 
@@ -72,6 +74,8 @@ namespace MessagePack.Resolvers
                 case 2: return new MessagePack.Formatters.App.Master.Tables.EnemySkillFormatter();
                 case 3: return new MessagePack.Formatters.App.Master.Tables.EnemySkillEffectFormatter();
                 case 4: return new MessagePack.Formatters.App.Master.Tables.EnemySkillSetFormatter();
+                case 5: return new MessagePack.Formatters.App.Master.Tables.HeroFormationFormatter();
+                case 6: return new MessagePack.Formatters.App.Master.Tables.HeroFormationFrameFormatter();
                 default: return null;
             }
         }

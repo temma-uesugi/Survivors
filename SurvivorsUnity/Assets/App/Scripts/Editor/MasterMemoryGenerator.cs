@@ -1,60 +1,36 @@
-using System;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using App.AppCommon.Core;
+using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace App.Editor
 {
+    //Note:
+    //別途 mastermemory.generator, messagepack.generator のインストールが必要
+    //.NETを入れてから
+    //dotnet tool install --global MasterMemory.Generator
+    //dotnet tool install --global MessagePack.Generator
+    
     /// <summary>
     /// MasterMemoryの生成
     /// </summary>
     public static class MasterMemoryGenerator
     {
+        private static readonly string InputDir = Path.Combine(Application.dataPath, "App", "Scripts", "Master", "Tables");
+        private static readonly string GeneratedDir = Path.Combine(Application.dataPath, "App", "Scripts", "Generated");
+        private static readonly string MasterMemoryGeneratedDir = Path.Combine(GeneratedDir, "MasterMemory");
+        private static readonly string MessagePackGeneratedDir = Path.Combine(GeneratedDir, "MessagePack");
+        
         /// <summary>
         /// ビルド
         /// </summary>
-        [MenuItem("CodeGenerate/MasterMemory")]
-        private static void Build()
+        [MenuItem("Survivors/GenerateMasterMemory")]
+        private static async UniTask BuildAsync()
         {
-            //TODO 動かないので、直接mpc.sh を指定する
-            ExecuteShellScript($"{Application.dataPath}/../GeneratorTools/mpc.sh");
-        }
-        
-        /// <summary>
-        /// シェルの実行
-        /// </summary>
-        private static void ExecuteShellScript(string filePath)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "/bin/bash",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                Arguments = filePath,
-            };
-
-            Process process = new Process
-            {
-                StartInfo = startInfo
-            };
-
-            process.Start();
-            process.StandardInput.WriteLine($"chmod +x {filePath}");
-
-            // シェルスクリプトのパスを実行
-            process.WaitForExit();
-            process.EnableRaisingEvents = true;
-            string output = process.StandardOutput.ReadToEnd();
-            Log.Debug("output", output);
-            process.Close(); 
+            await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
+            await ProcessHelper.InvokeAsync("mpc", $"-i {InputDir}", $"-o {MessagePackGeneratedDir}");
+            Debug.Log("終了");
         }
     }
 }

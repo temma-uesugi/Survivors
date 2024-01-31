@@ -33,7 +33,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -48,7 +50,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -63,7 +67,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -77,7 +83,9 @@ namespace App.MD
                 table,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -92,7 +100,9 @@ namespace App.MD
                 table,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -107,7 +117,9 @@ namespace App.MD
                 table,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -121,7 +133,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 table,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -136,7 +150,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 table,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -151,7 +167,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 table,
                 memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -165,7 +183,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 table,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -180,7 +200,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 table,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -195,7 +217,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 table,
-                memory.EnemySkillSetTable
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -209,7 +233,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                table
+                table,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -224,7 +250,9 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
-                table
+                table,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
             
             );
         }
@@ -239,6 +267,108 @@ namespace App.MD
                 memory.EnemyLevelStatusTable,
                 memory.EnemySkillTable,
                 memory.EnemySkillEffectTable,
+                table,
+                memory.HeroFormationTable,
+                memory.HeroFormationFrameTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<HeroFormation> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                table,
+                memory.HeroFormationFrameTable
+            
+            );
+        }
+
+        public void RemoveHeroFormation(uint[] keys)
+        {
+            var data = RemoveCore(memory.HeroFormationTable.GetRawDataUnsafe(), keys, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                table,
+                memory.HeroFormationFrameTable
+            
+            );
+        }
+
+        public void Diff(HeroFormation[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.HeroFormationTable.GetRawDataUnsafe(), addOrReplaceData, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                table,
+                memory.HeroFormationFrameTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<HeroFormationFrame> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationFrameTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                table
+            
+            );
+        }
+
+        public void RemoveHeroFormationFrame(uint[] keys)
+        {
+            var data = RemoveCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), keys, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationFrameTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
+                table
+            
+            );
+        }
+
+        public void Diff(HeroFormationFrame[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), addOrReplaceData, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new HeroFormationFrameTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseTable,
+                memory.EnemyLevelStatusTable,
+                memory.EnemySkillTable,
+                memory.EnemySkillEffectTable,
+                memory.EnemySkillSetTable,
+                memory.HeroFormationTable,
                 table
             
             );
