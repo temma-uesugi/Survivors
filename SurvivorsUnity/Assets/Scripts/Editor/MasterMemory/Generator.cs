@@ -38,6 +38,7 @@ namespace Editor.MasterMemory
             {
                 Directory.CreateDirectory(CopyDir);
             }
+            FileUtil.ClearDirectory(CopyDir);
             FileUtil.CopyDirectory(GeneratedDir, CopyDir, true);
             
             await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
