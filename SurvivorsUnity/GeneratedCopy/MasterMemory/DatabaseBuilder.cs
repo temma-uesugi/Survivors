@@ -55,7 +55,7 @@ namespace App.MD
 
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormationFrame> dataSource)
         {
-            AppendCore(dataSource, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            AppendCore(dataSource, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             return this;
         }
 

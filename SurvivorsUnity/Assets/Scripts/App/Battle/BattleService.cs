@@ -1,4 +1,5 @@
 ﻿using System;
+using App.AppCommon.Core;
 using App.Battle2.Debug;
 using Master.Battle.Map;
 using Master.Battle.Units;
@@ -48,6 +49,9 @@ namespace Master.Battle
             {
                 _unitManager.CreateHero(shipParam.grid);
             }
+
+            var a = MasterData.Facade.EnemyBaseTable.FindByEnemyId(1);
+            Log.Debug(a);
             
             //敵をランダム作成
             foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)

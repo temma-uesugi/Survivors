@@ -24,16 +24,6 @@ namespace MessagePack.Formatters.Master.Tables.Hero
         private static global::System.ReadOnlySpan<byte> GetSpan_Name() => new byte[1 + 4] { 164, 78, 97, 109, 101 };
         // Description
         private static global::System.ReadOnlySpan<byte> GetSpan_Description() => new byte[1 + 11] { 171, 68, 101, 115, 99, 114, 105, 112, 116, 105, 111, 110 };
-        // FrameId1
-        private static global::System.ReadOnlySpan<byte> GetSpan_FrameId1() => new byte[1 + 8] { 168, 70, 114, 97, 109, 101, 73, 100, 49 };
-        // FrameId2
-        private static global::System.ReadOnlySpan<byte> GetSpan_FrameId2() => new byte[1 + 8] { 168, 70, 114, 97, 109, 101, 73, 100, 50 };
-        // FrameId3
-        private static global::System.ReadOnlySpan<byte> GetSpan_FrameId3() => new byte[1 + 8] { 168, 70, 114, 97, 109, 101, 73, 100, 51 };
-        // FrameId4
-        private static global::System.ReadOnlySpan<byte> GetSpan_FrameId4() => new byte[1 + 8] { 168, 70, 114, 97, 109, 101, 73, 100, 52 };
-        // FrameId5
-        private static global::System.ReadOnlySpan<byte> GetSpan_FrameId5() => new byte[1 + 8] { 168, 70, 114, 97, 109, 101, 73, 100, 53 };
         // FrontDamageCutCoef
         private static global::System.ReadOnlySpan<byte> GetSpan_FrontDamageCutCoef() => new byte[1 + 18] { 178, 70, 114, 111, 110, 116, 68, 97, 109, 97, 103, 101, 67, 117, 116, 67, 111, 101, 102 };
         // SideDamageCutCoef
@@ -54,23 +44,13 @@ namespace MessagePack.Formatters.Master.Tables.Hero
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(13);
+            writer.WriteMapHeader(8);
             writer.WriteRaw(GetSpan_FormationId());
             writer.Write(value.FormationId);
             writer.WriteRaw(GetSpan_Name());
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Name, options);
             writer.WriteRaw(GetSpan_Description());
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Description, options);
-            writer.WriteRaw(GetSpan_FrameId1());
-            writer.Write(value.FrameId1);
-            writer.WriteRaw(GetSpan_FrameId2());
-            writer.Write(value.FrameId2);
-            writer.WriteRaw(GetSpan_FrameId3());
-            writer.Write(value.FrameId3);
-            writer.WriteRaw(GetSpan_FrameId4());
-            writer.Write(value.FrameId4);
-            writer.WriteRaw(GetSpan_FrameId5());
-            writer.Write(value.FrameId5);
             writer.WriteRaw(GetSpan_FrontDamageCutCoef());
             writer.Write(value.FrontDamageCutCoef);
             writer.WriteRaw(GetSpan_SideDamageCutCoef());
@@ -96,11 +76,6 @@ namespace MessagePack.Formatters.Master.Tables.Hero
             var __FormationId__ = default(uint);
             var __Name__ = default(string);
             var __Description__ = default(string);
-            var __FrameId1__ = default(uint);
-            var __FrameId2__ = default(uint);
-            var __FrameId3__ = default(uint);
-            var __FrameId4__ = default(uint);
-            var __FrameId5__ = default(uint);
             var __FrontDamageCutCoef__ = default(float);
             var __SideDamageCutCoef__ = default(float);
             var __BackDamageCutCoef__ = default(float);
@@ -144,26 +119,6 @@ namespace MessagePack.Formatters.Master.Tables.Hero
 
                         __Name__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
                         continue;
-                    case 8:
-                        switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
-                        {
-                            default: goto FAIL;
-                            case 3559050305505161798UL:
-                                __FrameId1__ = reader.ReadUInt32();
-                                continue;
-                            case 3631107899543089734UL:
-                                __FrameId2__ = reader.ReadUInt32();
-                                continue;
-                            case 3703165493581017670UL:
-                                __FrameId3__ = reader.ReadUInt32();
-                                continue;
-                            case 3775223087618945606UL:
-                                __FrameId4__ = reader.ReadUInt32();
-                                continue;
-                            case 3847280681656873542UL:
-                                __FrameId5__ = reader.ReadUInt32();
-                                continue;
-                        }
                     case 18:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
@@ -202,7 +157,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                 }
             }
 
-            var ____result = new global::Master.Tables.Hero.HeroFormation(__FormationId__, __Name__, __Description__, __FrameId1__, __FrameId2__, __FrameId3__, __FrameId4__, __FrameId5__, __FrontDamageCutCoef__, __SideDamageCutCoef__, __BackDamageCutCoef__, __BonusHpCoef__, __BonusDamageCutCoef__);
+            var ____result = new global::Master.Tables.Hero.HeroFormation(__FormationId__, __Name__, __Description__, __FrontDamageCutCoef__, __SideDamageCutCoef__, __BackDamageCutCoef__, __BonusHpCoef__, __BonusDamageCutCoef__);
             reader.Depth--;
             return ____result;
         }

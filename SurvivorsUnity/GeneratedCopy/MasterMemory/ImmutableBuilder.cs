@@ -328,7 +328,7 @@ namespace App.MD
 
         public void ReplaceAll(System.Collections.Generic.IList<HeroFormationFrame> data)
         {
-            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             var table = new HeroFormationFrameTable(newData);
             memory = new MemoryDatabase(
                 memory.EnemyBaseTable,
@@ -342,10 +342,10 @@ namespace App.MD
             );
         }
 
-        public void RemoveHeroFormationFrame(uint[] keys)
+        public void RemoveHeroFormationFrame((uint FormationId, int FrameIndex)[] keys)
         {
-            var data = RemoveCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), keys, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
-            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = RemoveCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), keys, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
+            var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             var table = new HeroFormationFrameTable(newData);
             memory = new MemoryDatabase(
                 memory.EnemyBaseTable,
@@ -361,8 +361,8 @@ namespace App.MD
 
         public void Diff(HeroFormationFrame[] addOrReplaceData)
         {
-            var data = DiffCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), addOrReplaceData, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
-            var newData = CloneAndSortBy(data, x => x.FormationFrameId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = DiffCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
+            var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             var table = new HeroFormationFrameTable(newData);
             memory = new MemoryDatabase(
                 memory.EnemyBaseTable,

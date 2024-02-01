@@ -44,7 +44,7 @@ namespace Editor.MasterMemory
 
             try
             {
-                await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {MasterDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
+                await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {MasterDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD", "-addImmutableConstructor");
             }
             catch (Exception e)
             {

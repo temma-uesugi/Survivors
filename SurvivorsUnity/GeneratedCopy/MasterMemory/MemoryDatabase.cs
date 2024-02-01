@@ -148,7 +148,7 @@ namespace App.MD
             ((ITableUniqueValidate)HeroFormationTable).ValidateUnique(result);
             ValidateTable(HeroFormationTable.All, database, "FormationId", HeroFormationTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)HeroFormationFrameTable).ValidateUnique(result);
-            ValidateTable(HeroFormationFrameTable.All, database, "FormationFrameId", HeroFormationFrameTable.PrimaryKeySelector, result);
+            ValidateTable(HeroFormationFrameTable.All, database, "(FormationId, FrameIndex)", HeroFormationFrameTable.PrimaryKeySelector, result);
 
             return result;
         }

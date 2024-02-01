@@ -18,8 +18,10 @@ namespace MessagePack.Formatters.Master.Tables.Hero
 {
     public sealed class HeroFormationFrameFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Hero.HeroFormationFrame>
     {
-        // FormationFrameId
-        private static global::System.ReadOnlySpan<byte> GetSpan_FormationFrameId() => new byte[1 + 16] { 176, 70, 111, 114, 109, 97, 116, 105, 111, 110, 70, 114, 97, 109, 101, 73, 100 };
+        // FormationId
+        private static global::System.ReadOnlySpan<byte> GetSpan_FormationId() => new byte[1 + 11] { 171, 70, 111, 114, 109, 97, 116, 105, 111, 110, 73, 100 };
+        // FrameIndex
+        private static global::System.ReadOnlySpan<byte> GetSpan_FrameIndex() => new byte[1 + 10] { 170, 70, 114, 97, 109, 101, 73, 110, 100, 101, 120 };
         // OffsetX
         private static global::System.ReadOnlySpan<byte> GetSpan_OffsetX() => new byte[1 + 7] { 167, 79, 102, 102, 115, 101, 116, 88 };
         // OffsetY
@@ -39,9 +41,11 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                 return;
             }
 
-            writer.WriteMapHeader(6);
-            writer.WriteRaw(GetSpan_FormationFrameId());
-            writer.Write(value.FormationFrameId);
+            writer.WriteMapHeader(7);
+            writer.WriteRaw(GetSpan_FormationId());
+            writer.Write(value.FormationId);
+            writer.WriteRaw(GetSpan_FrameIndex());
+            writer.Write(value.FrameIndex);
             writer.WriteRaw(GetSpan_OffsetX());
             writer.Write(value.OffsetX);
             writer.WriteRaw(GetSpan_OffsetY());
@@ -63,7 +67,8 @@ namespace MessagePack.Formatters.Master.Tables.Hero
 
             options.Security.DepthStep(ref reader);
             var length = reader.ReadMapHeader();
-            var __FormationFrameId__ = default(uint);
+            var __FormationId__ = default(uint);
+            var __FrameIndex__ = default(int);
             var __OffsetX__ = default(int);
             var __OffsetY__ = default(int);
             var __DamageRatio__ = default(float);
@@ -79,11 +84,40 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                     FAIL:
                       reader.Skip();
                       continue;
-                    case 16:
-                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_FormationFrameId().Slice(1))) { goto FAIL; }
+                    case 11:
+                        switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
+                        {
+                            default: goto FAIL;
+                            case 8028075772561485638UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 6572398UL) { goto FAIL; }
 
-                        __FormationFrameId__ = reader.ReadUInt32();
-                        continue;
+                                __FormationId__ = reader.ReadUInt32();
+                                continue;
+
+                            case 7012779064459878724UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 7301492UL) { goto FAIL; }
+
+                                __DamageRatio__ = reader.ReadSingle();
+                                continue;
+
+                        }
+                    case 10:
+                        switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
+                        {
+                            default: goto FAIL;
+                            case 7236802351206593094UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 30821UL) { goto FAIL; }
+
+                                __FrameIndex__ = reader.ReadInt32();
+                                continue;
+
+                            case 8017369836230571073UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 26213UL) { goto FAIL; }
+
+                                __AttackCoef__ = reader.ReadSingle();
+                                continue;
+
+                        }
                     case 7:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
@@ -95,26 +129,16 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                                 __OffsetY__ = reader.ReadInt32();
                                 continue;
                         }
-                    case 11:
-                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_DamageRatio().Slice(1))) { goto FAIL; }
-
-                        __DamageRatio__ = reader.ReadSingle();
-                        continue;
                     case 6:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 112585844420680UL) { goto FAIL; }
 
                         __HpCoef__ = reader.ReadSingle();
                         continue;
-                    case 10:
-                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_AttackCoef().Slice(1))) { goto FAIL; }
-
-                        __AttackCoef__ = reader.ReadSingle();
-                        continue;
 
                 }
             }
 
-            var ____result = new global::Master.Tables.Hero.HeroFormationFrame(__FormationFrameId__, __OffsetX__, __OffsetY__, __DamageRatio__, __HpCoef__, __AttackCoef__);
+            var ____result = new global::Master.Tables.Hero.HeroFormationFrame(__FormationId__, __FrameIndex__, __OffsetX__, __OffsetY__, __DamageRatio__, __HpCoef__, __AttackCoef__);
             reader.Depth--;
             return ____result;
         }

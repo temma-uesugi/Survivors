@@ -85,17 +85,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             options.Security.DepthStep(ref reader);
             var formatterResolver = options.Resolver;
             var length = reader.ReadMapHeader();
-            var __EnemyId__ = default(uint);
-            var __EnemyName__ = default(string);
-            var __ActionInterval__ = default(int);
-            var __MovePower__ = default(int);
-            var __SkillSetId__ = default(uint);
-            var __ActiveConditionType__ = default(global::Master.Constants.EnemyActiveConditionType);
-            var __ActiveConditionValue__ = default(int);
-            var __InactiveConditionType__ = default(global::Master.Constants.EnemyInactiveConditionType);
-            var __InactiveConditionValue__ = default(int);
-            var __IsFlight__ = default(bool);
-            var __ImageId__ = default(string);
+            var ____result = new global::Master.Tables.Enemy.EnemyBase();
 
             for (int i = 0; i < length; i++)
             {
@@ -111,10 +101,10 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                         {
                             default: goto FAIL;
                             case 28228283546299973UL:
-                                __EnemyId__ = reader.ReadUInt32();
+                                reader.Skip();
                                 continue;
                             case 28228197546028361UL:
-                                __ImageId__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
+                                reader.Skip();
                                 continue;
                         }
                     case 9:
@@ -124,56 +114,55 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                             case 7881667106308451909UL:
                                 if (stringKey[0] != 101) { goto FAIL; }
 
-                                __EnemyName__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
+                                reader.Skip();
                                 continue;
 
                             case 7311434911149616973UL:
                                 if (stringKey[0] != 114) { goto FAIL; }
 
-                                __MovePower__ = reader.ReadInt32();
+                                reader.Skip();
                                 continue;
 
                         }
                     case 14:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActionInterval().Slice(1))) { goto FAIL; }
 
-                        __ActionInterval__ = reader.ReadInt32();
+                        reader.Skip();
                         continue;
                     case 10:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_SkillSetId().Slice(1))) { goto FAIL; }
 
-                        __SkillSetId__ = reader.ReadUInt32();
+                        reader.Skip();
                         continue;
                     case 19:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __ActiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyActiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        reader.Skip();
                         continue;
                     case 20:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionValue().Slice(1))) { goto FAIL; }
 
-                        __ActiveConditionValue__ = reader.ReadInt32();
+                        reader.Skip();
                         continue;
                     case 21:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __InactiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyInactiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        reader.Skip();
                         continue;
                     case 22:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionValue().Slice(1))) { goto FAIL; }
 
-                        __InactiveConditionValue__ = reader.ReadInt32();
+                        reader.Skip();
                         continue;
                     case 8:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 8388068008463332169UL) { goto FAIL; }
 
-                        __IsFlight__ = reader.ReadBoolean();
+                        reader.Skip();
                         continue;
 
                 }
             }
 
-            var ____result = new global::Master.Tables.Enemy.EnemyBase(__EnemyId__, __EnemyName__, __ActionInterval__, __MovePower__, __SkillSetId__, __ActiveConditionType__, __ActiveConditionValue__, __InactiveConditionType__, __InactiveConditionValue__, __IsFlight__, __ImageId__);
             reader.Depth--;
             return ____result;
         }

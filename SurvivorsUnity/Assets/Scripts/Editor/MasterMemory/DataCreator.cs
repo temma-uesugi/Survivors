@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using App.AppCommon.Core;
 using App.MD;
-using Master.Tables.Enemy;
 using MessagePack;
 using MessagePack.Resolvers;
 using UnityEngine;
@@ -28,24 +28,12 @@ namespace Editor.MasterMemory
     public static class DataCreator
     {
         /// <summary>
-        /// 設定
-        /// </summary>
-        private static readonly SpreadSheetSetting Setting = new SpreadSheetSetting
-        {
-            KeyFile = "./lively-vim-404818-006ad04a879e.json",
-            // ApplicationName = "App",
-            SpreadsheetId = new()
-            {
-                { "Enemy", "1fVXOhIdj8rI7_WES23dh6_n4_hW897_w3UIJmVC72qY" }
-            }
-        };
-
-        /// <summary>
         /// SheetのId
         /// </summary>
         private static readonly Dictionary<string, string> SheetIdMap = new()
         {
-            { "Enemy", "1fVXOhIdj8rI7_WES23dh6_n4_hW897_w3UIJmVC72qY" }
+            { "Enemy", "1fVXOhIdj8rI7_WES23dh6_n4_hW897_w3UIJmVC72qY" },
+            { "Hero", "1PgmBKNvdJ4d-D0v1A3aS50lsSCF5gKNGuW_63V1qKWs"}
         };
 
         private static readonly string KeyPath = Path.Combine(Application.dataPath, "Scripts", "Editor", "MasterMemory", "key.json");
@@ -81,11 +69,13 @@ namespace Editor.MasterMemory
             //Note
             //Table毎に書く必要あり。refrectionではできなかった
             //敵
-            builder.Append(Create<EnemyBase>(ssGetter.Get("Enemy", "EnemyBase")));
-            builder.Append(Create<EnemyLevelStatus>(ssGetter.Get("Enemy", "EnemyLevelStatus")));
-            builder.Append(Create<EnemySkillSet>(ssGetter.Get("Enemy", "EnemySkillSet")));
-            builder.Append(Create<EnemySkill>(ssGetter.Get("Enemy", "EnemySkill")));
-            builder.Append(Create<EnemySkillEffect>(ssGetter.Get("Enemy", "EnemySkillEffect")));
+            builder.Append(Create<Master.Tables.Enemy.EnemyBase>(ssGetter.Get("Enemy", "EnemyBase")));
+            builder.Append(Create<Master.Tables.Enemy.EnemyLevelStatus>(ssGetter.Get("Enemy", "EnemyLevelStatus")));
+            builder.Append(Create<Master.Tables.Enemy.EnemySkillSet>(ssGetter.Get("Enemy", "EnemySkillSet")));
+            builder.Append(Create<Master.Tables.Enemy.EnemySkill>(ssGetter.Get("Enemy", "EnemySkill")));
+            builder.Append(Create<Master.Tables.Enemy.EnemySkillEffect>(ssGetter.Get("Enemy", "EnemySkillEffect")));
+            builder.Append(Create<Master.Tables.Hero.HeroFormation>(ssGetter.Get("Hero", "HeroFormation")));
+            builder.Append(Create<Master.Tables.Hero.HeroFormationFrame>(ssGetter.Get("Hero", "HeroFormationFrame")));
             
             byte[] data = builder.Build();
             

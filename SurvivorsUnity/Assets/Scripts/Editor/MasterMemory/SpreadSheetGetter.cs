@@ -14,7 +14,6 @@ namespace Editor.MasterMemory
     /// </summary>
     public class SpreadSheetGetter
     {
-        // private readonly SpreadSheetSetting _setting;
         private readonly SheetsService _service;
         private readonly Dictionary<string, string> _idMap;
 
@@ -23,7 +22,6 @@ namespace Editor.MasterMemory
         /// </summary>
         public SpreadSheetGetter(string keyPath, Dictionary<string, string> sheetIdMap)
         {
-            // _setting = setting;
             _idMap = sheetIdMap;
             var stream = new FileStream(keyPath, FileMode.Open, FileAccess.Read);
             var credential = GoogleCredential.FromStream(stream).CreateScoped(SheetsService.Scope.SpreadsheetsReadonly);
@@ -38,13 +36,10 @@ namespace Editor.MasterMemory
         /// </summary>
         public Dictionary<string, string>[] Get(string category, string masterName)
         {
-            // var stream = new FileStream(_setting.KeyFile, FileMode.Open, FileAccess.Read);
-            // var credential = GoogleCredential.FromStream(stream).CreateScoped(SheetsService.Scope.SpreadsheetsReadonly);
             if (!_idMap.TryGetValue(category, out var id))
             {
                 return null;
             }
-            // var id = _apiSettings[$"SpreadsheetId:{category}"];
             var request = _service.Spreadsheets.Values.Get(id, masterName);
             var values = request.Execute().Values.ToList();
 
