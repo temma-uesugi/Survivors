@@ -1,11 +1,10 @@
 using System;
-using App.Battle2.Map.Cells;
 using App.Battle2.ValueObjects;
 using UniRx;
 using UnityEngine;
-using HexCell = App.Battle.Map.HexCell;
+using HexCell = Master.Battle.Map.Cells.HexCell;
 
-namespace App.Battle.Units
+namespace Master.Battle.Units
 {
     /// <summary>
     /// UnitのModelインターフェイス

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using App.AppCommon;
+using Constants;
 using App.AppCommon.Utils;
 using App.Battle2.Turn;
 using App.Battle2.ValueObjects;
 using FastEnumUtility;
 using UnityEngine;
 
-namespace App.Battle.Map
+namespace Master.Battle.Map
 {
     /// <summary>
     /// HexUtil

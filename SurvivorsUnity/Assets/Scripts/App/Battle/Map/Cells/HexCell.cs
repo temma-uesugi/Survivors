@@ -1,8 +1,8 @@
-using App.AppCommon;
 using App.Battle2.ValueObjects;
 using UnityEngine;
+using Constants;
 
-namespace App.Battle.Map
+namespace Master.Battle.Map.Cells
 {
     /// <summary>
     /// Hexセル

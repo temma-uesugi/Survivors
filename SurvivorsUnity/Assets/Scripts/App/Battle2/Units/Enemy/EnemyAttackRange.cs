@@ -4,7 +4,6 @@ using App.Battle2.Map;
 using App.Battle2.Map.Cells;
 using App.Battle2.Utils;
 using UniRx;
-using Unity.VisualScripting;
 
 namespace App.Battle2.Units.Enemy
 {
@@ -40,7 +39,8 @@ namespace App.Battle2.Units.Enemy
                     .Where(x => x.Grid != moveHex.Grid)
                     //TODO: なんで1.1fしてるんだっけ？
                     .Where(x => HitUtil.IsCircleAndPoint(moveHex.Position, unitModel2.AttackRange * 1.1f, x.Position));
-                cellHashSet.AddRange(cells);
+                //AddRangeはない
+                // cellHashSet.AddRange(cells);
             }
 
             _attackRangeCell.Value = cellHashSet;

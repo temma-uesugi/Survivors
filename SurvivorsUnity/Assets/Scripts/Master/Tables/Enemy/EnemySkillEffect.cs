@@ -1,9 +1,10 @@
-﻿using MasterMemory;
+using Constants;
+using MasterMemory;
 using MessagePack;
 
-namespace App.Master.Tables
+namespace Master.Tables.Enemy
 {
-    
+
     /// <summary>
     /// 敵スキル効果
     /// </summary>
@@ -13,20 +14,30 @@ namespace App.Master.Tables
         /// <summary> EffectID </summary>
         [PrimaryKey]
         public uint EffectId { get; set; }
-        
+
         /// <summary> 効果Type </summary>
-        public App.AppCommon.SkillEffectType Type { get; set; }
-        
+        public SkillEffectType Type { get; set; }
+
         /// <summary> 効果値 </summary>
         public float Value { get; set; }
-        
+
         /// <summary> 効果範囲タイプ </summary>
-        public App.AppCommon.SkillEffectRangeType RangeType { get; set; }
-        
+        public SkillEffectRangeType RangeType { get; set; }
+
         /// <summary> 効果範囲値 </summary>
         public int RangeValue { get; set; }
-        
+
         /// <summary> イメージID </summary>
         public string ImageId { get; set; }
+
+        public EnemySkillEffect(uint EffectId, SkillEffectType Type, float Value, SkillEffectRangeType RangeType, int RangeValue, string ImageId)
+        {
+            this.EffectId = EffectId;
+            this.Type = Type;
+            this.Value = Value;
+            this.RangeType = RangeType;
+            this.RangeValue = RangeValue;
+            this.ImageId = ImageId;
+        }
     }
 }

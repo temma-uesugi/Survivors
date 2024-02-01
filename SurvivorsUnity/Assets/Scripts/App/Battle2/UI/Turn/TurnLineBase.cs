@@ -6,6 +6,7 @@ using App.Battle2.Turn;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
+using Constants;
 
 namespace App.Battle2.UI.Turn
 {

@@ -1,8 +1,10 @@
-﻿using App.Battle.Core;
-using App.Battle.Map;
+﻿using Master.Battle.Core;
+using Master.Battle.Map;
+using Master.Battle.Units.Enemys;
+using Master.Battle.Units.Heroes;
 using VContainer;
 
-namespace App.Battle.Units
+namespace Master.Battle.Units
 {
     /// <summary>
     /// UnitModelのFactory

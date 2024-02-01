@@ -1,7 +1,7 @@
-﻿using MasterMemory;
+using MasterMemory;
 using MessagePack;
 
-namespace App.Master.Tables
+namespace Master.Tables.Enemy
 {
     /// <summary>
     /// 敵スキルSet
@@ -13,8 +13,14 @@ namespace App.Master.Tables
         [PrimaryKey(0)]
         [SecondaryKey(0), NonUnique]
         public uint SkillSetId { get; set; }
-        
+
         [PrimaryKey(1)]
         public uint SkillId { get; set; }
+
+        public EnemySkillSet(uint SkillSetId, uint SkillId)
+        {
+            this.SkillSetId = SkillSetId;
+            this.SkillId = SkillId;
+        }
     }
 }

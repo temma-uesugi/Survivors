@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Battle.Core
+namespace Master.Battle.Core
 {
     /// <summary>
     /// DIContainerに登録するクラスにつける属性

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using App.Master.Tables;
 using App.MD;
+using Master.Tables.Enemy;
 using MessagePack;
 using MessagePack.Resolvers;
 using UnityEngine;
@@ -46,7 +46,6 @@ namespace Editor.MasterMemory
             { "Enemy", "1fVXOhIdj8rI7_WES23dh6_n4_hW897_w3UIJmVC72qY" }
         };
 
-
         private static readonly string KeyPath = Path.Combine(Application.dataPath, "Scripts", "Editor", "MasterMemory", "key.json");
         private static readonly string AssetPath = Path.Combine(Application.dataPath, "Resources", "master-data.bytes");
 
@@ -76,8 +75,6 @@ namespace Editor.MasterMemory
 
             var ssGetter = new SpreadSheetGetter(KeyPath, SheetIdMap);
             var builder = new DatabaseBuilder();
-
-             
             
             //Note
             //Table毎に書く必要あり。refrectionではできなかった
@@ -87,7 +84,7 @@ namespace Editor.MasterMemory
             builder.Append(Create<EnemySkillSet>(ssGetter.Get("Enemy", "EnemySkillSet")));
             builder.Append(Create<EnemySkill>(ssGetter.Get("Enemy", "EnemySkill")));
             builder.Append(Create<EnemySkillEffect>(ssGetter.Get("Enemy", "EnemySkillEffect")));
-
+            
             byte[] data = builder.Build();
             
             using var fs = new FileStream(AssetPath, FileMode.Create);

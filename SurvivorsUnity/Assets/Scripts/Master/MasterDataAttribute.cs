@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Master
+namespace Master
 {
     /// <summary>
     /// マスタ属性

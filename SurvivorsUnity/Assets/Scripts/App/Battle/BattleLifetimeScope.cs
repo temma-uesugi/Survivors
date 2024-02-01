@@ -1,8 +1,8 @@
-﻿using App.Battle.Core;
+﻿using Master.Battle.Core;
 using VContainer;
 using VContainer.Unity;
 
-namespace App.Battle
+namespace Master.Battle
 {
     /// <summary>
     /// BattleのDI

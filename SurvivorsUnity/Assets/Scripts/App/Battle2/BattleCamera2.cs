@@ -1,10 +1,10 @@
 using System.Threading;
-using App.AppCommon;
 using App.Battle2.Core;
 using App.Battle2.Map;
 using App.Battle2.Map.Cells;
 using App.Battle2.UI;
 using App.Battle2.Units;
+using Constants;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UniRx;

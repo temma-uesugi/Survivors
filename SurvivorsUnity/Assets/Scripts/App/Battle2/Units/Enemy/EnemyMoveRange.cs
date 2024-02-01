@@ -5,6 +5,7 @@ using App.Battle2.Map;
 using App.Battle2.Map.Cells;
 using App.Battle2.Utils;
 using UniRx;
+using Constants;
 
 namespace App.Battle2.Units.Enemy
 {

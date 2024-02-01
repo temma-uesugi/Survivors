@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.AppCommon;
 using App.Battle2.Common;
 using App.Battle2.Core;
 using App.Battle2.Facades;
@@ -11,6 +10,7 @@ using App.Battle2.Units.Enemy;
 using App.Battle2.Units.Ship;
 using App.Battle2.Utils;
 using App.Battle2.ValueObjects;
+using Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;

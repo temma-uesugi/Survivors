@@ -1,5 +1,3 @@
-using App.Battle.Map;
-using App.Battle.Units;
 using App.Battle2.Core;
 using App.Battle2.Map;
 using App.Battle2.Units.Enemy;

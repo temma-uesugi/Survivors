@@ -6,6 +6,7 @@ using App.Battle2.Libs;
 using UniRx;
 using UnityEngine;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.Units.Enemy
 {

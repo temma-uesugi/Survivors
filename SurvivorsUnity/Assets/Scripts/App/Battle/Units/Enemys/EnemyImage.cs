@@ -1,5 +1,5 @@
 ﻿
-namespace App.Battle.Units
+namespace Master.Battle.Units.Enemys
 {
     /// <summary>
     /// EnemyImage

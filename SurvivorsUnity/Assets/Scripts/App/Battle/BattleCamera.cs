@@ -1,14 +1,16 @@
 ﻿using System.Threading;
 using App.AppCommon.Core;
-using App.Battle.Core;
-using App.Battle.Map;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Master.Battle.Core;
+using Master.Battle.Map;
+using Master.Battle.Map.Cells;
 using UniRx;
 using UnityEngine;
 using VContainer;
-using DG.Tweening;
+using Constants;
 
-namespace App.Battle
+namespace Master.Battle
 {
     /// <summary>
     /// バトルカメラ
@@ -22,7 +24,7 @@ namespace App.Battle
 
         private readonly ReactiveProperty<Vector3> _cameraPosition = new();
         public IReactiveProperty<Vector3> Position => _cameraPosition;
-        
+       
         private MapManager _mapManager;
         private CancellationTokenSource _moveCtx;
       

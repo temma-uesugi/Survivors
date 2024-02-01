@@ -1,5 +1,6 @@
 using System;
 using App.AppCommon;
+using Constants;
 using App.Battle2.Interfaces;
 using App.Battle2.Map.Cells;
 using App.Battle2.ValueObjects;

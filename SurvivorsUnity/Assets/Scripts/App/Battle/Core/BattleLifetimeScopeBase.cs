@@ -1,8 +1,8 @@
-﻿using VContainer.Unity;
-using System.Reflection;
+﻿using System.Reflection;
 using VContainer;
+using VContainer.Unity;
 
-namespace App.Battle.Core
+namespace Master.Battle.Core
 {
     /// <summary>
     /// Battle用LifetimeScopeの拡張

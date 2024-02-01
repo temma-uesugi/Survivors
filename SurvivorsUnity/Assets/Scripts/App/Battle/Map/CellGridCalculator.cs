@@ -1,4 +1,4 @@
-﻿namespace App.Battle.Map
+﻿namespace Master.Battle.Map
 {
     public class CellGridCalculator
     {

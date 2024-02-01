@@ -1,6 +1,7 @@
 using App.AppCommon;
 using UniRx;
 using UnityEngine;
+using Constants;
 
 namespace App.Battle2.Units.Ship
 {

@@ -1,4 +1,4 @@
-namespace App.Battle.Units
+namespace Master.Battle.Units
 {
     /// <summary>
     /// IUnitViewModel

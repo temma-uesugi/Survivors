@@ -2,6 +2,7 @@ using App.AppCommon;
 using App.Battle2.Map.Cells;
 using DG.Tweening;
 using UnityEngine;
+using Constants;
 
 namespace App.Battle2.Units.Ship
 {

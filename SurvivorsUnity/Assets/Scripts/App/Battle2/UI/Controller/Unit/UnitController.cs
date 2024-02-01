@@ -14,6 +14,7 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI.Controller.Unit
 {

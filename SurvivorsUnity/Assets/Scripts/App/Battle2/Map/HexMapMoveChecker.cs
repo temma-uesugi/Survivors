@@ -3,6 +3,7 @@ using App.AppCommon;
 using App.Battle2.Core;
 using App.Battle2.Map.Cells;
 using App.Battle2.Units;
+using Constants;
 using VContainer;
 
 namespace App.Battle2.Map

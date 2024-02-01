@@ -1,6 +1,6 @@
-﻿using App.AppCommon;
+﻿using Constants;
 
-namespace App.Battle.Map
+namespace Master.Battle.Map.Cells
 {
     /// <summary>
     /// 砂漠Cell

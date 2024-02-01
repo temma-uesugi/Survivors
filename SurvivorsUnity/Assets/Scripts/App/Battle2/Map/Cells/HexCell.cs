@@ -1,6 +1,7 @@
 using App.AppCommon;
 using App.Battle2.ValueObjects;
 using UnityEngine;
+using Constants;
 
 namespace App.Battle2.Map.Cells
 {

@@ -1,11 +1,11 @@
-﻿using App.Battle.Map;
-using App.Battle2.ValueObjects;
-using App.Master;
-using App.Master.Tables;
+﻿using App.Battle2.ValueObjects;
+using Master.Battle.Map;
+using Master.Battle.Map.Cells;
+using Master.Tables.Enemy;
 using UniRx;
 using UnityEngine;
 
-namespace App.Battle.Units
+namespace Master.Battle.Units.Enemys
 {
     /// <summary>
     /// 敵UnitModel

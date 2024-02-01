@@ -5,6 +5,7 @@ using App.Battle2.Map.Cells;
 using UniRx;
 using UnityEngine;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI
 {

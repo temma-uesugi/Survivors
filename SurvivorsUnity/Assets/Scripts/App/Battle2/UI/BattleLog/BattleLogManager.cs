@@ -4,6 +4,7 @@ using App.Battle2.Core;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI.BattleLog
 {

@@ -1,4 +1,4 @@
-using App.AppCommon;
+using Constants;
 using App.Battle2.Map.Cells;
 using App.Battle2.ValueObjects;
 using UniRx;

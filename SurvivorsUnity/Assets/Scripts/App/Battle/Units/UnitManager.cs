@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using App.Battle.Core;
-using App.Battle.Map;
 using App.Battle2.Utils;
 using App.Battle2.ValueObjects;
+using Master.Battle.Core;
+using Master.Battle.Map;
+using Master.Battle.Units.Enemys;
+using Master.Battle.Units.Heroes;
 using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace App.Battle.Units
+namespace Master.Battle.Units
 {
     /// <summary>
     /// 敵管理

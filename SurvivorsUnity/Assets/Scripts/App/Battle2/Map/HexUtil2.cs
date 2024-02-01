@@ -5,6 +5,7 @@ using App.Battle2.Map.Cells;
 using App.Battle2.Turn;
 using App.Battle2.ValueObjects;
 using FastEnumUtility;
+using Constants;
 using UnityEngine;
 
 namespace App.Battle2.Map

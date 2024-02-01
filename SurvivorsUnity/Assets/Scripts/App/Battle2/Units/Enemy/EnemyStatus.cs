@@ -1,5 +1,6 @@
 using App.AppCommon;
 using App.Battle2.ValueObjects;
+using Constants;
 
 namespace App.Battle2.Units.Enemy
 {

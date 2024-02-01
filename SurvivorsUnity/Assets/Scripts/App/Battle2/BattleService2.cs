@@ -1,5 +1,5 @@
 using System;
-using App.AppCommon;
+using Constants;
 using App.Battle2.Debug;
 using App.Battle2.Facades;
 using App.Battle2.Map;
@@ -9,9 +9,8 @@ using App.Battle2.UI.BattleLog;
 using App.Battle2.UI.Turn;
 using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
-using App.Master;
 using Cysharp.Threading.Tasks;
-using MessagePack;
+using Master;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -22,7 +21,6 @@ namespace App.Battle2
     /// <summary>
     /// バトルサービス
     /// </summary>
-    [MessagePackObject()]
     public class BattleService2 : IStartable, IDisposable
     {
         private readonly CompositeDisposable _disposable = new();

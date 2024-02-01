@@ -7,11 +7,12 @@ using App.Battle2.Map;
 using App.Battle2.Map.Cells;
 using App.Battle2.Units.Ship;
 using App.Battle2.ValueObjects;
-using App.Master;
-using App.Master.Tables;
 using Cysharp.Threading.Tasks;
+using Master;
+using Master.Tables.Enemy;
 using UniRx;
 using UnityEngine;
+using Constants;
 
 namespace App.Battle2.Units.Enemy
 {
@@ -107,16 +108,16 @@ namespace App.Battle2.Units.Enemy
             _cell = new (createParam2.InitCell);
             _mapManager = mapManager;
 
-            var enemyBase = MasterData.Facade.EnemyBaseTable.FindByEnemyId(createParam2.EnemyId);
-            var enemyStatus = MasterData.Facade.EnemyLevelStatusTable.FindByEnemyIdAndLevel((createParam2.EnemyId, createParam2.Level));
-            _skills = MasterData.Facade.EnemySkillSetTable.FindBySkillSetId(enemyBase.SkillSetId)
-                .Select(x => MasterData.Facade.EnemySkillTable.FindBySkillId(x.SkillId))
-                .ToArray();
-            EnemyBase = enemyBase;
+            // var enemyBase = MasterData.Facade.EnemyBaseTable.FindByEnemyId(createParam2.EnemyId);
+            // var enemyStatus = MasterData.Facade.EnemyLevelStatusTable.FindByEnemyIdAndLevel((createParam2.EnemyId, createParam2.Level));
+            // _skills = MasterData.Facade.EnemySkillSetTable.FindBySkillSetId(enemyBase.SkillSetId)
+            //     .Select(x => MasterData.Facade.EnemySkillTable.FindBySkillId(x.SkillId))
+            //     .ToArray();
+            // EnemyBase = enemyBase;
 
-            ActionInterval = enemyBase.ActionInterval;
-            MovePower = enemyBase.MovePower;
-            Hp = new StatusValue<int>(enemyStatus.Hp);
+            // ActionInterval = enemyBase.ActionInterval;
+            // MovePower = enemyBase.MovePower;
+            // Hp = new StatusValue<int>(enemyStatus.Hp);
             DamageCalculator = new EnemyDamageCalculator(this);
             AttackRange = _skills.Max(x => x.MaxRange);
             _nextActionTurns.Value = ActionInterval - 1;

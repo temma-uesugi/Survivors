@@ -1,7 +1,7 @@
 ﻿using App.MD;
 using UnityEngine;
 
-namespace App.Master
+namespace Master
 {
     /// <summary>
     /// マスターデータFacade
@@ -10,7 +10,7 @@ namespace App.Master
     {
         private static MemoryDatabase _facade;
         public static MemoryDatabase Facade => _facade ??= LoadMasterData();
-
+        
         /// <summary>
         /// MasterDataをLoad
         /// </summary>

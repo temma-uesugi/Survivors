@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI.Turn
 {

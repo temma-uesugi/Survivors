@@ -4,6 +4,7 @@ using App.Battle2.Core;
 using App.Battle2.Units;
 using UniRx;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI.BattleLog
 {

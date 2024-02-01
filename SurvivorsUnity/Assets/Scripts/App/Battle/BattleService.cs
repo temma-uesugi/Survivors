@@ -1,13 +1,12 @@
 ﻿using System;
-using App.AppCommon.Core;
-using App.Battle.Map;
-using App.Battle.Units;
 using App.Battle2.Debug;
-using App.Master;
+using Master.Battle.Map;
+using Master.Battle.Units;
 using VContainer;
 using VContainer.Unity;
+using Constants;
 
-namespace App.Battle
+namespace Master.Battle
 {
     /// <summary>
     /// バトルService

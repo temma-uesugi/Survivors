@@ -2,9 +2,8 @@ using System;
 using System.Linq;
 using App.AppCommon.Core;
 using App.Localization;
-using App.Master;
-using App.Master.Tables;
 using Cysharp.Threading.Tasks;
+using Master;
 using UnityEngine;
 
 namespace App.TestScenes.Localization

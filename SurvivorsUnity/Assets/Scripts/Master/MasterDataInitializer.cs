@@ -3,7 +3,7 @@ using MessagePack;
 using MessagePack.Resolvers;
 using UnityEngine;
 
-namespace App.Master
+namespace Master
 {
     /// <summary>
     /// MasterDataInitializer

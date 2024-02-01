@@ -5,6 +5,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.UI.MovePower
 {

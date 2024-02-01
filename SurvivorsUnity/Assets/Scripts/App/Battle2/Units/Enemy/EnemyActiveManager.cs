@@ -6,10 +6,11 @@ using App.Battle2.Core;
 using App.Battle2.Facades;
 using App.Battle2.Map;
 using App.Battle2.Units.Ship;
-using App.Master;
 using Cysharp.Threading.Tasks;
+using Master;
 using UniRx;
 using VContainer;
+using Constants;
 
 namespace App.Battle2.Units.Enemy
 {
@@ -83,28 +84,29 @@ namespace App.Battle2.Units.Enemy
         /// </summary>
         private void AddEnemy(EnemyUnitModel2 enemyUnitModel2)
         {
-            var enemyMaster = MasterData.Facade.EnemyBaseTable.FindByEnemyId(enemyUnitModel2.EnemyId);
-            var inactiveCondType = enemyMaster.InactiveConditionType;
-            var inactiveCondValue = enemyMaster.InactiveConditionValue;
-            if (inactiveCondType == EnemyInactiveConditionType.Invert)
-            {
-                //逆の場合
-                inactiveCondType = enemyMaster.ActiveConditionType switch
-                {
-                    EnemyActiveConditionType.ProgressTurn => EnemyInactiveConditionType.ProgressTurn,
-                    EnemyActiveConditionType.InRange => EnemyInactiveConditionType.OutRange,
-                    EnemyActiveConditionType.InAttackRange => EnemyInactiveConditionType.OutAttackRange,
-                    _ => EnemyInactiveConditionType.None,
-                };
-                inactiveCondValue = enemyMaster.ActiveConditionValue;
-            }
+            // var enemyMaster = MasterData.Facade.EnemyBaseTable.FindByEnemyId(enemyUnitModel2.EnemyId);
+            // var enemyMaster = null;
+            // var inactiveCondType = enemyMaster.InactiveConditionType;
+            // var inactiveCondValue = enemyMaster.InactiveConditionValue;
+            // if (inactiveCondType == EnemyInactiveConditionType.Invert)
+            // {
+            //     //逆の場合
+            //     inactiveCondType = enemyMaster.ActiveConditionType switch
+            //     {
+            //         EnemyActiveConditionType.ProgressTurn => EnemyInactiveConditionType.ProgressTurn,
+            //         EnemyActiveConditionType.InRange => EnemyInactiveConditionType.OutRange,
+            //         EnemyActiveConditionType.InAttackRange => EnemyInactiveConditionType.OutAttackRange,
+            //         _ => EnemyInactiveConditionType.None,
+            //     };
+            //     inactiveCondValue = enemyMaster.ActiveConditionValue;
+            // }
 
             var activeCondition = new ActiveCondition
             {
-                ActiveCondType = enemyMaster.ActiveConditionType,
-                ActiveCondValue = enemyMaster.ActiveConditionValue,
-                InactiveCondType = inactiveCondType,
-                InactiveCondValue = inactiveCondValue,
+                // ActiveCondType = enemyMaster.ActiveConditionType,
+                // ActiveCondValue = enemyMaster.ActiveConditionValue,
+                // InactiveCondType = inactiveCondType,
+                // InactiveCondValue = inactiveCondValue,
             };
            
             _dic.Add(enemyUnitModel2.UnitId, (enemyUnitModel2, activeCondition));
