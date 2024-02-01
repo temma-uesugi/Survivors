@@ -27,13 +27,13 @@ namespace Master.Tables.Enemy
         public uint SkillSetId { get; set; }
 
         /// <summary> アクティブ化の条件タイプ </summary>
-        public EnemyActiveConditionType ActiveConditionType { get; set; }
+        public Constants.EnemyActiveConditionType ActiveConditionType { get; set; }
 
         /// <summary> アクティブ化の条件値 </summary>
         public int ActiveConditionValue { get; set; }
 
         /// <summary> 非アクティブ化の条件タイプ </summary>
-        public EnemyInactiveConditionType InactiveConditionType { get; set; }
+        public Constants.EnemyInactiveConditionType InactiveConditionType { get; set; }
 
         /// <summary> 非アクティブ化の条件値 </summary>
         public int InactiveConditionValue { get; set; }
@@ -43,6 +43,8 @@ namespace Master.Tables.Enemy
 
         /// <summary> イメージID </summary>
         public string ImageId { get; set; }
+        
+        public int Hoge { get; set; }
 
         public EnemyBase(uint EnemyId, string EnemyName, int ActionInterval, int MovePower, uint SkillSetId, EnemyActiveConditionType ActiveConditionType, int ActiveConditionValue, EnemyInactiveConditionType InactiveConditionType, int InactiveConditionValue, bool IsFlight, string ImageId)
         {

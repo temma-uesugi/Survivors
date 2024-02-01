@@ -16,13 +16,13 @@ namespace Master.Tables.Enemy
         public uint EffectId { get; set; }
 
         /// <summary> 効果Type </summary>
-        public SkillEffectType Type { get; set; }
+        public Constants.SkillEffectType Type { get; set; }
 
         /// <summary> 効果値 </summary>
         public float Value { get; set; }
 
         /// <summary> 効果範囲タイプ </summary>
-        public SkillEffectRangeType RangeType { get; set; }
+        public Constants.SkillEffectRangeType RangeType { get; set; }
 
         /// <summary> 効果範囲値 </summary>
         public int RangeValue { get; set; }
