@@ -1,6 +1,8 @@
 #if UNITY_EDITOR
 
+using System;
 using System.IO;
+using App.AppCommon.Core;
 using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -40,9 +42,28 @@ namespace Editor.MasterMemory
             }
             FileUtil.ClearDirectory(CopyDir);
             FileUtil.CopyDirectory(GeneratedDir, CopyDir, true);
+
+            try
+            {
+                await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                RestoreGenerated();
+                return;
+            }
             
-            await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
-            await ProcessHelper.InvokeAsync("mpc", $"-i {InputDir}", $"-o {MessagePackGeneratedDir}", "-c");
+            try
+            {
+                await ProcessHelper.InvokeAsync("mpc", $"-i {InputDir}", $"-o {MessagePackGeneratedDir}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+                RestoreGenerated();
+                return;
+            }
             Debug.Log("Complete!");
         }
 

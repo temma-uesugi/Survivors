@@ -1,4 +1,3 @@
-using Constants;
 using MasterMemory;
 using MessagePack;
 
@@ -30,7 +29,7 @@ namespace Master.Tables.Enemy
         /// <summary> イメージID </summary>
         public string ImageId { get; set; }
 
-        public EnemySkillEffect(uint EffectId, SkillEffectType Type, float Value, SkillEffectRangeType RangeType, int RangeValue, string ImageId)
+        public EnemySkillEffect(uint EffectId, Constants.SkillEffectType Type, float Value, Constants.SkillEffectRangeType RangeType, int RangeValue, string ImageId)
         {
             this.EffectId = EffectId;
             this.Type = Type;

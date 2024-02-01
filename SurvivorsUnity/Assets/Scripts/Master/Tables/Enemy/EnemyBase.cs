@@ -1,6 +1,5 @@
 using MasterMemory;
 using MessagePack;
-using Constants;
 
 namespace Master.Tables.Enemy
 {
@@ -46,7 +45,7 @@ namespace Master.Tables.Enemy
         
         public int Hoge { get; set; }
 
-        public EnemyBase(uint EnemyId, string EnemyName, int ActionInterval, int MovePower, uint SkillSetId, EnemyActiveConditionType ActiveConditionType, int ActiveConditionValue, EnemyInactiveConditionType InactiveConditionType, int InactiveConditionValue, bool IsFlight, string ImageId)
+        public EnemyBase(uint EnemyId, string EnemyName, int ActionInterval, int MovePower, uint SkillSetId, Constants.EnemyActiveConditionType ActiveConditionType, int ActiveConditionValue, Constants.EnemyInactiveConditionType InactiveConditionType, int InactiveConditionValue, bool IsFlight, string ImageId)
         {
             this.EnemyId = EnemyId;
             this.EnemyName = EnemyName;
