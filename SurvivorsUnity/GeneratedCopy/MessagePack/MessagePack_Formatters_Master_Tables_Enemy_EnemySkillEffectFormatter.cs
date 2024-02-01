@@ -44,11 +44,11 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             writer.WriteRaw(GetSpan_EffectId());
             writer.Write(value.EffectId);
             writer.WriteRaw(GetSpan_Type());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.SkillEffectType>(formatterResolver).Serialize(ref writer, value.Type, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.SkillEffectType>(formatterResolver).Serialize(ref writer, value.Type, options);
             writer.WriteRaw(GetSpan_Value());
             writer.Write(value.Value);
             writer.WriteRaw(GetSpan_RangeType());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.SkillEffectRangeType>(formatterResolver).Serialize(ref writer, value.RangeType, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.SkillEffectRangeType>(formatterResolver).Serialize(ref writer, value.RangeType, options);
             writer.WriteRaw(GetSpan_RangeValue());
             writer.Write(value.RangeValue);
             writer.WriteRaw(GetSpan_ImageId());
@@ -66,9 +66,9 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             var formatterResolver = options.Resolver;
             var length = reader.ReadMapHeader();
             var __EffectId__ = default(uint);
-            var __Type__ = default(Constants.SkillEffectType);
+            var __Type__ = default(global::Master.Constants.SkillEffectType);
             var __Value__ = default(float);
-            var __RangeType__ = default(Constants.SkillEffectRangeType);
+            var __RangeType__ = default(global::Master.Constants.SkillEffectRangeType);
             var __RangeValue__ = default(int);
             var __ImageId__ = default(string);
 
@@ -89,7 +89,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 4:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 1701869908UL) { goto FAIL; }
 
-                        __Type__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.SkillEffectType>(formatterResolver).Deserialize(ref reader, options);
+                        __Type__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.SkillEffectType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 5:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 435761733974UL) { goto FAIL; }
@@ -99,7 +99,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 9:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_RangeType().Slice(1))) { goto FAIL; }
 
-                        __RangeType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.SkillEffectRangeType>(formatterResolver).Deserialize(ref reader, options);
+                        __RangeType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.SkillEffectRangeType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 10:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_RangeValue().Slice(1))) { goto FAIL; }

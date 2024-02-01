@@ -1,8 +1,8 @@
 using App.AppCommon;
 using App.Battle2.Common;
 using App.Battle2.Map;
+using Master.Constants;
 using UnityEngine;
-using Constants;
 
 namespace App.Battle2.Units.Ship
 {

@@ -1,6 +1,6 @@
 using App.AppCommon;
 using App.AppCommon.Core;
-using Constants;
+using Master.Constants;
 
 namespace App.Battle2.Units.Ship
 {

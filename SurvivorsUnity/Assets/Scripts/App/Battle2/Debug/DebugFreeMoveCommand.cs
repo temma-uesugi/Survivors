@@ -1,5 +1,4 @@
 using System;
-using Constants;
 using App.AppCommon;
 using App.Battle2.Core;
 using App.Battle2.Facades;
@@ -7,6 +6,7 @@ using App.Battle2.Map;
 using App.Battle2.Units;
 using App.Battle2.Units.Ship;
 using App.Battle2.ValueObjects;
+using Master.Constants;
 using UnityEngine;
 using VContainer;
 

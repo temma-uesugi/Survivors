@@ -4,8 +4,8 @@ using App.AppCommon;
 using App.Battle2.ValueObjects;
 using Master.Battle.Core;
 using Master.Battle.Map.Cells;
+using Master.Constants;
 using UnityEngine;
-using Constants;
 
 namespace Master.Battle.Map
 {

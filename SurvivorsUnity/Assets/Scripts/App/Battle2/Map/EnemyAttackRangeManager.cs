@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Constants;
 using App.Battle2.Core;
 using App.Battle2.Facades;
 using App.Battle2.Libs;
 using App.Battle2.Map.Cells;
 using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;

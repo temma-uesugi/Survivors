@@ -1,7 +1,7 @@
 using App.AppCommon;
-using Constants;
 using App.Battle2.Units.Ship;
 using FastEnumUtility;
+using Master.Constants;
 using UnityEngine;
 
 namespace App.Battle2.Common

@@ -22,7 +22,6 @@ namespace Editor.MasterMemory
     public static class Generator
     {
         private static readonly string MasterDir = Path.Combine(Application.dataPath, "Scripts", "Master");
-        private static readonly string InputDir = Path.Combine(MasterDir, "Tables");
         private static readonly string GeneratedDir = Path.Combine(MasterDir, "Generated");
         private static readonly string MasterMemoryGeneratedDir = Path.Combine(GeneratedDir, "MasterMemory");
         private static readonly string MessagePackGeneratedDir = Path.Combine(GeneratedDir, "MessagePack");
@@ -45,7 +44,7 @@ namespace Editor.MasterMemory
 
             try
             {
-                await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
+                await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {MasterDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
             }
             catch (Exception e)
             {
@@ -56,7 +55,7 @@ namespace Editor.MasterMemory
             
             try
             {
-                await ProcessHelper.InvokeAsync("mpc", $"-i {InputDir}", $"-o {MessagePackGeneratedDir}");
+                await ProcessHelper.InvokeAsync("mpc", $"-i {MasterDir}", $"-o {MessagePackGeneratedDir}");
             }
             catch (Exception e)
             {

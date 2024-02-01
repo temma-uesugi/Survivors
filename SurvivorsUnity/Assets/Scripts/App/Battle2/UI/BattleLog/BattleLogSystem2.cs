@@ -2,9 +2,9 @@ using System;
 using App.AppCommon;
 using App.Battle2.Core;
 using App.Battle2.Units;
+using Master.Constants;
 using UniRx;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.UI.BattleLog
 {

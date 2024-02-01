@@ -2,9 +2,9 @@
 using App.Battle2.Debug;
 using Master.Battle.Map;
 using Master.Battle.Units;
+using Master.Constants;
 using VContainer;
 using VContainer.Unity;
-using Constants;
 
 namespace Master.Battle
 {

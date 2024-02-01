@@ -1,6 +1,6 @@
 using System;
 
-namespace Constants
+namespace Master.Constants
 {
     /// <summary>
     /// 操作モード

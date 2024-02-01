@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.AppCommon;
-using Constants;
 using App.AppCommon.Utils;
 using App.Battle2.Core;
 using App.Battle2.Map.Cells;
 using App.Battle2.Objects;
 using App.Battle2.Objects.Obstacle;
 using App.Battle2.ValueObjects;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
 

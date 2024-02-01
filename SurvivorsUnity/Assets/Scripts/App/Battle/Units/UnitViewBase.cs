@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using Master.Battle.Map.Cells;
+using Master.Constants;
 using UnityEngine;
-using Constants;
 
 namespace Master.Battle.Units
 {

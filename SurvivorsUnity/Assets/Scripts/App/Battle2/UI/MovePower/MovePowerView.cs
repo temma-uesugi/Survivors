@@ -1,11 +1,11 @@
 using App.AppCommon;
 using App.Battle2.Core;
 using DG.Tweening;
+using Master.Constants;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.UI.MovePower
 {

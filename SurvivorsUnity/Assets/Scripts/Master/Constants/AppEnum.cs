@@ -1,4 +1,4 @@
-namespace Constants
+namespace Master.Constants
 {
     /// <summary>
     /// シーンのタイプ

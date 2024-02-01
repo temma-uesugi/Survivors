@@ -1,5 +1,6 @@
 using MasterMemory;
 using MessagePack;
+using Master.Constants;
 
 namespace Master.Tables.Enemy
 {
@@ -15,13 +16,13 @@ namespace Master.Tables.Enemy
         public uint EffectId { get; set; }
 
         /// <summary> 効果Type </summary>
-        public Constants.SkillEffectType Type { get; set; }
+        public SkillEffectType Type { get; set; }
 
         /// <summary> 効果値 </summary>
         public float Value { get; set; }
 
         /// <summary> 効果範囲タイプ </summary>
-        public Constants.SkillEffectRangeType RangeType { get; set; }
+        public SkillEffectRangeType RangeType { get; set; }
 
         /// <summary> 効果範囲値 </summary>
         public int RangeValue { get; set; }

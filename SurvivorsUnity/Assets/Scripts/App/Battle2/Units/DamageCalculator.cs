@@ -1,4 +1,4 @@
-using Constants;
+using Master.Constants;
 
 namespace App.Battle2.Units
 {

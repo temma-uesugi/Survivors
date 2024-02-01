@@ -4,9 +4,9 @@ using App.Battle2.Common;
 using App.Battle2.Libs;
 using App.Battle2.Turn;
 using Cysharp.Threading.Tasks;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
-using Constants;
 
 namespace App.Battle2.UI.Turn
 {

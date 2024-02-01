@@ -3,10 +3,10 @@ using App.Battle2.Core;
 using App.Battle2.Turn;
 using App.Battle2.Units;
 using Cysharp.Threading.Tasks;
+using Master.Constants;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.UI.Turn
 {

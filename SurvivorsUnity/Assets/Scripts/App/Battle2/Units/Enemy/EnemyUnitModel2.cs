@@ -9,10 +9,10 @@ using App.Battle2.Units.Ship;
 using App.Battle2.ValueObjects;
 using Cysharp.Threading.Tasks;
 using Master;
+using Master.Constants;
 using Master.Tables.Enemy;
 using UniRx;
 using UnityEngine;
-using Constants;
 
 namespace App.Battle2.Units.Enemy
 {

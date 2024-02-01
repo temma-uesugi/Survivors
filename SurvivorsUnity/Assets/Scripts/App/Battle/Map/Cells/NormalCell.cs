@@ -1,4 +1,4 @@
-﻿using Constants;
+﻿using Master.Constants;
 using UnityEngine;
 
 namespace Master.Battle.Map.Cells

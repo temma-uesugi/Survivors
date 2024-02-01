@@ -1,4 +1,3 @@
-using Constants;
 using App.AppCommon.Core;
 using App.Battle2.Core;
 using App.Battle2.Turn;
@@ -6,6 +5,7 @@ using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
 using App.Battle2.Units.Ship;
 using Cysharp.Threading.Tasks;
+using Master.Constants;
 using VContainer;
 
 namespace App.Battle2.Facades

@@ -1,5 +1,5 @@
 using App.AppCommon;
-using Constants;
+using Master.Constants;
 
 namespace App.Battle2.Units.Enemy
 {

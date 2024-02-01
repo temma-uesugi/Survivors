@@ -5,8 +5,8 @@ using App.Battle2.Core;
 using App.Battle2.Map;
 using App.Battle2.ValueObjects;
 using FastEnumUtility;
+using Master.Constants;
 using UniRx;
-using Constants;
 
 namespace App.Battle2.Turn
 {

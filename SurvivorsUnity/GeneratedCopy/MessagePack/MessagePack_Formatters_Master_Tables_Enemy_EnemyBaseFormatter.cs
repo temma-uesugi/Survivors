@@ -64,11 +64,11 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             writer.WriteRaw(GetSpan_SkillSetId());
             writer.Write(value.SkillSetId);
             writer.WriteRaw(GetSpan_ActiveConditionType());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyActiveConditionType>(formatterResolver).Serialize(ref writer, value.ActiveConditionType, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyActiveConditionType>(formatterResolver).Serialize(ref writer, value.ActiveConditionType, options);
             writer.WriteRaw(GetSpan_ActiveConditionValue());
             writer.Write(value.ActiveConditionValue);
             writer.WriteRaw(GetSpan_InactiveConditionType());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyInactiveConditionType>(formatterResolver).Serialize(ref writer, value.InactiveConditionType, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyInactiveConditionType>(formatterResolver).Serialize(ref writer, value.InactiveConditionType, options);
             writer.WriteRaw(GetSpan_InactiveConditionValue());
             writer.Write(value.InactiveConditionValue);
             writer.WriteRaw(GetSpan_IsFlight());
@@ -94,9 +94,9 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             var __ActionInterval__ = default(int);
             var __MovePower__ = default(int);
             var __SkillSetId__ = default(uint);
-            var __ActiveConditionType__ = default(Constants.EnemyActiveConditionType);
+            var __ActiveConditionType__ = default(global::Master.Constants.EnemyActiveConditionType);
             var __ActiveConditionValue__ = default(int);
-            var __InactiveConditionType__ = default(Constants.EnemyInactiveConditionType);
+            var __InactiveConditionType__ = default(global::Master.Constants.EnemyInactiveConditionType);
             var __InactiveConditionValue__ = default(int);
             var __IsFlight__ = default(bool);
             var __ImageId__ = default(string);
@@ -153,7 +153,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 19:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __ActiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyActiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        __ActiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyActiveConditionType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 20:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionValue().Slice(1))) { goto FAIL; }
@@ -163,7 +163,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 21:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __InactiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyInactiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        __InactiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyInactiveConditionType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 22:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionValue().Slice(1))) { goto FAIL; }

@@ -5,9 +5,9 @@ using App.Battle2.Interfaces;
 using App.Battle2.Map;
 using App.Battle2.Map.Cells;
 using App.Battle2.ValueObjects;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
-using Constants;
 
 namespace App.Battle2.Units.Ship
 {

@@ -2,10 +2,10 @@
 using App.Battle2.Core;
 using App.Battle2.Facades;
 using App.Battle2.Map.Cells;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.UI
 {

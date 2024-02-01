@@ -1,6 +1,6 @@
 using App.AppCommon;
 using App.Battle2.Map.Cells;
-using Constants;
+using Master.Constants;
 
 namespace App.Battle2.Units
 {

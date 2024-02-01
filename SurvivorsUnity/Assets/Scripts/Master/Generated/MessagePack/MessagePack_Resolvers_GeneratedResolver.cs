@@ -47,15 +47,19 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(11)
             {
-                { typeof(global::Master.Tables.Enemy.EnemyBase), 0 },
-                { typeof(global::Master.Tables.Enemy.EnemyLevelStatus), 1 },
-                { typeof(global::Master.Tables.Enemy.EnemySkill), 2 },
-                { typeof(global::Master.Tables.Enemy.EnemySkillEffect), 3 },
-                { typeof(global::Master.Tables.Enemy.EnemySkillSet), 4 },
-                { typeof(global::Master.Tables.Hero.HeroFormation), 5 },
-                { typeof(global::Master.Tables.Hero.HeroFormationFrame), 6 },
+                { typeof(global::Master.Constants.EnemyActiveConditionType), 0 },
+                { typeof(global::Master.Constants.EnemyInactiveConditionType), 1 },
+                { typeof(global::Master.Constants.SkillEffectRangeType), 2 },
+                { typeof(global::Master.Constants.SkillEffectType), 3 },
+                { typeof(global::Master.Tables.Enemy.EnemyBase), 4 },
+                { typeof(global::Master.Tables.Enemy.EnemyLevelStatus), 5 },
+                { typeof(global::Master.Tables.Enemy.EnemySkill), 6 },
+                { typeof(global::Master.Tables.Enemy.EnemySkillEffect), 7 },
+                { typeof(global::Master.Tables.Enemy.EnemySkillSet), 8 },
+                { typeof(global::Master.Tables.Hero.HeroFormation), 9 },
+                { typeof(global::Master.Tables.Hero.HeroFormationFrame), 10 },
             };
         }
 
@@ -69,13 +73,17 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.Master.Tables.Enemy.EnemyBaseFormatter();
-                case 1: return new MessagePack.Formatters.Master.Tables.Enemy.EnemyLevelStatusFormatter();
-                case 2: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillFormatter();
-                case 3: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillEffectFormatter();
-                case 4: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillSetFormatter();
-                case 5: return new MessagePack.Formatters.Master.Tables.Hero.HeroFormationFormatter();
-                case 6: return new MessagePack.Formatters.Master.Tables.Hero.HeroFormationFrameFormatter();
+                case 0: return new MessagePack.Formatters.Master.Constants.EnemyActiveConditionTypeFormatter();
+                case 1: return new MessagePack.Formatters.Master.Constants.EnemyInactiveConditionTypeFormatter();
+                case 2: return new MessagePack.Formatters.Master.Constants.SkillEffectRangeTypeFormatter();
+                case 3: return new MessagePack.Formatters.Master.Constants.SkillEffectTypeFormatter();
+                case 4: return new MessagePack.Formatters.Master.Tables.Enemy.EnemyBaseFormatter();
+                case 5: return new MessagePack.Formatters.Master.Tables.Enemy.EnemyLevelStatusFormatter();
+                case 6: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillFormatter();
+                case 7: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillEffectFormatter();
+                case 8: return new MessagePack.Formatters.Master.Tables.Enemy.EnemySkillSetFormatter();
+                case 9: return new MessagePack.Formatters.Master.Tables.Hero.HeroFormationFormatter();
+                case 10: return new MessagePack.Formatters.Master.Tables.Hero.HeroFormationFrameFormatter();
                 default: return null;
             }
         }

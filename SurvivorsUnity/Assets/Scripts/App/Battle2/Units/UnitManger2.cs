@@ -10,7 +10,7 @@ using App.Battle2.Units.Enemy;
 using App.Battle2.Units.Ship;
 using App.Battle2.Utils;
 using App.Battle2.ValueObjects;
-using Constants;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;

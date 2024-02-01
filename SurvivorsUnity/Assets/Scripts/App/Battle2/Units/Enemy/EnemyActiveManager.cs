@@ -8,9 +8,9 @@ using App.Battle2.Map;
 using App.Battle2.Units.Ship;
 using Cysharp.Threading.Tasks;
 using Master;
+using Master.Constants;
 using UniRx;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.Units.Enemy
 {

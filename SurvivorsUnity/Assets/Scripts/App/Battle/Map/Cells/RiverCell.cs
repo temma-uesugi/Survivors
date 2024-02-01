@@ -1,4 +1,4 @@
-﻿using Constants;
+﻿using Master.Constants;
 
 namespace Master.Battle.Map.Cells
 {

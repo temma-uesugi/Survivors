@@ -7,9 +7,9 @@ using App.Battle2.Facades;
 using App.Battle2.Map;
 using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
-using Constants;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Master.Constants;
 using UniRx;
 using VContainer;
 

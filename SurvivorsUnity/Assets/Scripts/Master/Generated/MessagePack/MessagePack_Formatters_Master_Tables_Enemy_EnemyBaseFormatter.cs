@@ -40,8 +40,6 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
         private static global::System.ReadOnlySpan<byte> GetSpan_IsFlight() => new byte[1 + 8] { 168, 73, 115, 70, 108, 105, 103, 104, 116 };
         // ImageId
         private static global::System.ReadOnlySpan<byte> GetSpan_ImageId() => new byte[1 + 7] { 167, 73, 109, 97, 103, 101, 73, 100 };
-        // Hoge
-        private static global::System.ReadOnlySpan<byte> GetSpan_Hoge() => new byte[1 + 4] { 164, 72, 111, 103, 101 };
 
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemyBase value, global::MessagePack.MessagePackSerializerOptions options)
         {
@@ -52,7 +50,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(12);
+            writer.WriteMapHeader(11);
             writer.WriteRaw(GetSpan_EnemyId());
             writer.Write(value.EnemyId);
             writer.WriteRaw(GetSpan_EnemyName());
@@ -64,19 +62,17 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             writer.WriteRaw(GetSpan_SkillSetId());
             writer.Write(value.SkillSetId);
             writer.WriteRaw(GetSpan_ActiveConditionType());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyActiveConditionType>(formatterResolver).Serialize(ref writer, value.ActiveConditionType, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyActiveConditionType>(formatterResolver).Serialize(ref writer, value.ActiveConditionType, options);
             writer.WriteRaw(GetSpan_ActiveConditionValue());
             writer.Write(value.ActiveConditionValue);
             writer.WriteRaw(GetSpan_InactiveConditionType());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyInactiveConditionType>(formatterResolver).Serialize(ref writer, value.InactiveConditionType, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyInactiveConditionType>(formatterResolver).Serialize(ref writer, value.InactiveConditionType, options);
             writer.WriteRaw(GetSpan_InactiveConditionValue());
             writer.Write(value.InactiveConditionValue);
             writer.WriteRaw(GetSpan_IsFlight());
             writer.Write(value.IsFlight);
             writer.WriteRaw(GetSpan_ImageId());
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.ImageId, options);
-            writer.WriteRaw(GetSpan_Hoge());
-            writer.Write(value.Hoge);
         }
 
         public global::Master.Tables.Enemy.EnemyBase Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -94,14 +90,12 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             var __ActionInterval__ = default(int);
             var __MovePower__ = default(int);
             var __SkillSetId__ = default(uint);
-            var __ActiveConditionType__ = default(Constants.EnemyActiveConditionType);
+            var __ActiveConditionType__ = default(global::Master.Constants.EnemyActiveConditionType);
             var __ActiveConditionValue__ = default(int);
-            var __InactiveConditionType__ = default(Constants.EnemyInactiveConditionType);
+            var __InactiveConditionType__ = default(global::Master.Constants.EnemyInactiveConditionType);
             var __InactiveConditionValue__ = default(int);
             var __IsFlight__ = default(bool);
             var __ImageId__ = default(string);
-            var __Hoge__IsInitialized = false;
-            var __Hoge__ = default(int);
 
             for (int i = 0; i < length; i++)
             {
@@ -153,7 +147,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 19:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __ActiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyActiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        __ActiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyActiveConditionType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 20:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_ActiveConditionValue().Slice(1))) { goto FAIL; }
@@ -163,7 +157,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                     case 21:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionType().Slice(1))) { goto FAIL; }
 
-                        __InactiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<Constants.EnemyInactiveConditionType>(formatterResolver).Deserialize(ref reader, options);
+                        __InactiveConditionType__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Master.Constants.EnemyInactiveConditionType>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 22:
                         if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_InactiveConditionValue().Slice(1))) { goto FAIL; }
@@ -175,22 +169,11 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
 
                         __IsFlight__ = reader.ReadBoolean();
                         continue;
-                    case 4:
-                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 1701277512UL) { goto FAIL; }
-
-                        __Hoge__IsInitialized = true;
-                        __Hoge__ = reader.ReadInt32();
-                        continue;
 
                 }
             }
 
             var ____result = new global::Master.Tables.Enemy.EnemyBase(__EnemyId__, __EnemyName__, __ActionInterval__, __MovePower__, __SkillSetId__, __ActiveConditionType__, __ActiveConditionValue__, __InactiveConditionType__, __InactiveConditionValue__, __IsFlight__, __ImageId__);
-            if (__Hoge__IsInitialized)
-            {
-                ____result.Hoge = __Hoge__;
-            }
-
             reader.Depth--;
             return ____result;
         }

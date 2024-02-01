@@ -1,8 +1,7 @@
-using System;
 using System.IO;
 using UnityEngine;
 
-namespace Constants
+namespace Master.Constants
 {
     /// <summary>
     /// ゲーム内定数

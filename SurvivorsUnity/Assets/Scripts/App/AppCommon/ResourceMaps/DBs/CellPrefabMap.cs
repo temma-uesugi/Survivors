@@ -1,5 +1,5 @@
-﻿using Constants;
-using Master.Battle.Map.Cells;
+﻿using Master.Battle.Map.Cells;
+using Master.Constants;
 using UnityEngine;
 
 namespace App.AppCommon

@@ -1,5 +1,5 @@
-using Constants;
 using App.Battle2.Turn;
+using Master.Constants;
 
 namespace App.Battle2.ValueObjects
 {

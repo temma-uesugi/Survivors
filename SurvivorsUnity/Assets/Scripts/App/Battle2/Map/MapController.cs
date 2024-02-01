@@ -10,10 +10,10 @@ using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
 using App.Battle2.Units.Ship;
 using Cysharp.Threading.Tasks;
+using Master.Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;
-using Constants;
 
 namespace App.Battle2.Map
 {

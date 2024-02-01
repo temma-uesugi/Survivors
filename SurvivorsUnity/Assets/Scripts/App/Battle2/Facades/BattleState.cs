@@ -1,9 +1,9 @@
 using System;
-using Constants;
 using App.Battle2.Map.Cells;
 using App.Battle2.Units;
 using App.Battle2.Units.Ship;
 using App.Battle2.ValueObjects;
+using Master.Constants;
 using UniRx;
 
 namespace App.Battle2.Facades

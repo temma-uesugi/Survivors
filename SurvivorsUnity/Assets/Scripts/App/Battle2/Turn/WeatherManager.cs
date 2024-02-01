@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using App.AppCommon;
 using App.Battle2.Core;
 using App.Battle2.ValueObjects;
-using Constants;
+using Master.Constants;
 using UniRx;
 
 namespace App.Battle2.Turn

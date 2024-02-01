@@ -1,5 +1,4 @@
 using System.Linq;
-using Constants;
 using App.Battle2.Core;
 using App.Battle2.Interfaces;
 using App.Battle2.Map;
@@ -8,6 +7,7 @@ using App.Battle2.Units;
 using App.Battle2.Units.Enemy;
 using App.Battle2.Units.Ship;
 using Cysharp.Threading.Tasks;
+using Master.Constants;
 using VContainer;
 
 namespace App.Battle2.Facades
