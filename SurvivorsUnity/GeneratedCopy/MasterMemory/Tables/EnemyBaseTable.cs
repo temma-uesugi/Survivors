@@ -99,7 +99,6 @@ namespace App.MD.Tables
                     new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("InactiveConditionValue")),
                     new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("IsFlight")),
                     new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("ImageId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("Hoge")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
