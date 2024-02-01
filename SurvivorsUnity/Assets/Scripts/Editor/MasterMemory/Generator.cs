@@ -65,6 +65,7 @@ namespace Editor.MasterMemory
         {
             FileUtil.ClearDirectory(GeneratedDir);
             FileUtil.CopyDirectory(CopyDir, GeneratedDir, true);
+            Debug.Log("Complete!");
         }
     }
 }
