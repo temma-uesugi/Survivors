@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEditor;
@@ -22,6 +24,8 @@ namespace Editor.MasterMemory
         private static readonly string GeneratedDir = Path.Combine(MasterDir, "Generated");
         private static readonly string MasterMemoryGeneratedDir = Path.Combine(GeneratedDir, "MasterMemory");
         private static readonly string MessagePackGeneratedDir = Path.Combine(GeneratedDir, "MessagePack");
+
+        private static readonly string CopyDir = Path.Combine(Application.dataPath, "../", "GeneratedCopy");
         
         /// <summary>
         /// ビルド
@@ -29,6 +33,13 @@ namespace Editor.MasterMemory
         [MenuItem("Survivors/MasterMemory/Generate", priority = 1001)]
         private static async UniTask BuildAsync()
         {
+            //先に現状のものをコピーしておく
+            if (!Directory.Exists(CopyDir))
+            {
+                Directory.CreateDirectory(CopyDir);
+            }
+            FileUtil.CopyDirectory(GeneratedDir, CopyDir, true);
+            
             await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD");
             await ProcessHelper.InvokeAsync("mpc", $"-i {InputDir}", $"-o {MessagePackGeneratedDir}");
             // await ProcessHelper.InvokeAsync("dotnet-mmgen", $"-i {InputDir}", $"-o {MasterMemoryGeneratedDir}", "-n App.MD", "-c Constatns");
@@ -45,5 +56,17 @@ namespace Editor.MasterMemory
             DataCreator.Create();
             Debug.Log("Complete!");
         }
+        
+        /// <summary>
+        /// 生成済みを戻す
+        /// </summary>
+        [MenuItem("Survivors/MasterMemory/RestoreGenerated", priority = 1009)]
+        private static void RestoreGenerated()
+        {
+            FileUtil.ClearDirectory(GeneratedDir);
+            FileUtil.CopyDirectory(CopyDir, GeneratedDir, true);
+        }
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Google.Apis.Auth.OAuth2;
@@ -74,3 +76,5 @@ namespace Editor.MasterMemory
         }
     }
 }
+
+#endif
