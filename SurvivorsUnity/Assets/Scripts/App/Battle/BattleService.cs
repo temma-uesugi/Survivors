@@ -52,6 +52,8 @@ namespace Master.Battle
 
             var a = MasterData.Facade.EnemyBaseTable.FindByEnemyId(1);
             Log.Debug(a);
+            var b = MasterData.Facade.HeroFormationTable.FindByFormationId(1);
+            Log.Debug(b);
             
             //敵をランダム作成
             foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)

@@ -6,7 +6,7 @@ namespace Master.Tables.Enemy
     /// <summary>
     /// 敵ステータス
     /// </summary>
-    [MemoryTable("EnemyStatus"), MessagePackObject(true), MasterData("Enemy")]
+    [MemoryTable("EnemyStatus"), MessagePackObject(true)]
     public class EnemyLevelStatus
     {
         /// <summary> 敵ID </summary>

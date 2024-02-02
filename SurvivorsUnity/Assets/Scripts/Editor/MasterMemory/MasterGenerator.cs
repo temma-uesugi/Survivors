@@ -19,7 +19,7 @@ namespace Editor.MasterMemory
     /// <summary>
     /// MasterMemoryの生成
     /// </summary>
-    public static class Generator
+    public static class MasterGenerator
     {
         private static readonly string MasterDir = Path.Combine(Application.dataPath, "Scripts", "Master");
         private static readonly string GeneratedDir = Path.Combine(MasterDir, "Generated");
@@ -72,7 +72,7 @@ namespace Editor.MasterMemory
         [MenuItem("Survivors/MasterMemory/CreateData", priority = 1002)]
         private static void CreateData()
         {
-            DataCreator.Create();
+            new MasterDataCreator().Create();
             Debug.Log("Complete!");
         }
         
