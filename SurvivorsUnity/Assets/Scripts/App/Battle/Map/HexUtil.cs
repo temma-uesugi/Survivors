@@ -6,7 +6,7 @@ using FastEnumUtility;
 using Master.Constants;
 using UnityEngine;
 
-namespace Master.Battle.Map
+namespace App.Battle.Map
 {
     /// <summary>
     /// HexUtil

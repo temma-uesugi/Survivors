@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Master.Battle.Units.Heroes
+namespace App.Battle.Units
 {
     /// <summary>
     /// 美香UnitViewModel

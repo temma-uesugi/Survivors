@@ -1,6 +1,6 @@
 ﻿using Master.Constants;
 
-namespace Master.Battle.Map.Cells
+namespace App.Battle.Map
 {
     /// <summary>
     /// 侵入不可Cell

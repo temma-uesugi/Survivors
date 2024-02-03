@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using App.AppCommon;
 using App.AppCommon.Core;
 using App.AppCommon.UI;
+using App.AppCommon.UI.Menu;
 using App.Battle2.Core;
 using App.Battle2.Facades;
 using App.Battle2.Map;

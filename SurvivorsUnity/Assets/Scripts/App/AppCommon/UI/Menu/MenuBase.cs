@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using App.AppCommon.Core;
 using App.Inputs;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.AppCommon.UI
+namespace App.AppCommon.UI.Menu
 {
     /// <summary>
     /// Menu

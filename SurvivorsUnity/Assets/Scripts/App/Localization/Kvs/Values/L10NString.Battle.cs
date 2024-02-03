@@ -1,8 +1,10 @@
 
 //generated file
-using System.Collections.Generic;
 
-namespace App.Localization
+using System.Collections.Generic;
+using App.Localization.Kvs.Keys;
+
+namespace App.Localization.Kvs.Values
 {
     public partial class L10NString
     {

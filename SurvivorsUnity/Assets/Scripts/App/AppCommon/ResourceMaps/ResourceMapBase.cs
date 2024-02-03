@@ -1,9 +1,9 @@
 using System;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace App.AppCommon
+namespace App.AppCommon.ResourceMaps
 {
     /// <summary>
     /// EnumとImageの対応

@@ -1,7 +1,7 @@
 ﻿using App.AppCommon.Core;
 using UnityEngine;
 
-namespace Master.Battle.Units
+namespace App.Battle.Units
 {
     /// <summary>
     /// UnitImage

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Localization
+namespace App.Localization.Kvs
 {
     /// <summary>
     /// ローカライゼーションの属性

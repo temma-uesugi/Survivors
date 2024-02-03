@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace Master.Battle.Core
+namespace App.Battle.Core
 {
     /// <summary>
     /// イベント管理 (非同期PubSub).

@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace App.Externals
+namespace App.Externals.SerializableDictionary
 {
 #if UNITY_EDITOR
 	[CustomPropertyDrawer(typeof(SerializableDictionary<,>))]

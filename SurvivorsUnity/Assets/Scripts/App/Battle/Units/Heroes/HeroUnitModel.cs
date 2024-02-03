@@ -1,10 +1,9 @@
-﻿using App.Battle2.ValueObjects;
-using Master.Battle.Map;
-using Master.Battle.Map.Cells;
+﻿using App.Battle.Map;
+using App.Battle2.ValueObjects;
 using UniRx;
 using UnityEngine;
 
-namespace Master.Battle.Units.Heroes
+namespace App.Battle.Units
 {
     /// <summary>
     /// 味方UnitModel
@@ -19,6 +18,7 @@ namespace Master.Battle.Units.Heroes
         public string Label { get; }
         private readonly MapManager _mapManager;
         public string ImageId => "Hero1";
+        public int FormationId { get; }
         
         //位置
         private readonly ReactiveProperty<HexCell> _cell;
@@ -39,6 +39,7 @@ namespace Master.Battle.Units.Heroes
             UnitId = createParam.HeroUnitId;
             Label = createParam.Label;
             _cell = new (createParam.InitCell);
+            FormationId = createParam.FormationIndex;
             _mapManager = mapManager;
             
             //

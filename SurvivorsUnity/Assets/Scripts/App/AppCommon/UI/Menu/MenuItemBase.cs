@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
-namespace App.AppCommon.UI
+namespace App.AppCommon.UI.Menu
 {
     /// <summary>
     /// Menuアイテム

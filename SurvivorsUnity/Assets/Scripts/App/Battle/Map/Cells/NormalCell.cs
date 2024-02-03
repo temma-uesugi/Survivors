@@ -1,7 +1,7 @@
 ﻿using Master.Constants;
 using UnityEngine;
 
-namespace Master.Battle.Map.Cells
+namespace App.Battle.Map
 {
     /// <summary>
     /// 通常Cell

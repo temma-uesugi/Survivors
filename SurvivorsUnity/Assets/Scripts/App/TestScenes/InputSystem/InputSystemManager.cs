@@ -1,12 +1,10 @@
 using System;
 using App.ActionInputs;
-using App.AppCommon.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-namespace App.Test.Scenes
+namespace App.TestScenes.InputSystem
 {
     /// <summary>
     /// InputSystemManager

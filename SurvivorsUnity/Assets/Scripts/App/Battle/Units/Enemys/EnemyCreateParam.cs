@@ -1,6 +1,6 @@
-﻿using Master.Battle.Map.Cells;
+﻿using App.Battle.Map;
 
-namespace Master.Battle.Units.Enemys
+namespace App.Battle.Units
 {
     /// <summary>
     /// 敵作成パラメータ

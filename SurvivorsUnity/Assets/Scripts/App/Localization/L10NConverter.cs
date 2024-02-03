@@ -4,6 +4,9 @@ using System.Linq;
 using System.Reflection;
 using App.AppCommon.Core;
 using App.AppCommon.Libs;
+using App.Localization.Kvs;
+using App.Localization.Kvs.Keys;
+using App.Localization.Kvs.Values;
 
 namespace App.Localization
 {

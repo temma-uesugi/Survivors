@@ -2,7 +2,7 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace Master.Battle.Core
+namespace App.Battle.Core
 {
     /// <summary>
     /// Battle用LifetimeScopeの拡張

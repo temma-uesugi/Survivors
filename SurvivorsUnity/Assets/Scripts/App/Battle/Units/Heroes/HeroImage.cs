@@ -1,4 +1,4 @@
-﻿namespace Master.Battle.Units.Heroes
+﻿namespace App.Battle.Units
 {
     public class HeroImage : UnitImageBase
     {

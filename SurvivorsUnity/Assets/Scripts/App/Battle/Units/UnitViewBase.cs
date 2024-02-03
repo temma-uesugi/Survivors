@@ -1,9 +1,9 @@
-﻿using DG.Tweening;
-using Master.Battle.Map.Cells;
+﻿using App.Battle.Map;
+using DG.Tweening;
 using Master.Constants;
 using UnityEngine;
 
-namespace Master.Battle.Units
+namespace App.Battle.Units
 {
     /// <summary>
     /// UnitViewの基本

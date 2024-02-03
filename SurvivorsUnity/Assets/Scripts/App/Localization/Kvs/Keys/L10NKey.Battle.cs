@@ -1,7 +1,7 @@
 
 //generated file
 
-namespace App.Localization
+namespace App.Localization.Kvs.Keys
 {
     public partial class L10NKey
     {

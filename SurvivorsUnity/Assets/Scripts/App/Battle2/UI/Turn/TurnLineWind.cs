@@ -1,4 +1,5 @@
 using App.AppCommon;
+using App.AppCommon.ResourceMaps;
 using App.Battle2.ValueObjects;
 using UnityEngine;
 

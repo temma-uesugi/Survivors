@@ -4,7 +4,7 @@ using App.AppCommon.Core;
 using VContainer;
 using VContainer.Unity;
 
-namespace Master.Battle.Core
+namespace App.Battle.Core
 {
     /// <summary>
     /// ContainerRegisterMonoBehaviourAttributeが設定されたシーン内のObjectをDIContainerのインスタンスとして登録するためのもの

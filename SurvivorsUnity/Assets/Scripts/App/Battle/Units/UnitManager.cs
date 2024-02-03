@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using App.Battle.Core;
+using App.Battle.Map;
 using App.Battle2.Utils;
 using App.Battle2.ValueObjects;
-using Master.Battle.Core;
-using Master.Battle.Map;
-using Master.Battle.Units.Enemys;
-using Master.Battle.Units.Heroes;
 using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace Master.Battle.Units
+namespace App.Battle.Units
 {
     /// <summary>
     /// 敵管理
@@ -61,9 +59,10 @@ namespace Master.Battle.Units
         {
             var unitId = UnitUtil.GetUnitId();
             var label = UnitUtil.GetShipLabel();
-            var index = UnitUtil.GetShipIndex();
+            //TODO
+            var formationId = UnitUtil.GetShipIndex();
             var initCell = _mapManager.GetCellByGrid(initGrid);
-            var createParam = new HeroCreateParam(unitId, index, initCell, label);
+            var createParam = new HeroCreateParam(unitId, formationId, initCell, label);
             var heroModel = _factory.CreateHero(createParam);
             var hero = Instantiate(heroPrefab, heroLayer);
             hero.Setup(heroModel);

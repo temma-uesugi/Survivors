@@ -1,6 +1,7 @@
+using App.AppCommon.ResourceMaps.DBs;
 using UnityEngine;
 
-namespace App.AppCommon
+namespace App.AppCommon.ResourceMaps
 {
     /// <summary>
     /// リソースMap

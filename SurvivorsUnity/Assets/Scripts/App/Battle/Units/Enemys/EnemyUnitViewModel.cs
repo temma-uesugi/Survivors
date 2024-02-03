@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Master.Battle.Units.Enemys
+namespace App.Battle.Units
 {
     /// <summary>
     /// 敵UnitViewModel

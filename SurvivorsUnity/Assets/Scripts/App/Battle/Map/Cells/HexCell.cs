@@ -2,7 +2,7 @@ using App.Battle2.ValueObjects;
 using Master.Constants;
 using UnityEngine;
 
-namespace Master.Battle.Map.Cells
+namespace App.Battle.Map
 {
     /// <summary>
     /// Hexセル

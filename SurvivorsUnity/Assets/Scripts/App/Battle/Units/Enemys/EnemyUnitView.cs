@@ -1,4 +1,4 @@
-﻿namespace Master.Battle.Units.Enemys
+﻿namespace App.Battle.Units
 {
     /// <summary>
     /// 敵UnitView

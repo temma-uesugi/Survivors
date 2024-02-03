@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using App.AppCommon;
+using App.AppCommon.ResourceMaps;
+using App.Battle.Core;
 using App.Battle2.ValueObjects;
-using Master.Battle.Core;
-using Master.Battle.Map.Cells;
 using Master.Constants;
 using UnityEngine;
 
-namespace Master.Battle.Map
+namespace App.Battle.Map
 {
     /// <summary>
     /// Map管理

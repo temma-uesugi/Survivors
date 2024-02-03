@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using VContainer;
 
-namespace Master.Battle.Core
+namespace App.Battle.Core
 {
    
     [ContainerRegister(typeof(BattleEventHub))]

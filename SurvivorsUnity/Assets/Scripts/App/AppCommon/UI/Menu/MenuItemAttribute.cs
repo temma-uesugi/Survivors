@@ -1,6 +1,6 @@
 using System;
 
-namespace App.AppCommon.UI
+namespace App.AppCommon.UI.Menu
 {
     /// <summary>
     /// MenuItemとして登録しない

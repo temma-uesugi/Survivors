@@ -1,16 +1,15 @@
 ﻿using System.Threading;
 using App.AppCommon.Core;
+using App.Battle.Core;
+using App.Battle.Map;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Master.Battle.Core;
-using Master.Battle.Map;
-using Master.Battle.Map.Cells;
 using Master.Constants;
 using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace Master.Battle
+namespace App.Battle
 {
     /// <summary>
     /// バトルカメラ

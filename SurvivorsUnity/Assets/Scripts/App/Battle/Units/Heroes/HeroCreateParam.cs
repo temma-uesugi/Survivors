@@ -1,6 +1,6 @@
-﻿using Master.Battle.Map.Cells;
+﻿using App.Battle.Map;
 
-namespace Master.Battle.Units.Heroes
+namespace App.Battle.Units
 {
-    public record HeroCreateParam(uint HeroUnitId, int Index, HexCell InitCell, string Label);
+    public record HeroCreateParam(uint HeroUnitId, int FormationIndex, HexCell InitCell, string Label);
 }

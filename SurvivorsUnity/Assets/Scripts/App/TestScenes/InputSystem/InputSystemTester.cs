@@ -3,7 +3,7 @@ using App.AppCommon.Core;
 using UniRx;
 using UnityEngine;
 
-namespace App.Test.Scenes
+namespace App.TestScenes.InputSystem
 {
     /// <summary>
     /// InputSystemTester

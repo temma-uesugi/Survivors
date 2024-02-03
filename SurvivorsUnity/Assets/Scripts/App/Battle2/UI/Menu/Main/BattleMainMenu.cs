@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using App.AppCommon.UI;
+using App.AppCommon.UI.Menu;
 using App.Battle2.Inputs;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,13 +1,13 @@
 ﻿using System;
-using App.AppCommon.Core;
+using App.Battle.Map;
+using App.Battle.Units;
 using App.Battle2.Debug;
-using Master.Battle.Map;
-using Master.Battle.Units;
+using Master;
 using Master.Constants;
 using VContainer;
 using VContainer.Unity;
 
-namespace Master.Battle
+namespace App.Battle
 {
     /// <summary>
     /// バトルService
@@ -49,11 +49,6 @@ namespace Master.Battle
             {
                 _unitManager.CreateHero(shipParam.grid);
             }
-
-            var a = MasterData.Facade.EnemyBaseTable.FindByEnemyId(1);
-            Log.Debug(a);
-            var b = MasterData.Facade.HeroFormationTable.FindByFormationId(1);
-            Log.Debug(b);
             
             //敵をランダム作成
             foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)
