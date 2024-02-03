@@ -1,4 +1,6 @@
 ﻿using System;
+using App.AppCommon.Extensions;
+using App.Battle.Formations;
 using App.Battle.Map;
 using App.Battle.Units;
 using App.Battle2.Debug;
@@ -49,6 +51,8 @@ namespace App.Battle
             {
                 _unitManager.CreateHero(shipParam.grid);
             }
+            //TODO
+            var formation = MasterData.Facade.HeroFormationTable.All.RandomFirst();
             
             //敵をランダム作成
             foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)

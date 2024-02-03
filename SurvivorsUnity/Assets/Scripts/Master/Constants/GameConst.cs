@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -36,6 +37,9 @@ namespace Master.Constants
 
         public const int MapWidth = 40;
         public const int MapHeight = 25;
+
+        public static readonly int InitX = 5;
+        public static readonly int InitY = (int)Math.Ceiling(MapHeight / 2f);
         
         //最大カメラサイズ
         // public const float BattleCameraSizeLimit = 10;
