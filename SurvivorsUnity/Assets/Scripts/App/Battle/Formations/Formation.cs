@@ -3,6 +3,7 @@ using App.Battle.Core;
 using App.Battle.Map;
 using App.Battle.Units;
 using App.Battle2.ValueObjects;
+using Master;
 using Master.Constants;
 using UnityEngine;
 
@@ -18,7 +19,9 @@ namespace App.Battle.Formations
 
         public GridValue BaseGrid { get; private set; }
         private readonly Dictionary<int, HeroUnitModel> _heroMap = new();
-
+        private FormationHelper _helper;
+         
+        
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -27,6 +30,7 @@ namespace App.Battle.Formations
         )
         {
             _mapManager = mapManager;
+            _helper = new FormationHelper(_mapManager);
         }
 
         /// <summary>
@@ -43,6 +47,15 @@ namespace App.Battle.Formations
         public void AddHero(int index, HeroUnitModel heroModel)
         {
             _heroMap.Add(index, heroModel); 
+        }
+
+        /// <summary>
+        /// 陣形更新
+        /// </summary>
+        public void UpdateFormation(uint formationId)
+        {
+            var formation = MasterData.Facade.HeroFormationTable.FindByFormationId(formationId);
+            
         }
     }
 }
