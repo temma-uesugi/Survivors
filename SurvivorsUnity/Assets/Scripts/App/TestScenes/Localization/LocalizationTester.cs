@@ -20,7 +20,7 @@ namespace App.TestScenes.Localization
         /// </summary>
         private void Awake()
         {
-            var a = MasterData.Facade.EnemySkillTable.All;
+            var a = MasterData.Facade.EnemySkillEntityTable.All;
             Log.Debug("hoge", a.First.Effect1);
           
             UniTask.Void(async () =>

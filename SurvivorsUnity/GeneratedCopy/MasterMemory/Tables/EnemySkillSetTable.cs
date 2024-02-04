@@ -9,15 +9,15 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class EnemySkillSetTable : TableBase<EnemySkillSet>, ITableUniqueValidate
+   public sealed partial class EnemySkillSetTable : TableBase<EnemySkillSetEntity>, ITableUniqueValidate
    {
-        public Func<EnemySkillSet, (uint SkillSetId, uint SkillId)> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<EnemySkillSet, (uint SkillSetId, uint SkillId)> primaryIndexSelector;
+        public Func<EnemySkillSetEntity, (uint SkillSetId, uint SkillId)> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<EnemySkillSetEntity, (uint SkillSetId, uint SkillId)> primaryIndexSelector;
 
-        readonly EnemySkillSet[] secondaryIndex0;
-        readonly Func<EnemySkillSet, uint> secondaryIndex0Selector;
+        readonly EnemySkillSetEntity[] secondaryIndex0;
+        readonly Func<EnemySkillSetEntity, uint> secondaryIndex0Selector;
 
-        public EnemySkillSetTable(EnemySkillSet[] sortedData)
+        public EnemySkillSetTable(EnemySkillSetEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => (x.SkillSetId, x.SkillId);
@@ -28,39 +28,39 @@ namespace App.MD.Tables
 
         partial void OnAfterConstruct();
 
-        public RangeView<EnemySkillSet> SortBySkillSetId => new RangeView<EnemySkillSet>(secondaryIndex0, 0, secondaryIndex0.Length - 1, true);
+        public RangeView<EnemySkillSetEntity> SortBySkillSetId => new RangeView<EnemySkillSetEntity>(secondaryIndex0, 0, secondaryIndex0.Length - 1, true);
 
-        public EnemySkillSet FindBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key)
+        public EnemySkillSetEntity FindBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key)
         {
             return FindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default, key, true);
         }
         
-        public bool TryFindBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key, out EnemySkillSet result)
+        public bool TryFindBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key, out EnemySkillSetEntity result)
         {
             return TryFindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default, key, out result);
         }
 
-        public EnemySkillSet FindClosestBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key, bool selectLower = true)
+        public EnemySkillSetEntity FindClosestBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default, key, selectLower);
         }
 
-        public RangeView<EnemySkillSet> FindRangeBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) min, (uint SkillSetId, uint SkillId) max, bool ascendant = true)
+        public RangeView<EnemySkillSetEntity> FindRangeBySkillSetIdAndSkillId((uint SkillSetId, uint SkillId) min, (uint SkillSetId, uint SkillId) max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default, min, max, ascendant);
         }
 
-        public RangeView<EnemySkillSet> FindBySkillSetId(uint key)
+        public RangeView<EnemySkillSetEntity> FindBySkillSetId(uint key)
         {
             return FindManyCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, key);
         }
 
-        public RangeView<EnemySkillSet> FindClosestBySkillSetId(uint key, bool selectLower = true)
+        public RangeView<EnemySkillSetEntity> FindClosestBySkillSetId(uint key, bool selectLower = true)
         {
             return FindManyClosestCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, key, selectLower);
         }
 
-        public RangeView<EnemySkillSet> FindRangeBySkillSetId(uint min, uint max, bool ascendant = true)
+        public RangeView<EnemySkillSetEntity> FindRangeBySkillSetId(uint min, uint max, bool ascendant = true)
         {
             return FindManyRangeCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, min, max, ascendant);
         }
@@ -79,19 +79,19 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(EnemySkillSet), typeof(EnemySkillSetTable), "EnemySkillSet",
+            return new MasterMemory.Meta.MetaTable(typeof(EnemySkillSetEntity), typeof(EnemySkillSetTable), "EnemySkillSet",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillSet).GetProperty("SkillSetId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillSet).GetProperty("SkillId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillSetEntity).GetProperty("SkillSetId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillSetEntity).GetProperty("SkillId")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(EnemySkillSet).GetProperty("SkillSetId"),
-                        typeof(EnemySkillSet).GetProperty("SkillId"),
+                        typeof(EnemySkillSetEntity).GetProperty("SkillSetId"),
+                        typeof(EnemySkillSetEntity).GetProperty("SkillId"),
                     }, true, true, System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default),
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(EnemySkillSet).GetProperty("SkillSetId"),
+                        typeof(EnemySkillSetEntity).GetProperty("SkillSetId"),
                     }, false, false, System.Collections.Generic.Comparer<uint>.Default),
                 });
         }

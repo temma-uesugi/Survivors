@@ -16,7 +16,7 @@
 
 namespace MessagePack.Formatters.Master.Tables.Enemy
 {
-    public sealed class EnemySkillEffectFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemySkillEffect>
+    public sealed class EnemySkillEffectFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemySkillEffectEntity>
     {
         // EffectId
         private static global::System.ReadOnlySpan<byte> GetSpan_EffectId() => new byte[1 + 8] { 168, 69, 102, 102, 101, 99, 116, 73, 100 };
@@ -31,7 +31,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
         // ImageId
         private static global::System.ReadOnlySpan<byte> GetSpan_ImageId() => new byte[1 + 7] { 167, 73, 109, 97, 103, 101, 73, 100 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemySkillEffect value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemySkillEffectEntity value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -55,7 +55,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.ImageId, options);
         }
 
-        public global::Master.Tables.Enemy.EnemySkillEffect Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Master.Tables.Enemy.EnemySkillEffectEntity Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -115,7 +115,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                 }
             }
 
-            var ____result = new global::Master.Tables.Enemy.EnemySkillEffect(__EffectId__, __Type__, __Value__, __RangeType__, __RangeValue__, __ImageId__);
+            var ____result = new global::Master.Tables.Enemy.EnemySkillEffectEntity(__EffectId__, __Type__, __Value__, __RangeType__, __RangeValue__, __ImageId__);
             reader.Depth--;
             return ____result;
         }

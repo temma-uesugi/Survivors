@@ -9,13 +9,13 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class HeroFormationTable : TableBase<HeroFormation>, ITableUniqueValidate
+   public sealed partial class HeroFormationTable : TableBase<HeroFormationEntity>, ITableUniqueValidate
    {
-        public Func<HeroFormation, uint> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<HeroFormation, uint> primaryIndexSelector;
+        public Func<HeroFormationEntity, uint> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<HeroFormationEntity, uint> primaryIndexSelector;
 
 
-        public HeroFormationTable(HeroFormation[] sortedData)
+        public HeroFormationTable(HeroFormationEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => x.FormationId;
@@ -26,7 +26,7 @@ namespace App.MD.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public HeroFormation FindByFormationId(uint key)
+        public HeroFormationEntity FindByFormationId(uint key)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -43,7 +43,7 @@ namespace App.MD.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindByFormationId(uint key, out HeroFormation result)
+        public bool TryFindByFormationId(uint key, out HeroFormationEntity result)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -60,12 +60,12 @@ namespace App.MD.Tables
             return false;
         }
 
-        public HeroFormation FindClosestByFormationId(uint key, bool selectLower = true)
+        public HeroFormationEntity FindClosestByFormationId(uint key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, key, selectLower);
         }
 
-        public RangeView<HeroFormation> FindRangeByFormationId(uint min, uint max, bool ascendant = true)
+        public RangeView<HeroFormationEntity> FindRangeByFormationId(uint min, uint max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, min, max, ascendant);
         }
@@ -84,21 +84,21 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(HeroFormation), typeof(HeroFormationTable), "HeroFormation",
+            return new MasterMemory.Meta.MetaTable(typeof(HeroFormationEntity), typeof(HeroFormationTable), "HeroFormation",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("FormationId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("Name")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("Description")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("FrontDamageCutCoef")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("SideDamageCutCoef")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("BackDamageCutCoef")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("BonusHpCoef")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormation).GetProperty("BonusDamageCutCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("FormationId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("Name")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("Description")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("FrontDamageCutCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("SideDamageCutCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("BackDamageCutCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("BonusHpCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationEntity).GetProperty("BonusDamageCutCoef")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(HeroFormation).GetProperty("FormationId"),
+                        typeof(HeroFormationEntity).GetProperty("FormationId"),
                     }, true, true, System.Collections.Generic.Comparer<uint>.Default),
                 });
         }

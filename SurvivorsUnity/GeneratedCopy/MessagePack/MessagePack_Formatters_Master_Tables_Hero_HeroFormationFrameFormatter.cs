@@ -16,7 +16,7 @@
 
 namespace MessagePack.Formatters.Master.Tables.Hero
 {
-    public sealed class HeroFormationFrameFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Hero.HeroFormationFrame>
+    public sealed class HeroFormationFrameFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Hero.HeroFormationFrameEntity>
     {
         // FormationId
         private static global::System.ReadOnlySpan<byte> GetSpan_FormationId() => new byte[1 + 11] { 171, 70, 111, 114, 109, 97, 116, 105, 111, 110, 73, 100 };
@@ -33,7 +33,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
         // AttackCoef
         private static global::System.ReadOnlySpan<byte> GetSpan_AttackCoef() => new byte[1 + 10] { 170, 65, 116, 116, 97, 99, 107, 67, 111, 101, 102 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Hero.HeroFormationFrame value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Hero.HeroFormationFrameEntity value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -58,7 +58,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
             writer.Write(value.AttackCoef);
         }
 
-        public global::Master.Tables.Hero.HeroFormationFrame Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Master.Tables.Hero.HeroFormationFrameEntity Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -138,7 +138,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                 }
             }
 
-            var ____result = new global::Master.Tables.Hero.HeroFormationFrame(__FormationId__, __FrameIndex__, __OffsetX__, __OffsetY__, __DamageRatio__, __HpCoef__, __AttackCoef__);
+            var ____result = new global::Master.Tables.Hero.HeroFormationFrameEntity(__FormationId__, __FrameIndex__, __OffsetX__, __OffsetY__, __DamageRatio__, __HpCoef__, __AttackCoef__);
             reader.Depth--;
             return ____result;
         }

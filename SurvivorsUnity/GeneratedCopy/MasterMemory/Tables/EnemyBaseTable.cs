@@ -10,13 +10,13 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class EnemyBaseTable : TableBase<EnemyBase>, ITableUniqueValidate
+   public sealed partial class EnemyBaseTable : TableBase<EnemyBaseEntity>, ITableUniqueValidate
    {
-        public Func<EnemyBase, uint> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<EnemyBase, uint> primaryIndexSelector;
+        public Func<EnemyBaseEntity, uint> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<EnemyBaseEntity, uint> primaryIndexSelector;
 
 
-        public EnemyBaseTable(EnemyBase[] sortedData)
+        public EnemyBaseTable(EnemyBaseEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => x.EnemyId;
@@ -27,7 +27,7 @@ namespace App.MD.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public EnemyBase FindByEnemyId(uint key)
+        public EnemyBaseEntity FindByEnemyId(uint key)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -44,7 +44,7 @@ namespace App.MD.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindByEnemyId(uint key, out EnemyBase result)
+        public bool TryFindByEnemyId(uint key, out EnemyBaseEntity result)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -61,12 +61,12 @@ namespace App.MD.Tables
             return false;
         }
 
-        public EnemyBase FindClosestByEnemyId(uint key, bool selectLower = true)
+        public EnemyBaseEntity FindClosestByEnemyId(uint key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, key, selectLower);
         }
 
-        public RangeView<EnemyBase> FindRangeByEnemyId(uint min, uint max, bool ascendant = true)
+        public RangeView<EnemyBaseEntity> FindRangeByEnemyId(uint min, uint max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, min, max, ascendant);
         }
@@ -85,24 +85,24 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(EnemyBase), typeof(EnemyBaseTable), "EnemyBase",
+            return new MasterMemory.Meta.MetaTable(typeof(EnemyBaseEntity), typeof(EnemyBaseTable), "EnemyBase",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("EnemyId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("EnemyName")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("ActionInterval")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("MovePower")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("SkillSetId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("ActiveConditionType")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("ActiveConditionValue")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("InactiveConditionType")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("InactiveConditionValue")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("IsFlight")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBase).GetProperty("ImageId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("EnemyId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("EnemyName")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("ActionInterval")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("MovePower")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("SkillSetId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("ActiveConditionType")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("ActiveConditionValue")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("InactiveConditionType")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("InactiveConditionValue")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("IsFlight")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyBaseEntity).GetProperty("ImageId")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(EnemyBase).GetProperty("EnemyId"),
+                        typeof(EnemyBaseEntity).GetProperty("EnemyId"),
                     }, true, true, System.Collections.Generic.Comparer<uint>.Default),
                 });
         }

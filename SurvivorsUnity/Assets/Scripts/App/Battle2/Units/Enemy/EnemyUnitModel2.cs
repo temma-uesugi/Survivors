@@ -23,8 +23,8 @@ namespace App.Battle2.Units.Enemy
     {
         public CompositeDisposable ModelDisposable { get; } = new CompositeDisposable();
         
-        public EnemyBase EnemyBase { get; }
-        public uint EnemyId => EnemyBase.EnemyId;
+        public EnemyBaseEntity EnemyBaseEntity { get; }
+        public uint EnemyId => EnemyBaseEntity.EnemyId;
         public uint UnitId { get; }
         public uint Id => UnitId;
         public string Label { get; }
@@ -33,7 +33,7 @@ namespace App.Battle2.Units.Enemy
         public DamageCalculator DamageCalculator { get; private set; }
         public int CalcDamaged(float damage, AttackType attackType) => DamageCalculator.CalcDamaged(damage, attackType);
 
-        private readonly EnemySkill[] _skills;
+        private readonly EnemySkillEntity[] _skills;
         
         //位置
         private readonly ReactiveProperty<HexCell> _cell;

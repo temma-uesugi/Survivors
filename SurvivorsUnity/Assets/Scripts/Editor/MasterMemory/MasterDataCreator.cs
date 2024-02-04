@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using App.AppCommon.Core;
+using App.AppCommon.Utils;
 using App.Battle2.Units.Enemy;
 using App.MD;
 using Master;
@@ -90,7 +91,7 @@ namespace Editor.MasterMemory
 
                 var splits = type.ToString().Split("."); 
                 if (splits.Length < 2) continue;
-                var className = splits[^1];
+                var className = splits[^1].RemoveFromEnd("Entity");
                 var classCategory = splits[^2];
                 
                 var genericCreateMethod = createMethod.MakeGenericMethod(type);

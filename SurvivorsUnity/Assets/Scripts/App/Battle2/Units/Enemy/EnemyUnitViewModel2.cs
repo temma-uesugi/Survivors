@@ -28,7 +28,7 @@ namespace App.Battle2.Units.Enemy
             UnitModel = unitModel2;
             //TODO デバッグ用
             UnitView.Label = unitModel2.Label;
-            UnitView.Init(unitModel2.UnitId, unitModel2.Cell.Value, unitModel2.EnemyBase.ImageId);
+            UnitView.Init(unitModel2.UnitId, unitModel2.Cell.Value, unitModel2.EnemyBaseEntity.ImageId);
             unitModel2.Cell.Subscribe(UnitView.SetToCell).AddTo(this);
             UnitModel.Hp.OnUpdate.Subscribe(x =>
             {

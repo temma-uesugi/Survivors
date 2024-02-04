@@ -9,13 +9,13 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class EnemyLevelStatusTable : TableBase<EnemyLevelStatus>, ITableUniqueValidate
+   public sealed partial class EnemyLevelStatusTable : TableBase<EnemyLevelStatusEntity>, ITableUniqueValidate
    {
-        public Func<EnemyLevelStatus, (uint EnemyId, int Level)> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<EnemyLevelStatus, (uint EnemyId, int Level)> primaryIndexSelector;
+        public Func<EnemyLevelStatusEntity, (uint EnemyId, int Level)> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<EnemyLevelStatusEntity, (uint EnemyId, int Level)> primaryIndexSelector;
 
 
-        public EnemyLevelStatusTable(EnemyLevelStatus[] sortedData)
+        public EnemyLevelStatusTable(EnemyLevelStatusEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => (x.EnemyId, x.Level);
@@ -25,22 +25,22 @@ namespace App.MD.Tables
         partial void OnAfterConstruct();
 
 
-        public EnemyLevelStatus FindByEnemyIdAndLevel((uint EnemyId, int Level) key)
+        public EnemyLevelStatusEntity FindByEnemyIdAndLevel((uint EnemyId, int Level) key)
         {
             return FindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default, key, true);
         }
         
-        public bool TryFindByEnemyIdAndLevel((uint EnemyId, int Level) key, out EnemyLevelStatus result)
+        public bool TryFindByEnemyIdAndLevel((uint EnemyId, int Level) key, out EnemyLevelStatusEntity result)
         {
             return TryFindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default, key, out result);
         }
 
-        public EnemyLevelStatus FindClosestByEnemyIdAndLevel((uint EnemyId, int Level) key, bool selectLower = true)
+        public EnemyLevelStatusEntity FindClosestByEnemyIdAndLevel((uint EnemyId, int Level) key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default, key, selectLower);
         }
 
-        public RangeView<EnemyLevelStatus> FindRangeByEnemyIdAndLevel((uint EnemyId, int Level) min, (uint EnemyId, int Level) max, bool ascendant = true)
+        public RangeView<EnemyLevelStatusEntity> FindRangeByEnemyIdAndLevel((uint EnemyId, int Level) min, (uint EnemyId, int Level) max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default, min, max, ascendant);
         }
@@ -59,20 +59,20 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(EnemyLevelStatus), typeof(EnemyLevelStatusTable), "EnemyStatus",
+            return new MasterMemory.Meta.MetaTable(typeof(EnemyLevelStatusEntity), typeof(EnemyLevelStatusTable), "EnemyStatus",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("EnemyId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("Level")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("Hp")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("DirectAttackDefense")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("RangedAttackDefense")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatus).GetProperty("AttackPower")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("EnemyId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("Level")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("Hp")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("DirectAttackDefense")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("RangedAttackDefense")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemyLevelStatusEntity).GetProperty("AttackPower")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(EnemyLevelStatus).GetProperty("EnemyId"),
-                        typeof(EnemyLevelStatus).GetProperty("Level"),
+                        typeof(EnemyLevelStatusEntity).GetProperty("EnemyId"),
+                        typeof(EnemyLevelStatusEntity).GetProperty("Level"),
                     }, true, true, System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default),
                 });
         }

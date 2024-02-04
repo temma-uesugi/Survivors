@@ -78,7 +78,7 @@ namespace App.Battle2
             }
 
             //敵をランダム作成
-            foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)
+            foreach (var enemy in MasterData.Facade.EnemyLevelStatusEntityTable.All)
             {
                 var grid = randomObjectCreator.GetRandomGrid();
                 unitManger2.CreateEnemy(grid, enemy.EnemyId, enemy.Level);

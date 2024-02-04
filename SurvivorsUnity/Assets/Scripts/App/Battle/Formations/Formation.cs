@@ -54,7 +54,7 @@ namespace App.Battle.Formations
         /// </summary>
         public void UpdateFormation(uint formationId)
         {
-            var formation = MasterData.Facade.HeroFormationTable.FindByFormationId(formationId);
+            var formation = MasterData.Facade.HeroFormationEntityTable.FindByFormationId(formationId);
             
         }
     }

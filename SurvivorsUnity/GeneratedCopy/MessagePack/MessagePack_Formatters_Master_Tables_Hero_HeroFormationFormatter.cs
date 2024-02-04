@@ -16,7 +16,7 @@
 
 namespace MessagePack.Formatters.Master.Tables.Hero
 {
-    public sealed class HeroFormationFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Hero.HeroFormation>
+    public sealed class HeroFormationFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Hero.HeroFormationEntity>
     {
         // FormationId
         private static global::System.ReadOnlySpan<byte> GetSpan_FormationId() => new byte[1 + 11] { 171, 70, 111, 114, 109, 97, 116, 105, 111, 110, 73, 100 };
@@ -35,7 +35,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
         // BonusDamageCutCoef
         private static global::System.ReadOnlySpan<byte> GetSpan_BonusDamageCutCoef() => new byte[1 + 18] { 178, 66, 111, 110, 117, 115, 68, 97, 109, 97, 103, 101, 67, 117, 116, 67, 111, 101, 102 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Hero.HeroFormation value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Hero.HeroFormationEntity value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -63,7 +63,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
             writer.Write(value.BonusDamageCutCoef);
         }
 
-        public global::Master.Tables.Hero.HeroFormation Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Master.Tables.Hero.HeroFormationEntity Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -157,7 +157,7 @@ namespace MessagePack.Formatters.Master.Tables.Hero
                 }
             }
 
-            var ____result = new global::Master.Tables.Hero.HeroFormation(__FormationId__, __Name__, __Description__, __FrontDamageCutCoef__, __SideDamageCutCoef__, __BackDamageCutCoef__, __BonusHpCoef__, __BonusDamageCutCoef__);
+            var ____result = new global::Master.Tables.Hero.HeroFormationEntity(__FormationId__, __Name__, __Description__, __FrontDamageCutCoef__, __SideDamageCutCoef__, __BackDamageCutCoef__, __BonusHpCoef__, __BonusDamageCutCoef__);
             reader.Depth--;
             return ____result;
         }

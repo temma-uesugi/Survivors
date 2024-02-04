@@ -16,7 +16,7 @@
 
 namespace MessagePack.Formatters.Master.Tables.Enemy
 {
-    public sealed class EnemyLevelStatusFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemyLevelStatus>
+    public sealed class EnemyLevelStatusFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemyLevelStatusEntity>
     {
         // EnemyId
         private static global::System.ReadOnlySpan<byte> GetSpan_EnemyId() => new byte[1 + 7] { 167, 69, 110, 101, 109, 121, 73, 100 };
@@ -31,7 +31,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
         // AttackPower
         private static global::System.ReadOnlySpan<byte> GetSpan_AttackPower() => new byte[1 + 11] { 171, 65, 116, 116, 97, 99, 107, 80, 111, 119, 101, 114 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemyLevelStatus value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemyLevelStatusEntity value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -54,7 +54,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             writer.Write(value.AttackPower);
         }
 
-        public global::Master.Tables.Enemy.EnemyLevelStatus Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Master.Tables.Enemy.EnemyLevelStatusEntity Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -120,7 +120,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                 }
             }
 
-            var ____result = new global::Master.Tables.Enemy.EnemyLevelStatus(__EnemyId__, __Level__, __Hp__, __DirectAttackDefense__, __RangedAttackDefense__, __AttackPower__);
+            var ____result = new global::Master.Tables.Enemy.EnemyLevelStatusEntity(__EnemyId__, __Level__, __Hp__, __DirectAttackDefense__, __RangedAttackDefense__, __AttackPower__);
             reader.Depth--;
             return ____result;
         }

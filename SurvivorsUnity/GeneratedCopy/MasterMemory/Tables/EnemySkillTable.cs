@@ -9,13 +9,13 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class EnemySkillTable : TableBase<EnemySkill>, ITableUniqueValidate
+   public sealed partial class EnemySkillTable : TableBase<EnemySkillEntity>, ITableUniqueValidate
    {
-        public Func<EnemySkill, uint> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<EnemySkill, uint> primaryIndexSelector;
+        public Func<EnemySkillEntity, uint> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<EnemySkillEntity, uint> primaryIndexSelector;
 
 
-        public EnemySkillTable(EnemySkill[] sortedData)
+        public EnemySkillTable(EnemySkillEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => x.SkillId;
@@ -26,7 +26,7 @@ namespace App.MD.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public EnemySkill FindBySkillId(uint key)
+        public EnemySkillEntity FindBySkillId(uint key)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -43,7 +43,7 @@ namespace App.MD.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindBySkillId(uint key, out EnemySkill result)
+        public bool TryFindBySkillId(uint key, out EnemySkillEntity result)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -60,12 +60,12 @@ namespace App.MD.Tables
             return false;
         }
 
-        public EnemySkill FindClosestBySkillId(uint key, bool selectLower = true)
+        public EnemySkillEntity FindClosestBySkillId(uint key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, key, selectLower);
         }
 
-        public RangeView<EnemySkill> FindRangeBySkillId(uint min, uint max, bool ascendant = true)
+        public RangeView<EnemySkillEntity> FindRangeBySkillId(uint min, uint max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<uint>.Default, min, max, ascendant);
         }
@@ -84,23 +84,23 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(EnemySkill), typeof(EnemySkillTable), "EnemySkill",
+            return new MasterMemory.Meta.MetaTable(typeof(EnemySkillEntity), typeof(EnemySkillTable), "EnemySkill",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("SkillId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("MinRange")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("MaxRange")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("IsIgnoreObstacles")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("Effect1")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("Effect2")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("Effect3")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("Effect4")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("Effect5")),
-                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkill).GetProperty("ImageId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("SkillId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("MinRange")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("MaxRange")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("IsIgnoreObstacles")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("Effect1")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("Effect2")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("Effect3")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("Effect4")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("Effect5")),
+                    new MasterMemory.Meta.MetaProperty(typeof(EnemySkillEntity).GetProperty("ImageId")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(EnemySkill).GetProperty("SkillId"),
+                        typeof(EnemySkillEntity).GetProperty("SkillId"),
                     }, true, true, System.Collections.Generic.Comparer<uint>.Default),
                 });
         }

@@ -13,13 +13,13 @@ namespace App.Battle.Units
     public class EnemyUnitModel : IUnitModel
     {
         //基本Data
-        public EnemyBase EnemyBase { get; }
-        public uint EnemyId => EnemyBase.EnemyId;
+        public EnemyBaseEntity EnemyBaseEntity { get; }
+        public uint EnemyId => EnemyBaseEntity.EnemyId;
         public uint UnitId { get; } 
         public uint Id => UnitId;
         public string Label { get; }
         private readonly MapManager _mapManager;
-        public string ImageId => EnemyBase.ImageId;
+        public string ImageId => EnemyBaseEntity.ImageId;
         
         //位置
         private readonly ReactiveProperty<HexCell> _cell;
@@ -42,9 +42,9 @@ namespace App.Battle.Units
             _cell = new (createParam.InitCell);
             _mapManager = mapManager;
             
-            var enemyBase = MasterData.Facade.EnemyBaseTable.FindByEnemyId(createParam.EnemyId);
-            var enemyStatus = MasterData.Facade.EnemyLevelStatusTable.FindByEnemyIdAndLevel((createParam.EnemyId, createParam.Level));
-            EnemyBase = enemyBase;
+            var enemyBase = MasterData.Facade.EnemyBaseEntityTable.FindByEnemyId(createParam.EnemyId);
+            var enemyStatus = MasterData.Facade.EnemyLevelStatusEntityTable.FindByEnemyIdAndLevel((createParam.EnemyId, createParam.Level));
+            EnemyBaseEntity = enemyBase;
             
             //
             // ActionInterval = enemyBase.ActionInterval;

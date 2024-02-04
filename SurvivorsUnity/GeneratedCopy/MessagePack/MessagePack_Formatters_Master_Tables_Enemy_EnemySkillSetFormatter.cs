@@ -16,14 +16,14 @@
 
 namespace MessagePack.Formatters.Master.Tables.Enemy
 {
-    public sealed class EnemySkillSetFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemySkillSet>
+    public sealed class EnemySkillSetFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Master.Tables.Enemy.EnemySkillSetEntity>
     {
         // SkillSetId
         private static global::System.ReadOnlySpan<byte> GetSpan_SkillSetId() => new byte[1 + 10] { 170, 83, 107, 105, 108, 108, 83, 101, 116, 73, 100 };
         // SkillId
         private static global::System.ReadOnlySpan<byte> GetSpan_SkillId() => new byte[1 + 7] { 167, 83, 107, 105, 108, 108, 73, 100 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemySkillSet value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Master.Tables.Enemy.EnemySkillSetEntity value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -38,7 +38,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
             writer.Write(value.SkillId);
         }
 
-        public global::Master.Tables.Enemy.EnemySkillSet Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Master.Tables.Enemy.EnemySkillSetEntity Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -73,7 +73,7 @@ namespace MessagePack.Formatters.Master.Tables.Enemy
                 }
             }
 
-            var ____result = new global::Master.Tables.Enemy.EnemySkillSet(__SkillSetId__, __SkillId__);
+            var ____result = new global::Master.Tables.Enemy.EnemySkillSetEntity(__SkillSetId__, __SkillId__);
             reader.Depth--;
             return ____result;
         }

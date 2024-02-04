@@ -14,31 +14,31 @@ namespace App.MD
 {
    public sealed class MemoryDatabase : MemoryDatabaseBase
    {
-        public EnemyBaseTable EnemyBaseTable { get; private set; }
-        public EnemyLevelStatusTable EnemyLevelStatusTable { get; private set; }
-        public EnemySkillTable EnemySkillTable { get; private set; }
-        public EnemySkillEffectTable EnemySkillEffectTable { get; private set; }
-        public EnemySkillSetTable EnemySkillSetTable { get; private set; }
-        public HeroFormationTable HeroFormationTable { get; private set; }
-        public HeroFormationFrameTable HeroFormationFrameTable { get; private set; }
+        public EnemyBaseEntityTable EnemyBaseEntityTable { get; private set; }
+        public EnemyLevelStatusEntityTable EnemyLevelStatusEntityTable { get; private set; }
+        public EnemySkillEffectEntityTable EnemySkillEffectEntityTable { get; private set; }
+        public EnemySkillEntityTable EnemySkillEntityTable { get; private set; }
+        public EnemySkillSetEntityTable EnemySkillSetEntityTable { get; private set; }
+        public HeroFormationEntityTable HeroFormationEntityTable { get; private set; }
+        public HeroFormationFrameEntityTable HeroFormationFrameEntityTable { get; private set; }
 
         public MemoryDatabase(
-            EnemyBaseTable EnemyBaseTable,
-            EnemyLevelStatusTable EnemyLevelStatusTable,
-            EnemySkillTable EnemySkillTable,
-            EnemySkillEffectTable EnemySkillEffectTable,
-            EnemySkillSetTable EnemySkillSetTable,
-            HeroFormationTable HeroFormationTable,
-            HeroFormationFrameTable HeroFormationFrameTable
+            EnemyBaseEntityTable EnemyBaseEntityTable,
+            EnemyLevelStatusEntityTable EnemyLevelStatusEntityTable,
+            EnemySkillEffectEntityTable EnemySkillEffectEntityTable,
+            EnemySkillEntityTable EnemySkillEntityTable,
+            EnemySkillSetEntityTable EnemySkillSetEntityTable,
+            HeroFormationEntityTable HeroFormationEntityTable,
+            HeroFormationFrameEntityTable HeroFormationFrameEntityTable
         )
         {
-            this.EnemyBaseTable = EnemyBaseTable;
-            this.EnemyLevelStatusTable = EnemyLevelStatusTable;
-            this.EnemySkillTable = EnemySkillTable;
-            this.EnemySkillEffectTable = EnemySkillEffectTable;
-            this.EnemySkillSetTable = EnemySkillSetTable;
-            this.HeroFormationTable = HeroFormationTable;
-            this.HeroFormationFrameTable = HeroFormationFrameTable;
+            this.EnemyBaseEntityTable = EnemyBaseEntityTable;
+            this.EnemyLevelStatusEntityTable = EnemyLevelStatusEntityTable;
+            this.EnemySkillEffectEntityTable = EnemySkillEffectEntityTable;
+            this.EnemySkillEntityTable = EnemySkillEntityTable;
+            this.EnemySkillSetEntityTable = EnemySkillSetEntityTable;
+            this.HeroFormationEntityTable = HeroFormationEntityTable;
+            this.HeroFormationFrameEntityTable = HeroFormationFrameEntityTable;
         }
 
         public MemoryDatabase(byte[] databaseBinary, bool internString = true, MessagePack.IFormatterResolver formatterResolver = null, int maxDegreeOfParallelism = 1)
@@ -60,26 +60,26 @@ namespace App.MD
 
         void InitSequential(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
         {
-            this.EnemyBaseTable = ExtractTableData<EnemyBase, EnemyBaseTable>(header, databaseBinary, options, xs => new EnemyBaseTable(xs));
-            this.EnemyLevelStatusTable = ExtractTableData<EnemyLevelStatus, EnemyLevelStatusTable>(header, databaseBinary, options, xs => new EnemyLevelStatusTable(xs));
-            this.EnemySkillTable = ExtractTableData<EnemySkill, EnemySkillTable>(header, databaseBinary, options, xs => new EnemySkillTable(xs));
-            this.EnemySkillEffectTable = ExtractTableData<EnemySkillEffect, EnemySkillEffectTable>(header, databaseBinary, options, xs => new EnemySkillEffectTable(xs));
-            this.EnemySkillSetTable = ExtractTableData<EnemySkillSet, EnemySkillSetTable>(header, databaseBinary, options, xs => new EnemySkillSetTable(xs));
-            this.HeroFormationTable = ExtractTableData<HeroFormation, HeroFormationTable>(header, databaseBinary, options, xs => new HeroFormationTable(xs));
-            this.HeroFormationFrameTable = ExtractTableData<HeroFormationFrame, HeroFormationFrameTable>(header, databaseBinary, options, xs => new HeroFormationFrameTable(xs));
+            this.EnemyBaseEntityTable = ExtractTableData<EnemyBaseEntity, EnemyBaseEntityTable>(header, databaseBinary, options, xs => new EnemyBaseEntityTable(xs));
+            this.EnemyLevelStatusEntityTable = ExtractTableData<EnemyLevelStatusEntity, EnemyLevelStatusEntityTable>(header, databaseBinary, options, xs => new EnemyLevelStatusEntityTable(xs));
+            this.EnemySkillEffectEntityTable = ExtractTableData<EnemySkillEffectEntity, EnemySkillEffectEntityTable>(header, databaseBinary, options, xs => new EnemySkillEffectEntityTable(xs));
+            this.EnemySkillEntityTable = ExtractTableData<EnemySkillEntity, EnemySkillEntityTable>(header, databaseBinary, options, xs => new EnemySkillEntityTable(xs));
+            this.EnemySkillSetEntityTable = ExtractTableData<EnemySkillSetEntity, EnemySkillSetEntityTable>(header, databaseBinary, options, xs => new EnemySkillSetEntityTable(xs));
+            this.HeroFormationEntityTable = ExtractTableData<HeroFormationEntity, HeroFormationEntityTable>(header, databaseBinary, options, xs => new HeroFormationEntityTable(xs));
+            this.HeroFormationFrameEntityTable = ExtractTableData<HeroFormationFrameEntity, HeroFormationFrameEntityTable>(header, databaseBinary, options, xs => new HeroFormationFrameEntityTable(xs));
         }
 
         void InitParallel(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
         {
             var extracts = new Action[]
             {
-                () => this.EnemyBaseTable = ExtractTableData<EnemyBase, EnemyBaseTable>(header, databaseBinary, options, xs => new EnemyBaseTable(xs)),
-                () => this.EnemyLevelStatusTable = ExtractTableData<EnemyLevelStatus, EnemyLevelStatusTable>(header, databaseBinary, options, xs => new EnemyLevelStatusTable(xs)),
-                () => this.EnemySkillTable = ExtractTableData<EnemySkill, EnemySkillTable>(header, databaseBinary, options, xs => new EnemySkillTable(xs)),
-                () => this.EnemySkillEffectTable = ExtractTableData<EnemySkillEffect, EnemySkillEffectTable>(header, databaseBinary, options, xs => new EnemySkillEffectTable(xs)),
-                () => this.EnemySkillSetTable = ExtractTableData<EnemySkillSet, EnemySkillSetTable>(header, databaseBinary, options, xs => new EnemySkillSetTable(xs)),
-                () => this.HeroFormationTable = ExtractTableData<HeroFormation, HeroFormationTable>(header, databaseBinary, options, xs => new HeroFormationTable(xs)),
-                () => this.HeroFormationFrameTable = ExtractTableData<HeroFormationFrame, HeroFormationFrameTable>(header, databaseBinary, options, xs => new HeroFormationFrameTable(xs)),
+                () => this.EnemyBaseEntityTable = ExtractTableData<EnemyBaseEntity, EnemyBaseEntityTable>(header, databaseBinary, options, xs => new EnemyBaseEntityTable(xs)),
+                () => this.EnemyLevelStatusEntityTable = ExtractTableData<EnemyLevelStatusEntity, EnemyLevelStatusEntityTable>(header, databaseBinary, options, xs => new EnemyLevelStatusEntityTable(xs)),
+                () => this.EnemySkillEffectEntityTable = ExtractTableData<EnemySkillEffectEntity, EnemySkillEffectEntityTable>(header, databaseBinary, options, xs => new EnemySkillEffectEntityTable(xs)),
+                () => this.EnemySkillEntityTable = ExtractTableData<EnemySkillEntity, EnemySkillEntityTable>(header, databaseBinary, options, xs => new EnemySkillEntityTable(xs)),
+                () => this.EnemySkillSetEntityTable = ExtractTableData<EnemySkillSetEntity, EnemySkillSetEntityTable>(header, databaseBinary, options, xs => new EnemySkillSetEntityTable(xs)),
+                () => this.HeroFormationEntityTable = ExtractTableData<HeroFormationEntity, HeroFormationEntityTable>(header, databaseBinary, options, xs => new HeroFormationEntityTable(xs)),
+                () => this.HeroFormationFrameEntityTable = ExtractTableData<HeroFormationFrameEntity, HeroFormationFrameEntityTable>(header, databaseBinary, options, xs => new HeroFormationFrameEntityTable(xs)),
             };
             
             System.Threading.Tasks.Parallel.Invoke(new System.Threading.Tasks.ParallelOptions
@@ -96,26 +96,26 @@ namespace App.MD
         public DatabaseBuilder ToDatabaseBuilder()
         {
             var builder = new DatabaseBuilder();
-            builder.Append(this.EnemyBaseTable.GetRawDataUnsafe());
-            builder.Append(this.EnemyLevelStatusTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillEffectTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillSetTable.GetRawDataUnsafe());
-            builder.Append(this.HeroFormationTable.GetRawDataUnsafe());
-            builder.Append(this.HeroFormationFrameTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyBaseEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyLevelStatusEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillEffectEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillSetEntityTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationEntityTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationFrameEntityTable.GetRawDataUnsafe());
             return builder;
         }
 
         public DatabaseBuilder ToDatabaseBuilder(MessagePack.IFormatterResolver resolver)
         {
             var builder = new DatabaseBuilder(resolver);
-            builder.Append(this.EnemyBaseTable.GetRawDataUnsafe());
-            builder.Append(this.EnemyLevelStatusTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillEffectTable.GetRawDataUnsafe());
-            builder.Append(this.EnemySkillSetTable.GetRawDataUnsafe());
-            builder.Append(this.HeroFormationTable.GetRawDataUnsafe());
-            builder.Append(this.HeroFormationFrameTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyBaseEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyLevelStatusEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillEffectEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillEntityTable.GetRawDataUnsafe());
+            builder.Append(this.EnemySkillSetEntityTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationEntityTable.GetRawDataUnsafe());
+            builder.Append(this.HeroFormationFrameEntityTable.GetRawDataUnsafe());
             return builder;
         }
 
@@ -126,29 +126,29 @@ namespace App.MD
             var result = new ValidateResult();
             var database = new ValidationDatabase(new object[]
             {
-                EnemyBaseTable,
-                EnemyLevelStatusTable,
-                EnemySkillTable,
-                EnemySkillEffectTable,
-                EnemySkillSetTable,
-                HeroFormationTable,
-                HeroFormationFrameTable,
+                EnemyBaseEntityTable,
+                EnemyLevelStatusEntityTable,
+                EnemySkillEffectEntityTable,
+                EnemySkillEntityTable,
+                EnemySkillSetEntityTable,
+                HeroFormationEntityTable,
+                HeroFormationFrameEntityTable,
             });
 
-            ((ITableUniqueValidate)EnemyBaseTable).ValidateUnique(result);
-            ValidateTable(EnemyBaseTable.All, database, "EnemyId", EnemyBaseTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)EnemyLevelStatusTable).ValidateUnique(result);
-            ValidateTable(EnemyLevelStatusTable.All, database, "(EnemyId, Level)", EnemyLevelStatusTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)EnemySkillTable).ValidateUnique(result);
-            ValidateTable(EnemySkillTable.All, database, "SkillId", EnemySkillTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)EnemySkillEffectTable).ValidateUnique(result);
-            ValidateTable(EnemySkillEffectTable.All, database, "EffectId", EnemySkillEffectTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)EnemySkillSetTable).ValidateUnique(result);
-            ValidateTable(EnemySkillSetTable.All, database, "(SkillSetId, SkillId)", EnemySkillSetTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)HeroFormationTable).ValidateUnique(result);
-            ValidateTable(HeroFormationTable.All, database, "FormationId", HeroFormationTable.PrimaryKeySelector, result);
-            ((ITableUniqueValidate)HeroFormationFrameTable).ValidateUnique(result);
-            ValidateTable(HeroFormationFrameTable.All, database, "(FormationId, FrameIndex)", HeroFormationFrameTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemyBaseEntityTable).ValidateUnique(result);
+            ValidateTable(EnemyBaseEntityTable.All, database, "EnemyId", EnemyBaseEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemyLevelStatusEntityTable).ValidateUnique(result);
+            ValidateTable(EnemyLevelStatusEntityTable.All, database, "(EnemyId, Level)", EnemyLevelStatusEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemySkillEffectEntityTable).ValidateUnique(result);
+            ValidateTable(EnemySkillEffectEntityTable.All, database, "EffectId", EnemySkillEffectEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemySkillEntityTable).ValidateUnique(result);
+            ValidateTable(EnemySkillEntityTable.All, database, "SkillId", EnemySkillEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemySkillSetEntityTable).ValidateUnique(result);
+            ValidateTable(EnemySkillSetEntityTable.All, database, "(SkillSetId, SkillId)", EnemySkillSetEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)HeroFormationEntityTable).ValidateUnique(result);
+            ValidateTable(HeroFormationEntityTable.All, database, "FormationId", HeroFormationEntityTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)HeroFormationFrameEntityTable).ValidateUnique(result);
+            ValidateTable(HeroFormationFrameEntityTable.All, database, "(FormationId, FrameIndex)", HeroFormationFrameEntityTable.PrimaryKeySelector, result);
 
             return result;
         }
@@ -161,20 +161,20 @@ namespace App.MD
         {
             switch (tableName)
             {
-                case "EnemyBase":
-                    return db.EnemyBaseTable;
-                case "EnemyStatus":
-                    return db.EnemyLevelStatusTable;
-                case "EnemySkill":
-                    return db.EnemySkillTable;
-                case "EnemySkillEffect":
-                    return db.EnemySkillEffectTable;
-                case "EnemySkillSet":
-                    return db.EnemySkillSetTable;
-                case "HeroFormation":
-                    return db.HeroFormationTable;
-                case "HeroFormationFrame":
-                    return db.HeroFormationFrameTable;
+                case "EnemyBaseEntity":
+                    return db.EnemyBaseEntityTable;
+                case "EnemyLevelStatusEntity":
+                    return db.EnemyLevelStatusEntityTable;
+                case "EnemySkillEffectEntity":
+                    return db.EnemySkillEffectEntityTable;
+                case "EnemySkillEntity":
+                    return db.EnemySkillEntityTable;
+                case "EnemySkillSetEntity":
+                    return db.EnemySkillSetEntityTable;
+                case "HeroFormationEntity":
+                    return db.HeroFormationEntityTable;
+                case "HeroFormationFrameEntity":
+                    return db.HeroFormationFrameEntityTable;
                 
                 default:
                     return null;
@@ -188,13 +188,13 @@ namespace App.MD
             if (metaTable != null) return metaTable;
 
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
-            dict.Add("EnemyBase", App.MD.Tables.EnemyBaseTable.CreateMetaTable());
-            dict.Add("EnemyStatus", App.MD.Tables.EnemyLevelStatusTable.CreateMetaTable());
-            dict.Add("EnemySkill", App.MD.Tables.EnemySkillTable.CreateMetaTable());
-            dict.Add("EnemySkillEffect", App.MD.Tables.EnemySkillEffectTable.CreateMetaTable());
-            dict.Add("EnemySkillSet", App.MD.Tables.EnemySkillSetTable.CreateMetaTable());
-            dict.Add("HeroFormation", App.MD.Tables.HeroFormationTable.CreateMetaTable());
-            dict.Add("HeroFormationFrame", App.MD.Tables.HeroFormationFrameTable.CreateMetaTable());
+            dict.Add("EnemyBaseEntity", App.MD.Tables.EnemyBaseEntityTable.CreateMetaTable());
+            dict.Add("EnemyLevelStatusEntity", App.MD.Tables.EnemyLevelStatusEntityTable.CreateMetaTable());
+            dict.Add("EnemySkillEffectEntity", App.MD.Tables.EnemySkillEffectEntityTable.CreateMetaTable());
+            dict.Add("EnemySkillEntity", App.MD.Tables.EnemySkillEntityTable.CreateMetaTable());
+            dict.Add("EnemySkillSetEntity", App.MD.Tables.EnemySkillSetEntityTable.CreateMetaTable());
+            dict.Add("HeroFormationEntity", App.MD.Tables.HeroFormationEntityTable.CreateMetaTable());
+            dict.Add("HeroFormationFrameEntity", App.MD.Tables.HeroFormationFrameEntityTable.CreateMetaTable());
 
             metaTable = new MasterMemory.Meta.MetaDatabase(dict);
             return metaTable;

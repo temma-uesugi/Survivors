@@ -1,3 +1,5 @@
+using PlasticPipe.PlasticProtocol.Messages;
+
 namespace App.AppCommon.Utils
 {
     /// <summary>
@@ -25,6 +27,15 @@ namespace App.AppCommon.Utils
                 num += LowerLetterCode - 26;
             }
             return ((char)num).ToString();
+        }
+
+        /// <summary>
+        /// 後ろから文字を検索して削除
+        /// </summary>
+        public static string RemoveFromEnd(this string self, string removeString)
+        {
+            var lastIndex = self.LastIndexOf(removeString);
+            return (lastIndex != -1) ? self.Remove(lastIndex, removeString.Length) : self;
         }
     }
 }

@@ -9,15 +9,15 @@ using System;
 
 namespace App.MD.Tables
 {
-   public sealed partial class HeroFormationFrameTable : TableBase<HeroFormationFrame>, ITableUniqueValidate
+   public sealed partial class HeroFormationFrameTable : TableBase<HeroFormationFrameEntity>, ITableUniqueValidate
    {
-        public Func<HeroFormationFrame, (uint FormationId, int FrameIndex)> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<HeroFormationFrame, (uint FormationId, int FrameIndex)> primaryIndexSelector;
+        public Func<HeroFormationFrameEntity, (uint FormationId, int FrameIndex)> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<HeroFormationFrameEntity, (uint FormationId, int FrameIndex)> primaryIndexSelector;
 
-        readonly HeroFormationFrame[] secondaryIndex0;
-        readonly Func<HeroFormationFrame, uint> secondaryIndex0Selector;
+        readonly HeroFormationFrameEntity[] secondaryIndex0;
+        readonly Func<HeroFormationFrameEntity, uint> secondaryIndex0Selector;
 
-        public HeroFormationFrameTable(HeroFormationFrame[] sortedData)
+        public HeroFormationFrameTable(HeroFormationFrameEntity[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => (x.FormationId, x.FrameIndex);
@@ -28,39 +28,39 @@ namespace App.MD.Tables
 
         partial void OnAfterConstruct();
 
-        public RangeView<HeroFormationFrame> SortByFormationId => new RangeView<HeroFormationFrame>(secondaryIndex0, 0, secondaryIndex0.Length - 1, true);
+        public RangeView<HeroFormationFrameEntity> SortByFormationId => new RangeView<HeroFormationFrameEntity>(secondaryIndex0, 0, secondaryIndex0.Length - 1, true);
 
-        public HeroFormationFrame FindByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key)
+        public HeroFormationFrameEntity FindByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key)
         {
             return FindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default, key, true);
         }
         
-        public bool TryFindByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key, out HeroFormationFrame result)
+        public bool TryFindByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key, out HeroFormationFrameEntity result)
         {
             return TryFindUniqueCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default, key, out result);
         }
 
-        public HeroFormationFrame FindClosestByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key, bool selectLower = true)
+        public HeroFormationFrameEntity FindClosestByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default, key, selectLower);
         }
 
-        public RangeView<HeroFormationFrame> FindRangeByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) min, (uint FormationId, int FrameIndex) max, bool ascendant = true)
+        public RangeView<HeroFormationFrameEntity> FindRangeByFormationIdAndFrameIndex((uint FormationId, int FrameIndex) min, (uint FormationId, int FrameIndex) max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default, min, max, ascendant);
         }
 
-        public RangeView<HeroFormationFrame> FindByFormationId(uint key)
+        public RangeView<HeroFormationFrameEntity> FindByFormationId(uint key)
         {
             return FindManyCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, key);
         }
 
-        public RangeView<HeroFormationFrame> FindClosestByFormationId(uint key, bool selectLower = true)
+        public RangeView<HeroFormationFrameEntity> FindClosestByFormationId(uint key, bool selectLower = true)
         {
             return FindManyClosestCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, key, selectLower);
         }
 
-        public RangeView<HeroFormationFrame> FindRangeByFormationId(uint min, uint max, bool ascendant = true)
+        public RangeView<HeroFormationFrameEntity> FindRangeByFormationId(uint min, uint max, bool ascendant = true)
         {
             return FindManyRangeCore(secondaryIndex0, secondaryIndex0Selector, System.Collections.Generic.Comparer<uint>.Default, min, max, ascendant);
         }
@@ -79,24 +79,24 @@ namespace App.MD.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(HeroFormationFrame), typeof(HeroFormationFrameTable), "HeroFormationFrame",
+            return new MasterMemory.Meta.MetaTable(typeof(HeroFormationFrameEntity), typeof(HeroFormationFrameTable), "HeroFormationFrame",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("FormationId")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("FrameIndex")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("OffsetX")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("OffsetY")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("DamageRatio")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("HpCoef")),
-                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrame).GetProperty("AttackCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("FormationId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("FrameIndex")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("OffsetX")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("OffsetY")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("DamageRatio")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("HpCoef")),
+                    new MasterMemory.Meta.MetaProperty(typeof(HeroFormationFrameEntity).GetProperty("AttackCoef")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(HeroFormationFrame).GetProperty("FormationId"),
-                        typeof(HeroFormationFrame).GetProperty("FrameIndex"),
+                        typeof(HeroFormationFrameEntity).GetProperty("FormationId"),
+                        typeof(HeroFormationFrameEntity).GetProperty("FrameIndex"),
                     }, true, true, System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default),
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(HeroFormationFrame).GetProperty("FormationId"),
+                        typeof(HeroFormationFrameEntity).GetProperty("FormationId"),
                     }, false, false, System.Collections.Generic.Comparer<uint>.Default),
                 });
         }

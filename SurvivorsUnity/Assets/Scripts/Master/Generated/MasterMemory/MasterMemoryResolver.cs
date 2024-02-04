@@ -49,13 +49,13 @@ namespace App.MD
         {
             lookup = new global::System.Collections.Generic.Dictionary<Type, int>(7)
             {
-                {typeof(EnemyBase[]), 0 },
-                {typeof(EnemyLevelStatus[]), 1 },
-                {typeof(EnemySkill[]), 2 },
-                {typeof(EnemySkillEffect[]), 3 },
-                {typeof(EnemySkillSet[]), 4 },
-                {typeof(HeroFormation[]), 5 },
-                {typeof(HeroFormationFrame[]), 6 },
+                {typeof(EnemyBaseEntity[]), 0 },
+                {typeof(EnemyLevelStatusEntity[]), 1 },
+                {typeof(EnemySkillEffectEntity[]), 2 },
+                {typeof(EnemySkillEntity[]), 3 },
+                {typeof(EnemySkillSetEntity[]), 4 },
+                {typeof(HeroFormationEntity[]), 5 },
+                {typeof(HeroFormationFrameEntity[]), 6 },
             };
         }
 
@@ -66,13 +66,13 @@ namespace App.MD
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.ArrayFormatter<EnemyBase>();
-                case 1: return new MessagePack.Formatters.ArrayFormatter<EnemyLevelStatus>();
-                case 2: return new MessagePack.Formatters.ArrayFormatter<EnemySkill>();
-                case 3: return new MessagePack.Formatters.ArrayFormatter<EnemySkillEffect>();
-                case 4: return new MessagePack.Formatters.ArrayFormatter<EnemySkillSet>();
-                case 5: return new MessagePack.Formatters.ArrayFormatter<HeroFormation>();
-                case 6: return new MessagePack.Formatters.ArrayFormatter<HeroFormationFrame>();
+                case 0: return new MessagePack.Formatters.ArrayFormatter<EnemyBaseEntity>();
+                case 1: return new MessagePack.Formatters.ArrayFormatter<EnemyLevelStatusEntity>();
+                case 2: return new MessagePack.Formatters.ArrayFormatter<EnemySkillEffectEntity>();
+                case 3: return new MessagePack.Formatters.ArrayFormatter<EnemySkillEntity>();
+                case 4: return new MessagePack.Formatters.ArrayFormatter<EnemySkillSetEntity>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<HeroFormationEntity>();
+                case 6: return new MessagePack.Formatters.ArrayFormatter<HeroFormationFrameEntity>();
                 default: return null;
             }
         }

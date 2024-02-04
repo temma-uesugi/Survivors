@@ -52,10 +52,10 @@ namespace App.Battle
                 _unitManager.CreateHero(shipParam.grid);
             }
             //TODO
-            var formation = MasterData.Facade.HeroFormationTable.All.RandomFirst();
+            var formation = MasterData.Facade.HeroFormationEntityTable.All.RandomFirst();
             
             //敵をランダム作成
-            foreach (var enemy in MasterData.Facade.EnemyLevelStatusTable.All)
+            foreach (var enemy in MasterData.Facade.EnemyLevelStatusEntityTable.All)
             {
                 var grid = randomObjectCreator.GetRandomGrid();
                 _unitManager.CreateEnemy(grid, enemy.EnemyId, enemy.Level);

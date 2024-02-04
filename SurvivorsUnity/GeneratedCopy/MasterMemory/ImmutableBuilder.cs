@@ -26,351 +26,351 @@ namespace App.MD
             return memory;
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<EnemyBase> data)
+        public void ReplaceAll(System.Collections.Generic.IList<EnemyBaseEntity> data)
         {
             var newData = CloneAndSortBy(data, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemyBaseTable(newData);
+            var table = new EnemyBaseEntityTable(newData);
             memory = new MemoryDatabase(
                 table,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void RemoveEnemyBase(uint[] keys)
+        public void RemoveEnemyBaseEntity(uint[] keys)
         {
-            var data = RemoveCore(memory.EnemyBaseTable.GetRawDataUnsafe(), keys, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = RemoveCore(memory.EnemyBaseEntityTable.GetRawDataUnsafe(), keys, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemyBaseTable(newData);
+            var table = new EnemyBaseEntityTable(newData);
             memory = new MemoryDatabase(
                 table,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void Diff(EnemyBase[] addOrReplaceData)
+        public void Diff(EnemyBaseEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.EnemyBaseTable.GetRawDataUnsafe(), addOrReplaceData, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = DiffCore(memory.EnemyBaseEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemyBaseTable(newData);
+            var table = new EnemyBaseEntityTable(newData);
             memory = new MemoryDatabase(
                 table,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<EnemyLevelStatus> data)
+        public void ReplaceAll(System.Collections.Generic.IList<EnemyLevelStatusEntity> data)
         {
             var newData = CloneAndSortBy(data, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
-            var table = new EnemyLevelStatusTable(newData);
+            var table = new EnemyLevelStatusEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
+                memory.EnemyBaseEntityTable,
                 table,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void RemoveEnemyLevelStatus((uint EnemyId, int Level)[] keys)
+        public void RemoveEnemyLevelStatusEntity((uint EnemyId, int Level)[] keys)
         {
-            var data = RemoveCore(memory.EnemyLevelStatusTable.GetRawDataUnsafe(), keys, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
+            var data = RemoveCore(memory.EnemyLevelStatusEntityTable.GetRawDataUnsafe(), keys, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
             var newData = CloneAndSortBy(data, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
-            var table = new EnemyLevelStatusTable(newData);
+            var table = new EnemyLevelStatusEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
+                memory.EnemyBaseEntityTable,
                 table,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void Diff(EnemyLevelStatus[] addOrReplaceData)
+        public void Diff(EnemyLevelStatusEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.EnemyLevelStatusTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
+            var data = DiffCore(memory.EnemyLevelStatusEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
             var newData = CloneAndSortBy(data, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
-            var table = new EnemyLevelStatusTable(newData);
+            var table = new EnemyLevelStatusEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
+                memory.EnemyBaseEntityTable,
                 table,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<EnemySkill> data)
-        {
-            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillTable(newData);
-            memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                table,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
-            
-            );
-        }
-
-        public void RemoveEnemySkill(uint[] keys)
-        {
-            var data = RemoveCore(memory.EnemySkillTable.GetRawDataUnsafe(), keys, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillTable(newData);
-            memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                table,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
-            
-            );
-        }
-
-        public void Diff(EnemySkill[] addOrReplaceData)
-        {
-            var data = DiffCore(memory.EnemySkillTable.GetRawDataUnsafe(), addOrReplaceData, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillTable(newData);
-            memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                table,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
-            
-            );
-        }
-
-        public void ReplaceAll(System.Collections.Generic.IList<EnemySkillEffect> data)
+        public void ReplaceAll(System.Collections.Generic.IList<EnemySkillEffectEntity> data)
         {
             var newData = CloneAndSortBy(data, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillEffectTable(newData);
+            var table = new EnemySkillEffectEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
                 table,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void RemoveEnemySkillEffect(uint[] keys)
+        public void RemoveEnemySkillEffectEntity(uint[] keys)
         {
-            var data = RemoveCore(memory.EnemySkillEffectTable.GetRawDataUnsafe(), keys, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = RemoveCore(memory.EnemySkillEffectEntityTable.GetRawDataUnsafe(), keys, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillEffectTable(newData);
+            var table = new EnemySkillEffectEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
                 table,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void Diff(EnemySkillEffect[] addOrReplaceData)
+        public void Diff(EnemySkillEffectEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.EnemySkillEffectTable.GetRawDataUnsafe(), addOrReplaceData, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = DiffCore(memory.EnemySkillEffectEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new EnemySkillEffectTable(newData);
+            var table = new EnemySkillEffectEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
                 table,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<EnemySkillSet> data)
+        public void ReplaceAll(System.Collections.Generic.IList<EnemySkillEntity> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new EnemySkillEntityTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                table,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
+            
+            );
+        }
+
+        public void RemoveEnemySkillEntity(uint[] keys)
+        {
+            var data = RemoveCore(memory.EnemySkillEntityTable.GetRawDataUnsafe(), keys, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new EnemySkillEntityTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                table,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
+            
+            );
+        }
+
+        public void Diff(EnemySkillEntity[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.EnemySkillEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            var newData = CloneAndSortBy(data, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            var table = new EnemySkillEntityTable(newData);
+            memory = new MemoryDatabase(
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                table,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<EnemySkillSetEntity> data)
         {
             var newData = CloneAndSortBy(data, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
-            var table = new EnemySkillSetTable(newData);
+            var table = new EnemySkillSetEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
                 table,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void RemoveEnemySkillSet((uint SkillSetId, uint SkillId)[] keys)
+        public void RemoveEnemySkillSetEntity((uint SkillSetId, uint SkillId)[] keys)
         {
-            var data = RemoveCore(memory.EnemySkillSetTable.GetRawDataUnsafe(), keys, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
+            var data = RemoveCore(memory.EnemySkillSetEntityTable.GetRawDataUnsafe(), keys, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
             var newData = CloneAndSortBy(data, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
-            var table = new EnemySkillSetTable(newData);
+            var table = new EnemySkillSetEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
                 table,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void Diff(EnemySkillSet[] addOrReplaceData)
+        public void Diff(EnemySkillSetEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.EnemySkillSetTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
+            var data = DiffCore(memory.EnemySkillSetEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
             var newData = CloneAndSortBy(data, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
-            var table = new EnemySkillSetTable(newData);
+            var table = new EnemySkillSetEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
                 table,
-                memory.HeroFormationTable,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationEntityTable,
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<HeroFormation> data)
+        public void ReplaceAll(System.Collections.Generic.IList<HeroFormationEntity> data)
         {
             var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new HeroFormationTable(newData);
+            var table = new HeroFormationEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
                 table,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void RemoveHeroFormation(uint[] keys)
+        public void RemoveHeroFormationEntity(uint[] keys)
         {
-            var data = RemoveCore(memory.HeroFormationTable.GetRawDataUnsafe(), keys, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = RemoveCore(memory.HeroFormationEntityTable.GetRawDataUnsafe(), keys, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new HeroFormationTable(newData);
+            var table = new HeroFormationEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
                 table,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void Diff(HeroFormation[] addOrReplaceData)
+        public void Diff(HeroFormationEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.HeroFormationTable.GetRawDataUnsafe(), addOrReplaceData, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
+            var data = DiffCore(memory.HeroFormationEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
             var newData = CloneAndSortBy(data, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
-            var table = new HeroFormationTable(newData);
+            var table = new HeroFormationEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
                 table,
-                memory.HeroFormationFrameTable
+                memory.HeroFormationFrameEntityTable
             
             );
         }
 
-        public void ReplaceAll(System.Collections.Generic.IList<HeroFormationFrame> data)
+        public void ReplaceAll(System.Collections.Generic.IList<HeroFormationFrameEntity> data)
         {
             var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
-            var table = new HeroFormationFrameTable(newData);
+            var table = new HeroFormationFrameEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
                 table
             
             );
         }
 
-        public void RemoveHeroFormationFrame((uint FormationId, int FrameIndex)[] keys)
+        public void RemoveHeroFormationFrameEntity((uint FormationId, int FrameIndex)[] keys)
         {
-            var data = RemoveCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), keys, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
+            var data = RemoveCore(memory.HeroFormationFrameEntityTable.GetRawDataUnsafe(), keys, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
-            var table = new HeroFormationFrameTable(newData);
+            var table = new HeroFormationFrameEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
                 table
             
             );
         }
 
-        public void Diff(HeroFormationFrame[] addOrReplaceData)
+        public void Diff(HeroFormationFrameEntity[] addOrReplaceData)
         {
-            var data = DiffCore(memory.HeroFormationFrameTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
+            var data = DiffCore(memory.HeroFormationFrameEntityTable.GetRawDataUnsafe(), addOrReplaceData, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             var newData = CloneAndSortBy(data, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
-            var table = new HeroFormationFrameTable(newData);
+            var table = new HeroFormationFrameEntityTable(newData);
             memory = new MemoryDatabase(
-                memory.EnemyBaseTable,
-                memory.EnemyLevelStatusTable,
-                memory.EnemySkillTable,
-                memory.EnemySkillEffectTable,
-                memory.EnemySkillSetTable,
-                memory.HeroFormationTable,
+                memory.EnemyBaseEntityTable,
+                memory.EnemyLevelStatusEntityTable,
+                memory.EnemySkillEffectEntityTable,
+                memory.EnemySkillEntityTable,
+                memory.EnemySkillSetEntityTable,
+                memory.HeroFormationEntityTable,
                 table
             
             );

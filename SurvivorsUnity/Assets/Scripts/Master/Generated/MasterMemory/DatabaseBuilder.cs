@@ -17,43 +17,43 @@ namespace App.MD
         public DatabaseBuilder() : this(null) { }
         public DatabaseBuilder(MessagePack.IFormatterResolver resolver) : base(resolver) { }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemyBase> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemyBaseEntity> dataSource)
         {
             AppendCore(dataSource, x => x.EnemyId, System.Collections.Generic.Comparer<uint>.Default);
             return this;
         }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemyLevelStatus> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemyLevelStatusEntity> dataSource)
         {
             AppendCore(dataSource, x => (x.EnemyId, x.Level), System.Collections.Generic.Comparer<(uint EnemyId, int Level)>.Default);
             return this;
         }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkill> dataSource)
-        {
-            AppendCore(dataSource, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
-            return this;
-        }
-
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkillEffect> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkillEffectEntity> dataSource)
         {
             AppendCore(dataSource, x => x.EffectId, System.Collections.Generic.Comparer<uint>.Default);
             return this;
         }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkillSet> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkillEntity> dataSource)
+        {
+            AppendCore(dataSource, x => x.SkillId, System.Collections.Generic.Comparer<uint>.Default);
+            return this;
+        }
+
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemySkillSetEntity> dataSource)
         {
             AppendCore(dataSource, x => (x.SkillSetId, x.SkillId), System.Collections.Generic.Comparer<(uint SkillSetId, uint SkillId)>.Default);
             return this;
         }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormation> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormationEntity> dataSource)
         {
             AppendCore(dataSource, x => x.FormationId, System.Collections.Generic.Comparer<uint>.Default);
             return this;
         }
 
-        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormationFrame> dataSource)
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<HeroFormationFrameEntity> dataSource)
         {
             AppendCore(dataSource, x => (x.FormationId, x.FrameIndex), System.Collections.Generic.Comparer<(uint FormationId, int FrameIndex)>.Default);
             return this;

@@ -27,7 +27,7 @@ namespace App.Battle.Units
         {
             UnitModel = model;
             
-            UnitView.Init(model.UnitId, model.Cell.Value, model.EnemyBase.ImageId);
+            UnitView.Init(model.UnitId, model.Cell.Value, model.EnemyBaseEntity.ImageId);
             model.Cell.Subscribe(UnitView.SetToCell).AddTo(this);
             // UnitModel.Hp.OnUpdate.Subscribe(x =>
             // {
